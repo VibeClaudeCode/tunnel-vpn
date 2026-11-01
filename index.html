@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тоннель VPN</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!--TG--><script src="https://telegram.org/js/telegram-web-app.js"></script><!--/TG-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: one-column phone app, content scrolls, tab bar pinned to bottom */
+:root{
+  --bg:#F3F5F7; --surface:#FFFFFF; --fg:#0E1A24; --muted:#5B6B78; --line:#DCE3E8;
+  --accent:#0A8F7C; --accent-ink:#FFFFFF; --accent-soft:#D9F2EE;
+  --ok:#1C8A4A; --warn:#B7791F; --bad:#C2413A; --star:#E8A317;
+  --display:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --body:"Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1419; --surface:#162129; --fg:#E8EEF2; --muted:#8FA1AE; --line:#24323C;
+  --accent:#2CC9B0; --accent-ink:#06231E; --accent-soft:#123A35;
+  --ok:#4CC27A; --warn:#E0A84A; --bad:#EF6B63; --star:#F2B937; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0D1419; --surface:#162129; --fg:#E8EEF2; --muted:#8FA1AE; --line:#24323C;
+  --accent:#2CC9B0; --accent-ink:#06231E; --accent-soft:#123A35;
+  --ok:#4CC27A; --warn:#E0A84A; --bad:#EF6B63; --star:#F2B937; color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 var(--body);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{min-height:100%;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px calc(84px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:26px;line-height:1.15}
+h2{font-size:18px}
+h3{font-size:15px}
+.muted{color:var(--muted)}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;align-items:center;gap:10px}
+.num{font-variant-numeric:tabular-nums}
+
+/* search */
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 12px;height:46px}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font:inherit;outline:none}
+.search svg{flex:none;color:var(--muted)}
+
+/* hero */
+.hero{display:flex;flex-direction:column;gap:14px;padding-block:8px 4px}
+.route{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.route i{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 11px)}
+.route b{font-weight:600;color:var(--fg)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stat .v{font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
+.stat .k{font-size:12px;color:var(--muted)}
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:54px;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-family:var(--display);font-size:15px;font-weight:700}
+.cta.ghost{background:var(--accent-soft);color:var(--fg);font-family:var(--body);font-weight:600}
+.note{font-size:12px;color:var(--muted)}
+
+/* cards */
+.list{display:flex;flex-direction:column;gap:8px}
+.card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.logo{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--display);font-size:15px;color:#fff}
+.card .mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.card .name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .price{flex:none;text-align:right}
+.card .price b{font-family:var(--display);font-size:16px;font-variant-numeric:tabular-nums}
+.card .price small{display:block;font-size:11px;color:var(--muted)}
+.stars{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
+.stars span{letter-spacing:1px;color:var(--line)}
+.stars span em{font-style:normal;color:var(--star)}
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:6px;background:var(--accent-soft);color:var(--fg);vertical-align:1px}
+.ok-mark{color:var(--ok);font-weight:700}
+.chk{padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.chk.unverified,.chk.nobot{border-color:var(--warn);color:var(--fg)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.ok{color:var(--ok)} .pill.partial{color:var(--warn)} .pill.bad{color:var(--bad)} .pill.unknown{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;padding:5px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
+.sortbar{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.sortbar button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:7px 12px;font-size:13px}
+.sortbar button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+/* detail */
+.top{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.iconbtn[aria-pressed="true"]{color:var(--bad)}
+.iconbtn[aria-pressed="true"] svg{fill:currentColor}
+.head{display:flex;align-items:center;gap:14px}
+.head .logo{width:60px;height:60px;font-size:20px;border-radius:16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.facts div{background:var(--surface);padding:10px 12px;min-width:0}
+.facts b{display:block;font-weight:600;overflow-wrap:anywhere}
+.pc{display:grid;gap:8px}
+.pc ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.pc li{display:flex;gap:8px;align-items:flex-start}
+.pc li::before{flex:none;font-weight:700;width:16px}
+.pros li::before{content:"+";color:var(--ok)}
+.cons li::before{content:"−";color:var(--bad)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:10px}
+a.cta{text-decoration:none}
+
+/* quiz */
+.progress{display:flex;gap:4px}
+.progress i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.progress i.on{background:var(--accent)}
+.opt{width:100%;text-align:left;padding:14px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:2px}
+.opt b{font-weight:600}
+.opt small{color:var(--muted)}
+.match{font-family:var(--display);font-size:12px;color:var(--accent)}
+
+/* compare */
+.cmpwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;min-width:110px}
+th:first-child,td:first-child{position:sticky;left:0;background:var(--surface);min-width:96px;color:var(--muted);font-weight:500}
+thead th{font-family:var(--display);font-size:13px;color:var(--fg)}
+tr:last-child td{border-bottom:0}
+td.best{color:var(--accent);font-weight:600}
+.pick{display:flex;flex-wrap:wrap;gap:6px}
+.pick button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 11px;font-size:13px}
+.pick button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* profile */
+.avatar{width:84px;height:84px;border-radius:50%;object-fit:cover;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--display);font-size:30px;color:var(--accent)}
+.empty{text-align:center;padding:28px 16px;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted);display:flex;flex-direction:column;gap:10px;align-items:center}
+
+/* tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabs nav{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 9px;font-size:10.5px;color:var(--muted);position:relative}
+.tabs button[aria-current="page"]{color:var(--accent);font-weight:600}
+.tabs .badge{position:absolute;top:4px;left:calc(50% + 6px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-size:10px;display:grid;place-items:center}
+.view{animation:in .18s ease-out}
+@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}}
+.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:9px 14px;border-radius:10px;font-size:13px;z-index:30}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="tabs"><nav id="tabs"></nav></div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="data.js"></script>
+<script>
+(() => {
+const tg = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData !== undefined ? window.Telegram.WebApp : null;
+const V = window.VPNS || [];
+const byId = Object.fromEntries(V.map(v => [v.id, v]));
+
+/* ---------- Telegram setup ---------- */
+if (tg) {
+  tg.ready(); tg.expand();
+  const applyTheme = () => {
+    const p = tg.themeParams || {}, r = document.documentElement.style;
+    document.documentElement.setAttribute('data-theme', tg.colorScheme === 'dark' ? 'dark' : 'light');
+    if (p.bg_color) r.setProperty('--surface', p.bg_color);
+    if (p.secondary_bg_color) r.setProperty('--bg', p.secondary_bg_color);
+    if (p.text_color) r.setProperty('--fg', p.text_color);
+    if (p.hint_color) r.setProperty('--muted', p.hint_color);
+    try { tg.setHeaderColor('secondary_bg_color'); tg.setBackgroundColor('secondary_bg_color'); } catch(e){}
+  };
+  applyTheme(); tg.onEvent('themeChanged', applyTheme);
+}
+const haptic = (t='light') => { try { tg && tg.HapticFeedback.impactOccurred(t); } catch(e){} };
+
+/* ---------- Favorites storage: Telegram CloudStorage → localStorage → memory ---------- */
+let favs = [];
+const FKEY = 'favs';
+function loadFavs(cb){
+  if (tg && tg.CloudStorage && tg.isVersionAtLeast && tg.isVersionAtLeast('6.9')) {
+    tg.CloudStorage.getItem(FKEY, (err, val) => { try { favs = val ? JSON.parse(val) : []; } catch(e){ favs = []; } cb(); });
+  } else { try { favs = JSON.parse(localStorage.getItem(FKEY) || '[]'); } catch(e){ favs = []; } cb(); }
+}
+function saveFavs(){
+  const s = JSON.stringify(favs);
+  if (tg && tg.CloudStorage && tg.isVersionAtLeast && tg.isVersionAtLeast('6.9')) tg.CloudStorage.setItem(FKEY, s);
+  else { try { localStorage.setItem(FKEY, s); } catch(e){} }
+}
+function toggleFav(id){
+  const on = favs.includes(id);
+  favs = on ? favs.filter(x => x !== id) : [...favs, id];
+  saveFavs(); haptic(); toast(on ? 'Убрано из избранного' : 'Добавлено в избранное');
+  renderTabs(); render();
+}
+
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hue = s => { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+const logo = v => `<div class="logo" style="background:hsl(${hue(v.id)} 45% 42%)" aria-hidden="true">${esc(v.name.replace(/[^A-Za-zА-Яа-яЁё0-9]/g,'').slice(0,2).toUpperCase())}</div>`;
+const priceTxt = v => v.price == null ? 'В боте' : v.price === 0 ? 'Бесплатно' : `${v.price} ₽`;
+const P = v => v.price == null ? Infinity : v.price; // для сортировки: без цены — в конец
+const TSPU = { ok:'Обходит блокировки', partial:'Бывают сбои', bad:'Часто блокируется', unknown:'Нет данных' };
+const tspuPill = v => `<span class="pill ${v.tspu}">${TSPU[v.tspu]}</span>`;
+// Оценка редакции: считается по реальным данным каталога, а не по отзывам.
+function editorial(v){
+  let s = 3;
+  s += ({ok:1.1,partial:.3,unknown:.4,bad:-.6})[v.tspu];                     // обход блокировок
+  s += v.price==null ? 0 : v.price===0 ? .3 : v.price<=150 ? .35 : v.price<=250 ? .2 : 0; // цена
+  s += v.trialDays>=7 ? .3 : v.trialDays>0 || v.price===0 ? .15 : 0;          // пробный период
+  s += v.speed>=150 ? .3 : v.speed>=100 ? .15 : 0;                            // скорость в тесте
+  s += (v.devices==='Без лимита' || v.devices>=5) ? .15 : 0;                  // устройства
+  s += (v.countries.length ? .1 : 0) + (v.pay.length ? .1 : 0);               // открытость данных
+  s += v.tgUsers>=50000 ? .3 : v.tgUsers>=10000 ? .15 : 0;                   // живая аудитория бота
+  return Math.max(1, Math.min(5, Math.round(s*10)/10));
+}
+const scoreOf = v => v.rating != null ? v.rating : editorial(v);
+function stars(v){
+  const val = scoreOf(v), full = Math.round(val);
+  const tail = v.rating != null ? `${v.reviews} ${plural(v.reviews,['отзыв','отзыва','отзывов'])}` : 'оценка редакции';
+  return `<span class="stars num"><span><em>${'★'.repeat(full)}</em>${'★'.repeat(5-full)}</span> ${val.toFixed(1)} · ${tail}</span>`;
+}
+function plural(n, f){ const a=n%100, b=n%10; return f[(a>10&&a<20)?2:b===1?0:(b>=2&&b<=4)?1:2]; }
+const handle = v => v.bot
+  ? `@${esc(v.bot)}${v.check==='confirmed'||v.check==='catalog' ? ' <span class="ok-mark" title="Бот проверен">✓</span>' : ''}`
+  : 'официальный сайт';
+const CHECK = {
+  confirmed: v => `Бот проверен: подтверждён независимым каталогом${v.tgUsers ? `, около ${v.tgUsers.toLocaleString('ru-RU')} активных пользователей` : ' или официальным сайтом сервиса'}.`,
+  catalog: () => 'Бот проверен: он существует в Telegram и описан как VPN (проверка 1 ноября 2026). Независимых данных об аудитории нет.',
+  unverified: () => 'Юзернейм не подтверждён независимыми источниками. Перед оплатой убедитесь, что это официальный бот сервиса.',
+  nobot: () => 'Официальный Telegram-бот этого сервиса не найден. Подписка оформляется на сайте, остерегайтесь ботов-двойников.'
+};
+const checkNote = v => CHECK[v.check] ? `<p class="note chk ${v.check}" style="margin:0">${CHECK[v.check](v)}</p>` : '';
+const devTxt = v => v.devices == null ? 'Нет данных' : (typeof v.devices === 'number' ? `До ${v.devices}` : v.devices);
+let toastT;
+function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, 1600); }
+const card = v => `<button class="card" data-open="${v.id}">${logo(v)}
+  <div class="mid"><span class="name">${esc(v.name)}</span>${stars(v)}<span class="muted" style="font-size:12px">${handle(v)}${v.small ? ' <span class="tag">малоизвестный</span>' : ''}</span></div>
+  <div class="price"><b>${priceTxt(v)}</b><small>${v.price ? 'в месяц' : v.price == null ? 'цена' : ''}</small></div></button>`;
+const icons = {
+  home:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
+  cat:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>',
+  fav:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.2C1.6 7.4 4 4 7.4 4c2 0 3.6 1.2 4.6 2.7C13 5.2 14.6 4 16.6 4 20 4 22.4 7.4 21.2 10.8 19.5 15.4 12 20 12 20z"/></svg>',
+  cmp:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 4v16M17 4v16M3 8h8M13 16h8"/></svg>',
+  me:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" stroke-linecap="round"/></svg>',
+  search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+  back:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 9 12l6-6"/></svg>'
+};
+
+/* ---------- state ---------- */
+const S = { tab:'home', detail:null, q:'', sort:'price', quiz:null, cmp:[] , detailFrom:null };
+const TABS = [['home','Главная','home'],['catalog','Каталог','cat'],['favs','Избранное','fav'],['compare','Сравнение','cmp'],['profile','Профиль','me']];
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = TABS.map(([id,label,ic]) =>
+    `<button data-tab="${id}" ${S.tab===id && !S.detail ? 'aria-current="page"' : ''}>${icons[ic]}${label}${id==='favs'&&favs.length?`<span class="badge num">${favs.length}</span>`:''}${id==='compare'&&S.cmp.length?`<span class="badge num">${S.cmp.length}</span>`:''}</button>`).join('');
+}
+
+/* ---------- views ---------- */
+function vHome(){
+  const paid = V.filter(v => v.price > 0);
+  const smallN = V.filter(v => v.small).length;
+  const avg = Math.round(paid.reduce((a,v)=>a+v.price,0)/paid.length);
+  const min = Math.min(...paid.map(v=>v.price));
+  const trials = V.filter(v => v.trialDays > 0 || v.price === 0).length;
+  const stable = V.filter(v => v.tspu === 'ok').length;
+  const q = S.q.trim().toLowerCase();
+  const found = q ? V.filter(v => (v.name+' '+(v.bot||'')+' '+v.protocols.join(' ')+' '+v.countries.join(' ')).toLowerCase().includes(q)) : [];
+  return `<div class="stack">
+    <label class="search" for="q">${icons.search}<input id="q" type="search" placeholder="Название, бот, протокол или страна" value="${esc(S.q)}" autocomplete="off"></label>
+    ${q ? `<div class="list">${found.length ? found.map(card).join('') : `<div class="empty">Ничего не нашли по «${esc(S.q)}»</div>`}</div>` : `
+    <div class="hero">
+      <div class="route"><b>Вы</b><i></i><span>VLESS · Reality · AmneziaWG</span><i></i><b>Интернет</b></div>
+      <h1>Подберём VPN из Telegram за минуту</h1>
+      <p class="muted" style="margin:0">Мы собрали VPN-сервисы, которые продаются через Telegram-ботов, и свели в одно место цены в рублях, протоколы, страны, пробные периоды и результаты тестов на обход блокировок.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">${V.length}</div><div class="k">VPN-ботов, из них ${smallN} малоизвестных</div></div>
+      <div class="stat"><div class="v">${stable}</div><div class="k">стабильно обходят блокировки</div></div>
+      <div class="stat"><div class="v">${min}–${avg} ₽</div><div class="k">минимальная и средняя цена в месяц</div></div>
+      <div class="stat"><div class="v">${trials}</div><div class="k">с бесплатным тестом</div></div>
+    </div>
+    <button class="cta" data-quiz>Подобрать VPN за минуту</button>
+    <button class="cta ghost" data-tab="catalog">Открыть весь каталог</button>
+    <p class="note">О каждом сервисе 9 параметров: цена, протоколы, обход блокировок, скорость, тест, устройства, страны, оплата, плюсы и минусы. Данные из открытых обзоров, октябрь 2026.</p>`}
+  </div>`;
+}
+
+function sorted(list){
+  const l = [...list];
+  if (S.sort==='price') l.sort((a,b)=>P(a)-P(b));
+  if (S.sort==='rating') l.sort((a,b)=>scoreOf(b)-scoreOf(a) || P(a)-P(b));
+  if (S.sort==='speed') l.sort((a,b)=>(b.speed??-1)-(a.speed??-1));
+  if (S.sort==='popular') l.sort((a,b)=>(b.tgUsers||0)-(a.tgUsers||0) || scoreOf(b)-scoreOf(a));
+  if (S.sort==='trial') l.sort((a,b)=>b.trialDays-a.trialDays || P(a)-P(b));
+  return l;
+}
+function vCatalog(){
+  const opts = [['price','Сначала дешёвые'],['rating','По рейтингу'],['speed','По скорости'],['popular','Популярные'],['trial','С тестом'],['small','Малоизвестные']];
+  return `<div class="stack"><div class="row" style="justify-content:space-between"><h2>Каталог</h2><span class="muted num">${V.length} сервисов</span></div>
+    <div class="sortbar">${opts.map(([k,l])=>`<button data-sort="${k}" aria-pressed="${S.sort===k}">${l}</button>`).join('')}</div>
+    <div class="list">${(S.sort==='small' ? V.filter(v=>v.small).sort((a,b)=>scoreOf(b)-scoreOf(a)) : sorted(V)).map(card).join('')}</div></div>`;
+}
+
+function vDetail(v){
+  const isFav = favs.includes(v.id), inCmp = S.cmp.includes(v.id);
+  return `<div class="stack">
+    <div class="top"><button class="iconbtn" data-back aria-label="Назад">${icons.back}</button>
+      <button class="iconbtn" data-fav="${v.id}" aria-pressed="${isFav}" aria-label="${isFav?'Убрать из избранного':'В избранное'}">${icons.fav}</button></div>
+    <div class="head">${logo(v)}<div class="stack" style="gap:4px;min-width:0"><h2>${esc(v.name)}</h2>${stars(v)}<span class="muted">${handle(v)}${v.small ? ' <span class="tag">малоизвестный</span>' : ''}</span></div></div>
+    <p style="margin:0">${esc(v.about)}</p>
+    <div class="row" style="flex-wrap:wrap">${tspuPill(v)}${v.protocols.map(p=>`<span class="chip">${esc(p)}</span>`).join('')}</div>
+    <div class="facts">
+      <div><span class="label">Цена</span><b class="num">${esc(v.priceNote)}</b></div>
+      <div><span class="label">Пробный период</span><b>${esc(v.trial)}</b></div>
+      <div><span class="label">Скорость в тесте</span><b class="num">${v.speed?`до ${v.speed} Мбит/с`:'Нет данных'}</b></div>
+      <div><span class="label">Устройства</span><b>${esc(devTxt(v))}</b></div>
+    </div>
+    <div class="box"><h3>Геолокации</h3>${v.countries.length?`<div class="chips">${v.countries.map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div>`:'<span class="muted">Список стран сервис не публикует. Уточните в боте.</span>'}</div>
+    <div class="box"><h3>Оплата</h3>${v.pay.length?`<div class="chips">${v.pay.map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div>`:'<span class="muted">Нет данных. Уточните в боте.</span>'}</div>
+    <div class="box pc"><h3>Плюсы</h3><ul class="pros">${v.pros.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>
+    <div class="box pc"><h3>Минусы</h3><ul class="cons">${v.cons.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>
+    ${v.rating == null ? `<p class="note" style="margin:0">Оценка редакции ${editorial(v).toFixed(1)} из 5 — считается по данным каталога: обход блокировок, цена, пробный период, скорость, число устройств и открытость информации о сервисе.</p>` : ''}
+    ${checkNote(v)}
+    ${v.bot ? `<a class="cta" href="https://t.me/${encodeURIComponent(v.bot)}" data-bot="${esc(v.bot)}" target="_blank" rel="noopener">Открыть бота @${esc(v.bot)}</a>` : `<a class="cta" href="${esc(v.site)}" target="_blank" rel="noopener">Открыть сайт сервиса</a>`}
+    <button class="cta ghost" data-addcmp="${v.id}">${inCmp?'Убрать из сравнения':'Добавить к сравнению'}</button>
+  </div>`;
+}
+
+function vFavs(){
+  const l = favs.map(id=>byId[id]).filter(Boolean);
+  return `<div class="stack"><h2>Избранное</h2>${l.length?`<div class="list">${l.map(card).join('')}</div>`:
+   `<div class="empty"><span>Здесь появятся VPN, которые вы отметите сердечком на странице сервиса.</span><button class="cta ghost" data-tab="catalog" style="width:auto;padding:0 18px;height:42px">Перейти в каталог</button></div>`}</div>`;
+}
+
+const CMP_ROWS = [
+  ['Цена', v=>priceTxt(v)+(v.price?'/мес':''), 'min', v=>P(v)],
+  ['Оценка', v=>`★ ${scoreOf(v).toFixed(1)}`, 'max', v=>scoreOf(v)],
+  ['Блокировки', v=>TSPU[v.tspu], 'max', v=>({ok:3,partial:2,unknown:1,bad:0})[v.tspu]],
+  ['Скорость', v=>v.speed?`${v.speed} Мбит/с`:'—', 'max', v=>v.speed??-1],
+  ['Тест', v=>v.trial, 'max', v=>v.trialDays],
+  ['Протоколы', v=>v.protocols.join(', ')||'—'],
+  ['Устройства', v=>devTxt(v)],
+  ['Страны', v=>v.countries.join(', ')||'—'],
+  ['Оплата', v=>v.pay.join(', ')||'—'],
+];
+function vCompare(){
+  const sel = S.cmp.map(id=>byId[id]).filter(Boolean);
+  const pick = `<div class="pick">${sorted(V).map(v=>`<button data-cmp="${v.id}" aria-pressed="${S.cmp.includes(v.id)}">${esc(v.name)}</button>`).join('')}</div>`;
+  let table = '';
+  if (sel.length >= 2) {
+    table = `<div class="cmpwrap"><table><thead><tr><th></th>${sel.map(v=>`<th>${esc(v.name)}</th>`).join('')}</tr></thead><tbody>${
+      CMP_ROWS.map(([label,f,mode,score]) => {
+        let best = null;
+        if (mode) { const sc = sel.map(score); const b = mode==='min'?Math.min(...sc):Math.max(...sc); if (sc.filter(x=>x===b).length < sc.length && b >= 0) best = b; }
+        return `<tr><td>${label}</td>${sel.map(v=>`<td class="${best!==null&&score(v)===best?'best':''}">${esc(f(v))}</td>`).join('')}</tr>`;
+      }).join('')}</tbody></table></div><p class="note">Цветом отмечено лучшее значение в строке.</p>`;
+  } else table = `<div class="empty">Выберите минимум 2 сервиса${sel.length?`, уже выбран: ${esc(sel[0].name)}`:''}</div>`;
+  return `<div class="stack"><div class="row" style="justify-content:space-between"><h2>Сравнение</h2>${sel.length?'<button class="chip" data-clearcmp>Сбросить</button>':''}</div>
+    ${table}<span class="label">Выберите до 3 сервисов</span>${pick}</div>`;
+}
+
+function vProfile(){
+  const u = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
+  const name = u ? [u.first_name,u.last_name].filter(Boolean).join(' ') : 'Гость';
+  const ava = u && u.photo_url ? `<img class="avatar" src="${esc(u.photo_url)}" alt="">` : `<div class="avatar">${esc((name[0]||'?').toUpperCase())}</div>`;
+  const l = favs.map(id=>byId[id]).filter(Boolean);
+  return `<div class="stack">
+    <div class="box" style="align-items:center;text-align:center">${ava}
+      <h2>${esc(name)}</h2>
+      ${u ? `<div class="muted">${u.username?'@'+esc(u.username)+' · ':''}<span class="num">ID ${u.id}</span></div>` : `<div class="muted">Откройте приложение в Telegram, чтобы увидеть свой профиль</div>`}
+    </div>
+    <div class="row" style="justify-content:space-between"><h3>Любимые VPN</h3><span class="muted num">${l.length}</span></div>
+    ${l.length?`<div class="list">${l.map(card).join('')}</div>`:`<div class="empty">Пока пусто. Отмечайте сервисы сердечком.</div>`}
+  </div>`;
+}
+
+/* ---------- quiz: 5 categories ---------- */
+const QUIZ = [
+  { k:'budget', q:'Сколько готовы платить в месяц?', o:[['150','До 150 ₽','Самые бюджетные боты'],['250','До 250 ₽','Оптимальный вариант'],['999','Не важно','Главное — качество']] },
+  { k:'task', q:'Для чего нужен VPN?', o:[['youtube','YouTube и видео','Нужна высокая скорость'],['social','Соцсети и мессенджеры','Хватит любой стабильной скорости'],['work','Работа и нейросети','Стабильность важнее всего'],['games','Игры','Низкий пинг']] },
+  { k:'devices', q:'Сколько устройств подключить?', o:[['1','1–2','Телефон и ноутбук'],['5','3–5','Вся техника одного человека'],['many','Больше 5','Семья или компания']] },
+  { k:'pay', q:'Как удобнее платить?', o:[['rub','Карта РФ или СБП',''],['stars','Telegram Stars',''],['crypto','Криптовалюта','TON, USDT'],['any','Без разницы','']] },
+  { k:'trial', q:'Нужен бесплатный тест?', o:[['yes','Да, сначала попробую',''],['no','Не обязательно','']] },
+];
+function score(v, a){
+  let s = 0;
+  const b = +a.budget; if (v.price == null) s += a.budget==='999' ? 2 : 0; else if (v.price <= b) s += 3; else s -= Math.min(4, (v.price-b)/60);
+  s += ({ok:4,partial:1,unknown:1.5,bad:-4})[v.tspu];
+  if (v.tasks.includes(a.task)) s += 2;
+  if ((a.task==='youtube'||a.task==='games') && v.speed) s += Math.min(2, v.speed/100);
+  if (a.devices==='many') s += (v.devices==='Без лимита'||v.devices>5) ? 2 : 0;
+  if (a.devices==='5') s += (v.devices==='Без лимита'||v.devices>=3) ? 1 : 0;
+  const p = v.pay.join(' ');
+  if (a.pay==='rub' && /СБП|Карта/.test(p)) s += 1.5;
+  if (a.pay==='stars' && /Stars/.test(p)) s += 2.5;
+  if (a.pay==='crypto' && /Крипта|TON/.test(p)) s += 2.5;
+  if (a.trial==='yes') s += v.trialDays>=7 ? 2 : v.trialDays>0||v.price===0 ? 1 : -1.5;
+  return s;
+}
+function vQuiz(){
+  const st = S.quiz;
+  if (st.step < QUIZ.length) {
+    const Q = QUIZ[st.step];
+    return `<div class="stack"><div class="top"><button class="iconbtn" data-qback aria-label="Назад">${icons.back}</button><span class="muted num">Шаг ${st.step+1} из ${QUIZ.length}</span><span style="width:40px"></span></div>
+      <div class="progress">${QUIZ.map((_,i)=>`<i class="${i<=st.step?'on':''}"></i>`).join('')}</div>
+      <h2>${Q.q}</h2><div class="list">${Q.o.map(([val,t,sub])=>`<button class="opt" data-ans="${val}"><b>${t}</b>${sub?`<small>${sub}</small>`:''}</button>`).join('')}</div></div>`;
+  }
+  const res = V.map(v=>({v,s:score(v,st.a)})).sort((x,y)=>y.s-x.s).slice(0,3);
+  const max = res[0].s;
+  return `<div class="stack"><div class="top"><button class="iconbtn" data-qexit aria-label="Закрыть">${icons.back}</button><span></span></div>
+    <h2>Вам подойдут</h2><p class="muted" style="margin:0">Подобрали по бюджету, задаче, числу устройств, способу оплаты и наличию теста.</p>
+    <div class="list">${res.map((r,i)=>`<div class="stack" style="gap:4px"><span class="match num">${i===0?'Лучшее совпадение':'Совпадение'} · ${Math.max(40,Math.round(r.s/max*100))}%</span>${card(r.v)}</div>`).join('')}</div>
+    <button class="cta ghost" data-quiz>Пройти ещё раз</button>
+    <button class="cta ghost" data-cmpquiz="${res.map(r=>r.v.id).join(',')}">Сравнить эти три</button></div>`;
+}
+
+/* ---------- render & events ---------- */
+const app = document.getElementById('app');
+function render(){
+  let html;
+  if (S.detail) html = vDetail(byId[S.detail]);
+  else if (S.quiz) html = vQuiz();
+  else html = ({home:vHome, catalog:vCatalog, favs:vFavs, compare:vCompare, profile:vProfile})[S.tab]();
+  app.innerHTML = `<div class="view">${html}</div>`;
+  if (tg && tg.BackButton) { (S.detail||S.quiz) ? tg.BackButton.show() : tg.BackButton.hide(); }
+}
+function go(tab){ S.tab = tab; S.detail = null; S.quiz = null; renderTabs(); render(); window.scrollTo(0,0); }
+function back(){
+  if (S.detail) { S.detail = null; }
+  else if (S.quiz) { if (S.quiz.step>0 && S.quiz.step<QUIZ.length) S.quiz.step--; else S.quiz = null; }
+  renderTabs(); render(); window.scrollTo(0,0);
+}
+if (tg && tg.BackButton) tg.BackButton.onClick(back);
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('button,a'); if (!t) return;
+  const d = t.dataset;
+  if (d.tab) { haptic(); go(d.tab); }
+  else if (d.open) { haptic(); S.detail = d.open; renderTabs(); render(); window.scrollTo(0,0); }
+  else if (d.back !== undefined || d.qback !== undefined) back();
+  else if (d.qexit !== undefined) { S.quiz = null; go('home'); }
+  else if (d.fav) toggleFav(d.fav);
+  else if (d.sort) { S.sort = d.sort; render(); }
+  else if (d.quiz !== undefined) { haptic(); S.quiz = {step:0, a:{}}; S.detail = null; render(); window.scrollTo(0,0); }
+  else if (d.ans) { haptic(); S.quiz.a[QUIZ[S.quiz.step].k] = d.ans; S.quiz.step++; render(); window.scrollTo(0,0); }
+  else if (d.cmp) {
+    const id = d.cmp;
+    if (S.cmp.includes(id)) S.cmp = S.cmp.filter(x=>x!==id);
+    else { if (S.cmp.length >= 3) { toast('Можно сравнить до 3 сервисов'); return; } S.cmp.push(id); }
+    haptic(); renderTabs(); render();
+  }
+  else if (d.addcmp) {
+    const id = d.addcmp;
+    if (S.cmp.includes(id)) S.cmp = S.cmp.filter(x=>x!==id);
+    else if (S.cmp.length >= 3) { toast('Уже выбрано 3 сервиса'); return; }
+    else { S.cmp.push(id); toast('Добавлено к сравнению'); }
+    renderTabs(); render();
+  }
+  else if (d.clearcmp !== undefined) { S.cmp = []; renderTabs(); render(); }
+  else if (d.cmpquiz) { S.cmp = d.cmpquiz.split(','); go('compare'); }
+  else if (d.bot && tg) { e.preventDefault(); tg.openTelegramLink('https://t.me/' + d.bot); }
+});
+document.addEventListener('input', e => {
+  if (e.target.id === 'q') { S.q = e.target.value; const pos = e.target.selectionStart; render(); const i = document.getElementById('q'); i.focus(); try{ i.setSelectionRange(pos,pos); }catch(_){} }
+});
+
+loadFavs(() => { renderTabs(); render(); });
+})();
+</script>
+</body>
+</html>
