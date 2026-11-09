@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --bg:#050507; --red:#E23B3B; }
+  .scene { background:#050507; }
+  #cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+  #cap .k1, #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+  .tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+  .quote { background:rgba(12,10,10,.85); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:84px; line-height:1.1; color:#E23B3B; }
+  #vign { position:absolute; inset:0; z-index:40; pointer-events:none;
+          background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+  #flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+  /* экран телефона */
+  .phone { position:absolute; width:440px; height:900px; border-radius:64px; background:#0B0D12; border:14px solid #1C1F27; box-shadow:0 0 120px rgba(120,160,255,.18); overflow:hidden; }
+  .phone .scr { position:absolute; inset:0; background:linear-gradient(#1A2236,#0C1020); display:flex; flex-direction:column; align-items:center; }
+  .phone .lbl2 { margin-top:120px; font:700 26px/1 "JetBrains Mono"; color:#8FA3BF; letter-spacing:.1em; }
+  .phone .who { margin-top:30px; font:800 64px/1 "Montserrat"; color:#F4F1EA; }
+  .phone .num { margin-top:22px; font:700 32px/1 "JetBrains Mono"; color:#C9D0DA; }
+  .phone .btns { position:absolute; bottom:110px; left:0; right:0; display:flex; justify-content:space-around; }
+  .phone .b { width:120px; height:120px; border-radius:50%; }
+  .phone .b.r { background:#E23B3B; } .phone .b.g { background:#3DBE6E; }
+  .log { position:absolute; left:120px; right:120px; }
+  .row { display:flex; justify-content:space-between; align-items:center; padding:30px 34px; margin-bottom:18px; border-radius:20px; background:#101219; border:3px solid #2A2D38;
+         font:800 44px/1 "Montserrat"; color:#E23B3B; }
+  .row span { font:700 34px/1 "JetBrains Mono"; color:#C9C3B6; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="58.8" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. Хук: телефон в темноте, звонит «ваш» номер -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><defs><radialGradient id="glowA"><stop offset="0" stop-color="#5B7BC9" stop-opacity=".35"/><stop offset="1" stop-color="#5B7BC9" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#030304"/><circle id="glowAc" cx="540" cy="860" r="620" fill="url(#glowA)"/></svg>
+    <div class="phone" id="phA" style="left:320px;top:410px"><div class="scr"><div class="lbl2">ВХОДЯЩИЙ ВЫЗОВ</div><div class="who">Я</div><div class="num" id="numA">+7 9•• ••• 47 47</div>
+      <div class="btns"><div class="b r"></div><div class="b g"></div></div></div></div>
+  </section>
+
+  <!-- B. Подъезд, 23:41, вибрация, на экране её номер -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="bulbB"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".5"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#1A1D1A"/>
+      <rect y="0" width="1080" height="900" fill="#2A3A30"/><rect y="900" width="1080" height="20" fill="#14181A"/>
+      <g fill="#121513"><polygon points="0,1920 0,1500 300,1500 300,1380 560,1380 560,1260 820,1260 820,1140 1080,1140 1080,1920"/></g>
+      <g stroke="#3A3F3A" stroke-width="10"><line x1="0" y1="1500" x2="300" y2="1500"/><line x1="300" y1="1380" x2="560" y2="1380"/><line x1="560" y1="1260" x2="820" y2="1260"/><line x1="820" y1="1140" x2="1080" y2="1140"/></g>
+      <g stroke="#555" stroke-width="8"><line x1="40" y1="1500" x2="1040" y2="1120"/><line x1="40" y1="1380" x2="1040" y2="1000"/></g>
+      <circle id="bulbBg" cx="540" cy="200" r="420" fill="url(#bulbB)"/><circle cx="540" cy="200" r="22" fill="#FFE7A8"/>
+      <g fill="#0A0B0D"><rect x="120" y="380" width="16" height="16"/><rect x="900" y="560" width="22" height="22"/></g>
+    </svg>
+    <div class="tag" data-small id="bTag"><i></i>23:41 · ПОДЪЕЗД</div>
+    <div class="phone" id="phB" style="left:320px;top:520px;transform:scale(.8)"><div class="scr"><div class="lbl2">ВХОДЯЩИЙ ВЫЗОВ</div><div class="who">Я</div><div class="num">+7 9•• ••• 47 47</div>
+      <div class="btns"><div class="b r" id="decline"></div><div class="b g" id="accept"></div></div></div></div>
+  </section>
+
+  <!-- C. Ответила: тишина, потом её голос, «Не заходи домой» -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#040405"/>
+      <g id="wave" fill="#E23B3B"></g></svg>
+    <div class="tag" data-small id="cTag" style="top:330px"><i></i>ВЫЗОВ · <span id="cTimer">00:00</span></div>
+    <div class="quote" id="cQ" style="top:1180px;text-align:center">«Не заходи домой»</div>
+  </section>
+
+  <!-- D. Этажи: 1 → 7 -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#101312"/>
+      <g id="floors" stroke="#2A2F2C" stroke-width="8"></g></svg>
+    <div class="big" id="dFloor" style="top:620px;font-size:300px;color:#C9C3B6;font-family:'JetBrains Mono'">1</div>
+    <div class="tag" data-small id="dTag" style="top:1000px"><i></i>ЭТАЖ</div>
+  </section>
+
+  <!-- E. Дверь приоткрыта, внутри свет -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="beamE" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="#0B0B0D"/>
+      <rect x="0" y="1480" width="1080" height="440" fill="#08080A"/>
+      <rect x="280" y="340" width="520" height="1140" fill="#16161A" stroke="#26262C" stroke-width="16"/>
+      <rect id="inner" x="290" y="350" width="500" height="1120" fill="#FFE7A8" opacity=".85"/>
+      <polygon id="floorBeam" points="790,1480 1080,1700 1080,1920 600,1920" fill="url(#beamE)" opacity=".7"/>
+      <g id="leaf"><rect x="290" y="350" width="500" height="1120" fill="#2A2420"/><circle cx="740" cy="930" r="18" fill="#9A8A70"/><rect x="420" y="560" width="240" height="320" fill="none" stroke="#3A322C" stroke-width="10"/><rect x="420" y="980" width="240" height="320" fill="none" stroke="#3A322C" stroke-width="10"/></g>
+      <g id="ringsE" fill="none" stroke="#E23B3B" stroke-width="6"></g>
+    </svg>
+    <div class="tag red" data-small id="eLock" style="top:200px"><i></i>ОНА ЗАПИРАЛА</div>
+    <div class="phone" id="phE" style="left:610px;top:1100px;transform:scale(.45) rotate(-8deg);transform-origin:0 0"><div class="scr"><div class="lbl2">ВЫЗОВ</div><div class="who">Я</div><div class="num">+7 9•• ••• 47 47</div></div></div>
+  </section>
+
+  <!-- F. Полиция: мигалки, «квартира пуста» -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#0A0A0D"/>
+      <rect id="pR" width="1080" height="1920" fill="#E23B3B" opacity="0"/><rect id="pB" width="1080" height="1920" fill="#2F5BD1" opacity="0"/>
+      <g fill="#15151A"><rect x="80" y="700" width="300" height="420"/><rect x="460" y="760" width="200" height="360"/><rect x="720" y="640" width="280" height="480"/></g>
+      <rect y="1120" width="1080" height="800" fill="#0E0E12"/></svg>
+    <div class="stamp" id="fStamp" style="left:120px;top:420px;font-size:72px;color:#C9C3B6;border-color:#C9C3B6;background:rgba(10,10,12,.6)">КВАРТИРА ПУСТА</div>
+    <div class="tag" data-small id="fNo" style="top:1220px"><i></i>НИЧЕГО НЕ ПРОПАЛО</div>
+  </section>
+
+  <!-- G. История звонков: три исходящих в 23:47 -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#060608"/></svg>
+    <div class="tag" data-small id="gTag" style="top:300px"><i></i>ИСТОРИЯ ВЫЗОВОВ</div>
+    <div class="log" style="top:520px">
+      <div class="row" id="r1">Я · исходящий <span>23:47</span></div>
+      <div class="row" id="r2">Я · исходящий <span>23:47</span></div>
+      <div class="row" id="r3">Я · исходящий <span>23:47</span></div>
+    </div>
+    <div class="big" id="g2347" style="top:1100px;font-size:160px;color:#E23B3B;font-family:'JetBrains Mono';text-shadow:0 0 50px rgba(226,59,59,.6)">23:47</div>
+  </section>
+
+  <!-- H. Финал: телефон экраном вниз светится и вибрирует -->
+  <section class="scene" id="sH">
+    <svg class="art" viewBox="0 0 1080 1920"><defs><radialGradient id="glowH"><stop offset="0" stop-color="#5B7BC9" stop-opacity=".45"/><stop offset="1" stop-color="#5B7BC9" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#030304"/>
+      <ellipse id="glowHe" cx="540" cy="980" rx="420" ry="160" fill="url(#glowH)"/>
+      <g id="phH"><rect x="330" y="860" width="420" height="200" rx="40" fill="#14161C"/><rect x="350" y="880" width="380" height="160" rx="30" fill="#0B0D12"/><circle cx="420" cy="960" r="26" fill="#1E222B"/></g></svg>
+    <div class="tag red" data-small id="hTag" style="top:600px"><i></i>ВХОДЯЩИЙ · Я</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(41), W = M.data.words.s6;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('марина') - .3, C: wt('третий') - .3, D: wt('решила') - .3, E: wt('дверь') - .3, F: wt('полиция') - .3, G: wt('только') - .3, H: wt('марина', 3) - .3 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sD',T.D],['#sE',T.E],['#sF',T.F],['#sG',T.G],['#sH',T.H]], D, .45);
+  captions(W, { k1: [], k2: [], k3: ['собственного','номера?','номер.','голос.','заходи','приоткрыта.','свет.','запирала.','мелодия.','руке.','пустая.','исходящих.','сама.','полночь.'], k4: [] });
+
+  // общее: мерцание на стыках, низкий гул, сердцебиение
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.B, T.C, T.E, T.F, T.H]) if (t > a - .05 && t < a + .45) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .5));
+    f.style.opacity = o; });
+  for (const s of [0, T.B, T.C, T.D, T.E, T.F, T.G, T.H]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+  const buzz = (el, a, b) => M.onFrame(t => { const on = t > a && t < b && (t * 2.5) % 1 < .55; document.querySelector(el).style.translate = on ? `${Math.sin(t * 90) * 7}px ${Math.cos(t * 80) * 3}px` : '0 0'; });
+
+  // A — телефон в темноте
+  tl.fromTo('#phA', { scale: .85, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.2, ease: 'power2.out' }, .1);
+  buzz('#phA', .4, T.B);
+  M.onFrame(t => document.querySelector('#glowAc').setAttribute('opacity', .7 + .3 * Math.sin(t * 5)));
+  for (let k = .5; k < T.B; k += .4) M.sfx('thud', k, { gain: -16, rate: 1.6 });
+  tl.to('#numA', { color: '#E23B3B', duration: .3 }, wt('собственного'));
+  M.hit(wt('номера'), 's');
+
+  // B — подъезд
+  M.show('#bTag', { at: T.B + .3, in: 'fade', dur: .6 });
+  M.onFrame(t => document.querySelector('#bulbBg').setAttribute('opacity', (t > T.B + 3.2 && t < T.B + 3.5) ? .1 : .85 + .15 * Math.sin(t * 17)));
+  tl.fromTo('#phB', { y: 300, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, ease: 'expo.out' }, wt('телефон') - .1);
+  buzz('#phB', wt('завибрировал'), wt('сбросила')); buzz('#phB', wt('повторился') - .1, T.C);
+  for (let k = wt('завибрировал'); k < wt('сбросила'); k += .4) M.sfx('thud', k, { gain: -16, rate: 1.6 });
+  tl.to('#decline', { scale: 1.3, duration: .15, yoyo: true, repeat: 1 }, wt('сбросила')); M.sfx('tap', wt('сбросила'));
+  for (let k = wt('повторился') - .1; k < T.C; k += .4) M.sfx('thud', k, { gain: -16, rate: 1.6 });
+
+  // C — ответила: тишина, потом голос
+  M.show('#cTag', { at: T.C + .2, in: 'fade', dur: .5 });
+  M.onFrame(t => { const s = Math.max(0, t - wt('ответила')); document.querySelector('#cTimer').textContent = '00:' + String(Math.floor(s)).padStart(2, '0'); });
+  const wv = document.querySelector('#wave'), bars = [];
+  for (let i = 0; i < 40; i++) bars.push(mk(wv, 'rect', { x: 140 + i * 20, y: 860, width: 10, height: 4, rx: 4 }));
+  const vA = wt('голос') - .2, vB = wt('решила') - .4;
+  M.onFrame(t => bars.forEach((b, i) => { const live = t > vA && t < vB; const h = live ? 8 + Math.abs(Math.sin(t * 9 + i * .7) * Math.sin(t * 3.3 + i)) * 260 : 4;
+    b.setAttribute('height', h); b.setAttribute('y', 860 - h / 2); b.setAttribute('opacity', live ? 1 : .4); }));
+  M.show('#cQ', { at: wt('заходи') - .3, in: 'blur', dur: .9 }); M.hit(wt('домой'), 'l');
+
+  // D — этажи
+  const fl = document.querySelector('#floors');
+  for (let i = 0; i < 12; i++) mk(fl, 'line', { x1: 0, y1: i * 180, x2: 1080, y2: i * 180 });
+  const fp = { p: 0 }; tl.to(fp, { p: 1, duration: Math.max(1, T.E - wt('поднялась') - .3), ease: 'power1.in' }, wt('поднялась'));
+  M.onFrame(t => { document.querySelector('#floors').setAttribute('transform', `translate(0,${(fp.p * 6 * 180) % 180})`); document.querySelector('#dFloor').textContent = 1 + Math.floor(fp.p * 6.99); });
+  M.show('#dTag', { at: T.D + .3, in: 'fade', dur: .5 });
+  for (let i = 0; i < 7; i++) M.sfx('tap', wt('поднялась') + i * .22, { gain: -10 });
+
+  // E — дверь приоткрыта
+  gsap.set('#leaf', { transformOrigin: '290px 900px' });
+  tl.fromTo('#leaf', { scaleX: 1 }, { scaleX: .86, duration: 2.2, ease: 'power2.out' }, T.E + .1);
+  tl.fromTo('#floorBeam', { opacity: 0 }, { opacity: .7, duration: 1.5 }, wt('горел'));
+  M.show('#eLock', { at: wt('запирала') - .1, in: 'pop', dur: .45 });
+  tl.fromTo('#phE', { autoAlpha: 0, y: 200 }, { autoAlpha: 1, y: 0, duration: .6, ease: 'expo.out' }, wt('набрала') - .1);
+  const mel = wt('мелодия');
+  for (let i = 0; i < 6; i++) { const c = mk('#ringsE', 'circle', { cx: 540, cy: 900, r: 10, opacity: 0 }); tl.fromTo(c, { attr: { r: 10 }, opacity: .9 }, { attr: { r: 520 }, opacity: 0, duration: 1.4, ease: 'expo.out' }, mel - .2 + i * .45); }
+  M.sfx('ringtone_loop', mel - .2, { gain: -8 });
+  tl.to('#phE', { scale: .62, rotation: 0, x: -340, y: -420, duration: 1, ease: 'power3.inOut' }, wt('руке') - 1.4);
+  M.hit(wt('руке'), 'l');
+  tl.to('#sE svg.art', { scale: 1.1, transformOrigin: '50% 50%', duration: T.F - T.E, ease: 'none' }, T.E);
+
+  // F — полиция
+  M.onFrame(t => { const k = (t * 2.2) % 1; document.querySelector('#pR').setAttribute('opacity', t > T.F && t < T.G ? (k < .5 ? .22 : 0) : 0); document.querySelector('#pB').setAttribute('opacity', t > T.F && t < T.G ? (k >= .5 ? .22 : 0) : 0); });
+  tl.fromTo('#fStamp', { scale: 2.2, rotation: -14, autoAlpha: 0 }, { scale: 1, rotation: -6, autoAlpha: 1, duration: .3, ease: 'power4.in' }, wt('пустая') - .25);
+  M.sfx('thud', wt('пустая') + .05);
+  M.show('#fNo', { at: wt('ничего') - .05, in: 'fade', dur: .5 });
+
+  // G — история вызовов
+  M.show('#gTag', { at: T.G + .3, in: 'fade', dur: .5 });
+  ['#r1', '#r2', '#r3'].forEach((r, i) => { M.show(r, { at: wt('исходящих') + i * .35, in: 'slide', dur: .45 }); });
+  M.show('#g2347', { at: wt('23') - .1, in: 'blur', dur: .7 }); M.hit(wt('23', 1, true) - .2, 'm');
+
+  // H — финал
+  buzz('#phH', T.H + .3, D);
+  M.onFrame(t => document.querySelector('#glowHe').setAttribute('opacity', t > T.H + .3 ? .6 + .4 * Math.sin(t * 6) : 0));
+  for (let k = T.H + .4; k < D - .3; k += .4) M.sfx('thud', k, { gain: -16, rate: 1.6 });
+  M.show('#hTag', { at: wt('сама') - .2, in: 'blur', dur: .8 }); M.hit(wt('сама'), 'l');
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
