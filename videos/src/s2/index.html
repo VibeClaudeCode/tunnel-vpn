@@ -3,39 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="fonts/fonts.css">
-<style>
-  :root { --bg:#0A0F1A; --fg:#F4F1EA; --blue:#3FC3FF; --orange:#FFB23A; --red:#FF4B4B; --green:#5BE38B; --lamp:#FFC857;
-          --font-display:"Montserrat"; --font-mono:"JetBrains Mono"; --font-hand:"Marck Script"; }
-  #stage { color: var(--fg); font-family: var(--font-display), sans-serif; }
-  .bg { background: var(--bg); }
-  .scene { background: var(--bg); overflow:hidden; }
-  .scene svg.art { position:absolute; inset:0; width:100%; height:100%; }
-  .tag { position:absolute; left:50%; top:250px; transform:translateX(-50%); white-space:nowrap;
-         font:700 30px/1 var(--font-mono); letter-spacing:.08em; color:var(--blue);
-         padding:14px 26px; border:3px solid var(--blue); border-radius:14px; background:rgba(10,20,35,.75);
-         box-shadow:0 0 24px rgba(63,195,255,.35); }
-  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(255,75,75,.35); }
-  .tag i { display:inline-block; width:16px; height:16px; border-radius:50%; background:currentColor; margin-right:14px; vertical-align:middle; box-shadow:0 0 10px currentColor; }
-  #cap { position:absolute; left:0; right:0; top:1600px; text-align:center; z-index:50;
-         font:900 92px/1.05 var(--font-display); text-transform:uppercase; letter-spacing:-.01em;
-         text-shadow:0 4px 0 rgba(0,0,0,.55), 0 0 30px rgba(0,0,0,.6); padding:0 60px; }
-  #cap .k1 { color:var(--orange); } #cap .k2 { color:var(--blue); } #cap .k3 { color:var(--red); } #cap .k4 { color:var(--green); }
-  .chip { position:absolute; white-space:nowrap; font:800 46px/1 var(--font-display); text-transform:uppercase;
-          padding:18px 28px; border-radius:16px; background:#111A2B; border:3px solid var(--orange); color:var(--orange); }
-  .big { position:absolute; left:0; right:0; text-align:center; font:900 230px/1 var(--font-display); color:var(--orange);
-         text-shadow:0 0 40px rgba(255,178,58,.35); }
-  .lbl { position:absolute; font:700 26px/1 var(--font-mono); color:#8FA3BF; letter-spacing:.06em; white-space:nowrap; }
-  .stamp { position:absolute; left:110px; top:760px; white-space:nowrap; font:900 80px/1 var(--font-display); color:var(--red);
-           border:10px solid var(--red); padding:18px 34px; border-radius:18px; text-transform:uppercase; background:rgba(40,8,8,.35); }
-  .note { position:absolute; left:140px; top:560px; width:800px; height:640px; background:#EFE6D2; border-radius:10px;
-          box-shadow:0 30px 60px rgba(0,0,0,.6); padding:90px 70px; box-sizing:border-box; }
-  .note p { margin:0 0 16px; font:400 96px/1.08 var(--font-hand); color:#C62828; white-space:nowrap; }
-  .note .rule { position:absolute; left:0; right:0; height:2px; background:#C9D6E8; }
-  .card { position:absolute; width:250px; height:290px; border-radius:24px; background:#111A2B; border:3px solid #2A3B57;
-          display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; }
-  .card svg { width:130px; height:130px; }
-  .card b { font:800 30px/1.1 var(--font-display); text-transform:uppercase; text-align:center; color:var(--fg); }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="67.2" data-safe="none" data-sfx="02">
@@ -151,7 +119,7 @@
       <circle cx="540" cy="180" r="18" fill="#9FB3C8"/>
       <rect x="490" y="420" width="100" height="1500" fill="#140E0B"/>
       <line x1="540" y1="180" x2="540" y2="1900" stroke="#9FB3C8" stroke-width="3"/>
-      <g id="capsule" transform="translate(0,1150)">
+      <g id="capsule" transform="translate(0,950)">
         <rect x="502" y="300" width="76" height="220" rx="30" fill="#E9EEF5"/>
         <rect x="502" y="380" width="76" height="40" fill="#D33A2C"/>
         <rect x="522" y="320" width="36" height="36" rx="8" fill="#2A3B57"/>

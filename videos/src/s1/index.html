@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="65.6" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. Хук: темнота, луч фонаря по мокрому камню -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs>
+        <radialGradient id="torch" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFFFFF" stop-opacity="1"/><stop offset=".55" stop-color="#FFFFFF" stop-opacity=".6"/><stop offset="1" stop-color="#FFD98A" stop-opacity="0"/></radialGradient>
+        <mask id="lightM"><rect width="1080" height="1920" fill="#000"/><circle id="spotC" cx="540" cy="900" r="330" fill="url(#torch)"/></mask>
+      </defs>
+      <rect width="1080" height="1920" fill="#030406"/>
+      <g mask="url(#lightM)">
+        <rect width="1080" height="1920" fill="#7A6A5C"/>
+        <path d="M0,300 Q240,240 420,330 T820,300 T1080,360 L1080,520 Q760,600 520,520 T0,560 Z" fill="#8E7D6D"/>
+        <path d="M0,900 Q300,820 560,920 T1080,880 L1080,1100 Q760,1180 480,1080 T0,1120 Z" fill="#5E5248"/>
+        <path d="M0,1400 Q260,1320 540,1420 T1080,1380 L1080,1920 L0,1920 Z" fill="#4E443B"/>
+        <g fill="#9FC7E0" opacity=".55"><ellipse cx="300" cy="620" rx="40" ry="10"/><ellipse cx="760" cy="760" rx="60" ry="12"/><ellipse cx="520" cy="1240" rx="80" ry="14"/><ellipse cx="840" cy="1180" rx="30" ry="8"/><ellipse cx="220" cy="1020" rx="50" ry="10"/></g>
+        <g stroke="#2A231E" stroke-width="8" fill="none"><path d="M380,700 l60,80 l-30,90"/><path d="M700,980 l-50,70 l40,60"/><path d="M200,1300 l70,40"/></g>
+      </g>
+      <g id="dripsA" fill="#9FC7E0"></g>
+    </svg>
+    <div class="tag" data-small id="aTag"><i></i>ТАИЛАНД · ПЕЩЕРА ТХАМ ЛУАНГ</div>
+    <div class="chip" id="aKm" style="left:330px;top:1380px;color:var(--blue);border-color:var(--blue)">1 км скалы над головой</div>
+  </section>
+
+  <!-- B. Вход в пещеру: велосипеды, мяч; 12+1; на час; ливень -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#121A33"/><stop offset=".6" stop-color="#2D3550"/><stop offset="1" stop-color="#3E4560"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyB)"/>
+      <rect id="skyDark" width="1080" height="1920" fill="#05070D" opacity="0"/>
+      <g fill="#1E3A2A"><path d="M-20,900 Q120,700 260,820 T520,760 T800,700 T1100,820 L1100,1400 L-20,1400 Z"/></g>
+      <g fill="#2B4A35"><circle cx="90" cy="860" r="90"/><circle cx="230" cy="830" r="110"/><circle cx="860" cy="780" r="120"/><circle cx="1000" cy="840" r="100"/></g>
+      <path d="M200,1400 L200,1080 Q540,820 880,1080 L880,1400 Z" fill="#4A4038"/>
+      <path d="M330,1400 L330,1160 Q540,980 750,1160 L750,1400 Z" fill="#050506"/>
+      <rect x="-20" y="1390" width="1120" height="560" fill="#3A322C"/>
+      <path d="M-20,1420 Q300,1390 560,1430 T1100,1410 L1100,1940 L-20,1940 Z" fill="#2E2823"/>
+      <g stroke="#C9D6E8" stroke-width="7" fill="none">
+        <circle cx="150" cy="1460" r="46"/><circle cx="280" cy="1460" r="46"/><path d="M150,1460 L200,1390 L280,1460 M200,1390 L250,1390 M180,1390 L215,1460"/>
+        <circle cx="830" cy="1470" r="46"/><circle cx="960" cy="1470" r="46"/><path d="M830,1470 L880,1400 L960,1470 M880,1400 L930,1400 M860,1400 L895,1470"/>
+      </g>
+      <g transform="translate(560,1470)"><circle r="36" fill="#F4F1EA"/><path d="M0,-14 l13,9 -5,15 -16,0 -5,-15 Z" fill="#111"/></g>
+      <g id="rain" stroke="#9FB3C8" stroke-width="3" opacity="0"></g>
+    </svg>
+    <div class="tag" data-small id="bTag"><i></i>23 ИЮНЯ 2018</div>
+    <div class="big" id="b12" style="top:440px">0</div>
+    <div class="chip" id="bBoys" style="left:300px;top:690px">мальчишек + тренер</div>
+    <div class="chip" id="bHour" style="left:395px;top:800px;color:var(--blue);border-color:var(--blue)">на 1 час</div>
+    <div class="tag red" data-small id="bRain" style="top:950px"><i></i>ЛИВЕНЬ</div>
+  </section>
+
+  <!-- D. Схема пещеры: вода отрезает выход, путь вглубь, 4 км, без еды/света/связи -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0A0F1A"/>
+      <g stroke="#13213A" stroke-width="2">
+        <line x1="0" y1="400" x2="1080" y2="400"/><line x1="0" y1="600" x2="1080" y2="600"/><line x1="0" y1="800" x2="1080" y2="800"/><line x1="0" y1="1000" x2="1080" y2="1000"/><line x1="0" y1="1200" x2="1080" y2="1200"/>
+        <line x1="180" y1="300" x2="180" y2="1300"/><line x1="360" y1="300" x2="360" y2="1300"/><line x1="540" y1="300" x2="540" y2="1300"/><line x1="720" y1="300" x2="720" y2="1300"/><line x1="900" y1="300" x2="900" y2="1300"/>
+      </g>
+      <path id="tunnel" d="M90,480 C230,500 260,640 380,660 S560,600 620,760 S760,900 820,980 S960,1060 990,1160" fill="none" stroke="#3A322C" stroke-width="70" stroke-linecap="round"/>
+      <path id="flood" d="M90,480 C230,500 260,640 380,660 S560,600 620,760 S760,900 820,980" fill="none" stroke="#2F7DD1" stroke-width="56" stroke-linecap="round" opacity=".85"/>
+      <circle cx="90" cy="480" r="22" fill="#5BE38B"/>
+      <rect x="930" y="1140" width="120" height="40" rx="10" fill="#C9A98A"/>
+      <circle id="grp" cx="90" cy="480" r="18" fill="#FFB23A"/>
+      <line id="measure" x1="90" y1="1260" x2="990" y2="1260" stroke="#FFB23A" stroke-width="5" stroke-dasharray="16 12"/>
+    </svg>
+    <div class="lbl" data-small style="left:50px;top:420px;color:var(--green)">ВХОД</div>
+    <div class="lbl" data-small style="left:860px;top:1100px">СУХОЙ ВЫСТУП</div>
+    <div class="tag" data-small id="dTag" style="top:200px"><i></i>ПЛАН ПЕЩЕРЫ</div>
+    <div class="chip" id="d4" style="left:400px;top:1290px;font-size:56px">4 км</div>
+    <div class="card bad" id="c1" style="left:120px;top:1300px"><svg viewBox="0 0 130 130"><path d="M30,60 h70 l-8,50 h-54 Z" fill="#C98A47"/><ellipse cx="65" cy="60" rx="35" ry="10" fill="#E0A862"/></svg><b>еда</b></div>
+    <div class="card bad" id="c2" style="left:415px;top:1300px"><svg viewBox="0 0 130 130"><circle cx="65" cy="55" r="30" fill="#FFC857"/><rect x="52" y="85" width="26" height="22" rx="4" fill="#9FB3C8"/></svg><b>свет</b></div>
+    <div class="card bad" id="c3" style="left:710px;top:1300px"><svg viewBox="0 0 130 130"><rect x="40" y="20" width="50" height="90" rx="10" fill="#2A3B57" stroke="#9FB3C8" stroke-width="5"/><g fill="#3FC3FF"><rect x="50" y="80" width="6" height="14"/><rect x="60" y="72" width="6" height="22"/><rect x="70" y="64" width="6" height="30"/></g></svg><b>связь</b></div>
+  </section>
+
+  <!-- E. Выступ: дети сидят, капли, дыхание, дни -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="dimL"><stop offset="0" stop-color="#55617E" stop-opacity=".7"/><stop offset="1" stop-color="#3A4560" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#06080E"/>
+      <circle cx="540" cy="1050" r="520" fill="url(#dimL)"/>
+      <path d="M0,0 L1080,0 L1080,380 Q760,460 540,400 T0,420 Z" fill="#1A1714"/>
+      <rect x="0" y="1180" width="1080" height="760" fill="#0D2A44"/>
+      <path d="M120,1180 L960,1180 L900,1080 L180,1080 Z" fill="#3A322C"/>
+      <g id="kids" fill="#46536E"></g>
+      <g id="drops" fill="#9FC7E0"></g>
+      <g id="ripples" fill="none" stroke="#9FC7E0" stroke-width="3"></g>
+      <circle id="breath" cx="540" cy="700" r="120" fill="none" stroke="#3FC3FF" stroke-width="6" opacity="0"/>
+    </svg>
+    <div class="tag" data-small id="eTag"><i></i>ТРЕНЕР · БЫВШИЙ МОНАХ</div>
+    <div class="lbl" data-small id="breathL" style="left:470px;top:686px;color:var(--blue);font-size:30px">ВДОХ</div>
+    <div class="big" id="day" style="top:520px;font-size:150px;color:var(--fg)">ДЕНЬ <span id="dayN" style="color:var(--orange)">1</span></div>
+  </section>
+
+  <!-- F. Свет из воды, дайверы, «сколько вас?», 13, все живы -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="uw"><stop offset="0" stop-color="#E6F6FF" stop-opacity=".95"/><stop offset=".35" stop-color="#7FD0FF" stop-opacity=".45"/><stop offset="1" stop-color="#3FC3FF" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#04070C"/>
+      <rect x="0" y="1100" width="1080" height="820" fill="#071C30"/>
+      <line x1="0" y1="1100" x2="1080" y2="1100" stroke="#3FC3FF" stroke-width="3" opacity=".5"/>
+      <circle id="glow" cx="540" cy="1250" r="420" fill="url(#uw)" opacity="0"/>
+      <g id="divers" opacity="0">
+        <g transform="translate(430,1110)"><circle r="44" fill="#2A3B57"/><rect x="-22" y="-14" width="44" height="22" rx="8" fill="#9FC7E0"/><circle cx="0" cy="-48" r="12" fill="#FFF1C9"/></g>
+        <g transform="translate(650,1120)"><circle r="44" fill="#2A3B57"/><rect x="-22" y="-14" width="44" height="22" rx="8" fill="#9FC7E0"/><circle cx="0" cy="-48" r="12" fill="#FFF1C9"/></g>
+      </g>
+      <g id="splash" fill="#9FC7E0"></g>
+    </svg>
+    <div class="tag" data-small id="fTag"><i></i>ДЕНЬ 10 · 2 ДАЙВЕРА</div>
+    <div class="quote" id="fQ" style="top:420px;text-align:center">— Сколько вас?</div>
+    <div class="big" id="f13" style="top:600px;font-size:300px">13</div>
+    <div class="chip" id="fAlive" style="left:345px;top:930px;color:var(--green);border-color:var(--green);font-size:56px">все живы</div>
+  </section>
+
+  <!-- G. Карта затопленных коридоров -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0A0F1A"/>
+      <path d="M90,480 C230,500 260,640 380,660 S560,600 620,760 S760,900 820,980 S960,1060 990,1160" fill="none" stroke="#2A2420" stroke-width="70" stroke-linecap="round"/>
+      <path id="gFlood" d="M990,1160 C960,1060 880,1040 820,980 S700,860 620,760 S440,640 380,660 S230,500 90,480" fill="none" stroke="#3FC3FF" stroke-width="40" stroke-linecap="round"/>
+      <circle cx="990" cy="1160" r="20" fill="#FFB23A"/><circle cx="90" cy="480" r="22" fill="#5BE38B"/>
+    </svg>
+    <div class="lbl" data-small style="left:50px;top:420px;color:var(--green)">ВЫХОД</div>
+    <div class="tag" data-small id="gTag" style="top:200px"><i></i>ЗАТОПЛЕННЫЕ КОРИДОРЫ</div>
+    <div class="tag red" data-small id="gSwim" style="top:1330px"><i></i>ДЕТИ НЕ УМЕЮТ ПЛАВАТЬ</div>
+    <div class="chip" id="gKm" style="left:320px;top:1420px;color:var(--blue);border-color:var(--blue)">километры под водой</div>
+  </section>
+
+  <!-- H. Тизер серии 2 -->
+  <section class="scene" id="sH">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1530"/><stop offset=".6" stop-color="#3B2440"/><stop offset="1" stop-color="#6B3B3A"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyH)"/>
+      <polygon points="-50,1350 260,760 420,900 560,640 820,1000 1130,1350" fill="#5A3A2E"/>
+      <path d="M470,1350 L470,1210 Q540,1130 610,1210 L610,1350 Z" fill="#0A0605"/>
+      <rect x="-20" y="1340" width="1120" height="600" fill="#7A5236"/>
+    </svg>
+    <div class="tag" data-small id="hTag"><i></i>СЛЕДУЮЩАЯ СЕРИЯ</div>
+    <div class="big" id="h33" style="top:420px">33</div>
+    <div class="chip" id="h17" style="left:300px;top:680px;color:var(--red);border-color:var(--red)">17 дней «мёртвые»</div>
+  </section>
+
+  <div id="cap"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(11);
+  xfade(tl, [['#sA',0],['#sB',7.7],['#sD',17.4],['#sE',29.3],['#sF',41.6],['#sG',51.6],['#sH',58.5]], D);
+  captions(M.data.words.s1, {
+    k1: ['12','4','13','13.','17','33','пять','девять.','десятый','день,'],
+    k2: ['пещере','воду,','воды','дайверов.','водой.','под'],
+    k3: ['ливень.','выход.','без','еды,','света,','связи.','мёртвыми'],
+    k4: ['живы.','спасти.','медленно,'] });
+
+  // A — луч фонаря шарит по камню
+  M.onFrame(t => { const c = document.querySelector('#spotC'); c.setAttribute('cx', 540 + Math.sin(t * .9) * 260); c.setAttribute('cy', 900 + Math.sin(t * .6 + 1) * 320); });
+  tl.fromTo('#spotC', { attr: { r: 60 } }, { attr: { r: 360 }, duration: 1.2, ease: 'expo.out' }, 0.05);
+  M.show('#aTag', { at: 0.15, in: 'drop', dur: 0.5 });
+  M.show('#aKm', { at: 2.85, in: 'pop', dur: 0.45 });
+  M.hit(4.45, 's');
+  for (let i = 0; i < 6; i++) { const x = 160 + R() * 760, d = mk('#dripsA', 'ellipse', { cx: x, cy: 380, rx: 5, ry: 9, opacity: 0 }); const t0 = 0.6 + i * 1.1;
+    tl.fromTo(d, { attr: { cy: 380 }, opacity: .9 }, { attr: { cy: 1500 }, opacity: .9, duration: .9, ease: 'power2.in' }, t0); tl.to(d, { opacity: 0, duration: .15 }, t0 + .9); }
+
+  // B — вход, 12+1, ливень
+  M.show('#bTag', { at: 7.9, in: 'drop', dur: 0.5 });
+  M.show('#b12', { at: 7.95, in: 'pop', dur: 0.45 });
+  M.count('#b12', { from: 0, to: 12, at: 8.0, dur: 0.7 });
+  M.show('#bBoys', { at: 10.6, in: 'rise', dur: 0.5 });
+  M.show('#bHour', { at: 13.45, in: 'pop', dur: 0.45 });
+  M.hide('#b12, #bBoys, #bHour', { at: 15.3, out: 'fade', dur: 0.4 });
+  tl.to('#skyDark', { opacity: .55, duration: 2, ease: 'power1.inOut' }, 15.0);
+  const rain = document.querySelector('#rain'), RD = [];
+  for (let i = 0; i < 80; i++) RD.push([mk(rain, 'line', {}), R() * 1080, R() * 1920, 900 + R() * 500]);
+  M.onFrame(t => RD.forEach(([l, x, y0, v]) => { const y = (y0 + t * v) % 2000 - 80; l.setAttribute('x1', x - y * .12); l.setAttribute('y1', y); l.setAttribute('x2', x - y * .12 - 8); l.setAttribute('y2', y + 50); }));
+  tl.to('#rain', { opacity: .6, duration: .8 }, 15.5);
+  M.show('#bRain', { at: 16.2, in: 'pop', dur: 0.45 });
+  M.sfx('swell', 15.6, { gain: -6 });
+
+  // D — схема пещеры
+  M.show('#dTag', { at: 17.6, in: 'drop', dur: 0.5 });
+  const fl = document.querySelector('#flood'), L = fl.getTotalLength();
+  gsap.set(fl, { strokeDasharray: L, strokeDashoffset: L });
+  tl.to(fl, { strokeDashoffset: 0, duration: 1.4, ease: 'power2.out' }, 17.7); M.sfx('sweep', 17.8, { gain: -4 });
+  const tn = document.querySelector('#tunnel'), TL = tn.getTotalLength();
+  const g = { p: 0 }; tl.to(g, { p: 1, duration: 3.6, ease: 'power1.inOut' }, 19.6);
+  M.onFrame(() => { const pt = tn.getPointAtLength(g.p * TL); const c = document.querySelector('#grp'); c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); });
+  tl.fromTo('#measure', { attr: { x2: 90 } }, { attr: { x2: 990 }, duration: .8, ease: 'expo.out' }, 24.1);
+  M.show('#d4', { at: 24.15, in: 'pop', dur: 0.45 });
+  M.hide('#d4', { at: 25.8, out: 'fade', dur: 0.4 });
+  tl.to('#measure', { opacity: 0, duration: .4 }, 25.8);
+  M.show('#c1', { at: 26.05, in: 'pop', dur: 0.45 }); M.show('#c2', { at: 27.2, in: 'pop', dur: 0.45 }); M.show('#c3', { at: 28.2, in: 'pop', dur: 0.45 });
+
+  // E — выступ: дети, капли, дыхание, дни
+  const kids = document.querySelector('#kids');
+  for (let i = 0; i < 13; i++) { const x = 220 + i * 53 + (i % 2) * 8, y = 1080 - (i % 3) * 6, s = i === 6 ? 1.25 : 1;
+    mk(kids, 'circle', { cx: x, cy: y - 70 * s, r: 20 * s }); mk(kids, 'path', { d: `M${x - 28 * s},${y} Q${x},${y - 80 * s} ${x + 28 * s},${y} Z` }); }
+  M.show('#eTag', { at: 30.4, in: 'drop', dur: 0.5 });
+  for (let i = 0; i < 9; i++) { const x = 200 + R() * 680, t0 = 29.6 + i * 1.25, d = mk('#drops', 'ellipse', { cx: x, cy: 420, rx: 6, ry: 10, opacity: 0 }), r = mk('#ripples', 'ellipse', { cx: x, cy: 1250, rx: 4, ry: 2, opacity: 0 });
+    tl.fromTo(d, { attr: { cy: 420 }, opacity: .9 }, { attr: { cy: 1240 }, duration: .8, ease: 'power2.in' }, t0); tl.to(d, { opacity: 0, duration: .1 }, t0 + .8);
+    tl.fromTo(r, { attr: { rx: 4, ry: 2 }, opacity: .9 }, { attr: { rx: 90, ry: 18 }, opacity: 0, duration: 1.2, ease: 'expo.out' }, t0 + .8); M.sfx('bubble', t0 + .8, { gain: -10 }); }
+  tl.to('#breath', { opacity: 1, duration: .4 }, 33.7);
+  M.show('#breathL', { at: 33.7, in: 'fade', dur: 0.5 });
+  M.onFrame(t => { if (t < 33.5 || t > 38.8) return; const k = (Math.sin((t - 33.7) * 1.4) + 1) / 2; document.querySelector('#breath').setAttribute('r', 90 + 80 * k);
+    document.querySelector('#breathL').textContent = Math.cos((t - 33.7) * 1.4) > 0 ? 'ВДОХ' : 'ВЫДОХ'; });
+  tl.to('#breath', { opacity: 0, duration: .4 }, 38.5); M.hide('#breathL', { at: 38.5, out: 'fade', dur: 0.4 });
+  M.show('#day', { at: 38.9, in: 'pop', dur: 0.45 });
+  const dayN = document.querySelector('#dayN');
+  M.onFrame(t => { dayN.textContent = t < 39.85 ? 1 : t < 40.95 ? 5 : 9; });
+  M.sfx('thock', 39.86); M.sfx('thock', 40.96);
+  tl.fromTo('#dayN', { scale: 1.4 }, { scale: 1, duration: .3, ease: 'back.out(2)' }, 39.86);
+  tl.fromTo('#dayN', { scale: 1.4 }, { scale: 1, duration: .3, ease: 'back.out(2)' }, 40.96);
+
+  // F — свет из воды
+  M.show('#fTag', { at: 41.8, in: 'drop', dur: 0.5 });
+  tl.to('#glow', { opacity: 1, duration: 1.2, ease: 'power2.out' }, 42.7); M.sfx('swell', 42.6);
+  tl.fromTo('#divers', { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: .7, ease: 'expo.out' }, 43.15);
+  burst(tl, '#splash', R, 540, 1110, 43.2, { tag: 'circle', n: 18, a0: -Math.PI, span: Math.PI, d: 120, sy: .8 }); M.sfx('swish', 43.2);
+  M.show('#fQ', { at: 47.6, in: 'pop', dur: 0.45 });
+  M.hide('#fQ', { at: 48.8, out: 'fade', dur: 0.3 });
+  M.show('#f13', { at: 48.9, in: 'pop', dur: 0.45 }); M.hit(48.94, 'm');
+  M.show('#fAlive', { at: 50.3, in: 'pop', dur: 0.45 }); M.hit(50.35, 'l');
+
+  // G — карта затопленных коридоров
+  M.show('#gTag', { at: 51.8, in: 'drop', dur: 0.5 });
+  const gf = document.querySelector('#gFlood'), GL = gf.getTotalLength();
+  gsap.set(gf, { strokeDasharray: GL, strokeDashoffset: GL });
+  tl.to(gf, { strokeDashoffset: 0, duration: 4.5, ease: 'power1.inOut' }, 52.2); M.sfx('sweep', 52.4, { gain: -6 });
+  M.show('#gSwim', { at: 54.45, in: 'pop', dur: 0.45 });
+  M.show('#gKm', { at: 56.75, in: 'rise', dur: 0.5 });
+
+  // H — тизер
+  M.show('#hTag', { at: 58.7, in: 'drop', dur: 0.5 });
+  M.show('#h33', { at: 59.95, in: 'pop', dur: 0.45 });
+  M.show('#h17', { at: 63.45, in: 'pop', dur: 0.45 });
+  M.hit(63.5, 'm');
+
+  drift(tl, [['#sB svg.art', 7.5, 17.6], ['#sD svg.art', 17.2, 29.5], ['#sE svg.art', 29.1, 41.8], ['#sF svg.art', 41.4, 51.8], ['#sG svg.art', 51.4, 58.7], ['#sH svg.art', 58.3, 65.6]]);
+  M.grain(0.08);
+});
+</script>
+</body>
+</html>

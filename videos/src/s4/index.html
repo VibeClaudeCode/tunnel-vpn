@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="69.4" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. Вид из кабины: Манхэттен, высота падает, таймер 3:00 -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FA9C4"/><stop offset="1" stop-color="#D9E2EA"/></linearGradient></defs>
+      <g id="viewA">
+        <rect x="-200" y="-200" width="1480" height="2320" fill="url(#skyA)"/>
+        <g fill="#5C6A84"><rect x="80" y="980" width="90" height="420"/><rect x="190" y="900" width="70" height="500"/><rect x="280" y="1020" width="110" height="380"/><rect x="410" y="820" width="80" height="580"/><rect x="510" y="950" width="120" height="450"/><rect x="650" y="870" width="70" height="530"/><rect x="740" y="1000" width="130" height="400"/><rect x="890" y="930" width="90" height="470"/></g>
+        <rect x="-200" y="1400" width="1480" height="800" fill="#6B7A8F"/>
+      </g>
+      <path d="M0,0 L1080,0 L1080,700 Q540,560 0,700 Z" fill="#1A2030"/>
+      <path d="M0,1920 L0,1300 Q540,1180 1080,1300 L1080,1920 Z" fill="#1A2030"/>
+      <rect x="520" y="560" width="40" height="760" fill="#1A2030"/>
+      <g transform="translate(160,1420)"><rect width="300" height="200" rx="16" fill="#0E1626" stroke="#2A3B57" stroke-width="4"/><text x="150" y="60" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="26" fill="#8FA3BF">ВЫСОТА, М</text><text id="alt" x="150" y="140" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="64" fill="#FFB23A">850</text></g>
+      <g transform="translate(620,1420)"><rect width="300" height="200" rx="16" fill="#0E1626" stroke="#2A3B57" stroke-width="4"/><text x="150" y="60" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="26" fill="#8FA3BF">ДВИГАТЕЛИ</text><text x="150" y="140" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="56" fill="#FF4B4B">0 / 2</text></g>
+    </svg>
+    <div class="tag red" data-small id="aTag"><i></i>РЕЙС 1549 · НЬЮ-ЙОРК</div>
+    <div class="big" id="aT" style="top:330px;font-size:170px;color:var(--red);font-family:'JetBrains Mono'">3:00</div>
+  </section>
+
+  <!-- B. Взлёт, 155 человек, гуси, отказ двигателей -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6F8FB5"/><stop offset="1" stop-color="#C9D6E8"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyB)"/>
+      <g fill="#EEF3F8" opacity=".8"><ellipse cx="220" cy="520" rx="160" ry="40"/><ellipse cx="820" cy="380" rx="200" ry="46"/><ellipse cx="700" cy="1000" rx="140" ry="34"/></g>
+      <rect y="1400" width="1080" height="520" fill="#7C8A9C"/><rect y="1440" width="1080" height="40" fill="#5C6A84"/>
+      <g fill="#4A5670"><rect x="740" y="1220" width="60" height="180"/><rect x="820" y="1260" width="90" height="140"/><rect x="930" y="1200" width="70" height="200"/></g>
+      <g id="planeB"><g transform="rotate(-14)">
+        <rect x="-180" y="-22" width="360" height="44" rx="22" fill="#F4F1EA"/><polygon points="-20,0 60,0 -40,-120 -70,-120" fill="#C9D6E8"/><polygon points="-20,0 60,0 -40,120 -70,120" fill="#C9D6E8"/><polygon points="-160,-10 -120,-10 -160,-80 -180,-80" fill="#3FC3FF"/>
+        <rect id="e1" x="-30" y="40" width="60" height="26" rx="12" fill="#5C6A84"/><rect id="e2" x="-30" y="-66" width="60" height="26" rx="12" fill="#5C6A84"/>
+        <g fill="#2A3B57"><circle cx="100" cy="-6" r="6"/><circle cx="80" cy="-6" r="6"/><circle cx="60" cy="-6" r="6"/><circle cx="40" cy="-6" r="6"/></g></g></g>
+      <g id="geese" fill="#2A2420"></g>
+      <g id="smoke" fill="#5C6A84"></g>
+      <circle id="flashB" data-cut="16.3" cx="540" cy="800" r="30" fill="#FFF3C4" opacity="0"/>
+    </svg>
+    <div class="tag" data-small id="bTag"><i></i>15 ЯНВАРЯ 2009</div>
+    <div class="chip" id="b155" style="left:90px;top:330px;font-size:56px">155 человек на борту</div>
+    <div class="tag red" data-small id="bEng" style="top:1100px"><i></i>ОБА ДВИГАТЕЛЯ ОТКАЗАЛИ</div>
+  </section>
+
+  <!-- C. Капитан, 40 лет, назад в аэропорт — не дотянет, внизу город -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0A0F1A"/>
+      <g id="mapC">
+        <rect x="60" y="760" width="960" height="760" rx="24" fill="#0E1626" stroke="#2A3B57" stroke-width="4"/>
+        <g fill="#1A2440" id="blocks"></g>
+        <path d="M640,780 Q560,1100 600,1500" fill="none" stroke="#2F7DD1" stroke-width="60"/>
+        <rect x="180" y="1300" width="200" height="120" rx="10" fill="#2A3B57"/><text x="280" y="1372" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="26" fill="#8FA3BF">АЭРОПОРТ</text>
+        <circle id="pC" cx="820" cy="900" r="22" fill="#FFB23A"/>
+        <path id="backPath" d="M820,900 Q600,1000 290,1300" fill="none" stroke="#FFB23A" stroke-width="8" stroke-dasharray="20 14"/>
+        <path id="realPath" d="M820,900 Q680,1060 560,1150" fill="none" stroke="#FF4B4B" stroke-width="10"/>
+      </g>
+      <g transform="translate(110,300)">
+        <rect width="860" height="380" rx="28" fill="#111A2B" stroke="#2A3B57" stroke-width="4"/>
+        <circle cx="170" cy="190" r="120" fill="#1A2440"/>
+        <path d="M95,240 Q170,320 245,240 L245,300 Q170,330 95,300 Z" fill="#2A3B57"/>
+        <circle cx="170" cy="160" r="66" fill="#E3B48F"/><path d="M104,150 Q110,84 170,86 Q232,84 236,150 Q220,116 170,118 Q120,116 104,150Z" fill="#D9D9D9"/>
+        <path d="M130,196 Q170,220 210,196 Q200,214 170,216 Q140,214 130,196Z" fill="#D9D9D9"/>
+        <rect x="100" y="250" width="140" height="40" rx="6" fill="#0E1626"/>
+      </g>
+    </svg>
+    <div style="position:absolute;left:440px;top:360px;font:800 34px/1.15 var(--font-display);text-transform:uppercase;color:#8FA3BF" id="cName">Капитан<br><span style="color:var(--fg);font-size:52px">Чесли<br>Салленбергер</span></div>
+    <div class="chip" id="c40" style="left:440px;top:580px;font-size:36px">40 лет за штурвалом</div>
+    <div class="tag red" data-small id="cNo" style="top:1110px;left:560px"><i></i>НЕ ДОТЯНЕТ</div>
+    <div class="lbl" data-small style="left:90px;top:790px">МАНХЭТТЕН</div>
+  </section>
+
+  <!-- D. Река Гудзон, «садимся на Гудзон», лёд, «приготовиться к удару» -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#3A4256"/>
+      <g fill="#5C6A84" id="cityD"></g>
+      <path d="M330,0 Q470,600 420,1100 T520,1920 L760,1920 Q690,1500 720,1000 T600,0 Z" fill="#3E6C93"/>
+      <g stroke="#DDEBFF" stroke-width="3" opacity=".4" fill="none"><path d="M450,300 q20,10 40,0"/><path d="M500,700 q20,10 40,0"/><path d="M560,1300 q20,10 40,0"/><path d="M600,1600 q20,10 40,0"/></g>
+      <g id="planeD"><g transform="rotate(10)">
+        <rect x="-26" y="-130" width="52" height="260" rx="26" fill="#F4F1EA"/><polygon points="0,-20 0,40 -150,10 -150,-20" fill="#C9D6E8"/><polygon points="0,-20 0,40 150,10 150,-20" fill="#C9D6E8"/><polygon points="0,100 0,130 -60,140 -60,120" fill="#C9D6E8"/><polygon points="0,100 0,130 60,140 60,120" fill="#C9D6E8"/></g></g>
+      <g id="ice" fill="#EEF3F8" opacity="0"><rect x="420" y="900" width="40" height="16" rx="6"/><rect x="600" y="1180" width="50" height="18" rx="6"/><rect x="480" y="1500" width="36" height="14" rx="6"/><rect x="640" y="700" width="30" height="12" rx="6"/></g>
+    </svg>
+    <div class="tag" data-small id="dTag" style="top:200px"><i></i>ДИСПЕТЧЕРУ: «МЫ САДИМСЯ НА ГУДЗОН»</div>
+    <div class="chip" id="dHud" style="left:640px;top:820px;color:var(--blue);border-color:var(--blue)">Гудзон</div>
+    <div class="chip" id="dCold" style="left:120px;top:1000px;color:var(--blue);border-color:var(--blue)">вода +2 °C</div>
+    <div class="quote" id="dWarn" style="top:1250px;text-align:center;color:var(--red);border-color:var(--red)">ПРИГОТОВИТЬСЯ К УДАРУ</div>
+  </section>
+
+  <!-- E. Посадка на воду, люди на крыльях, паромы, капитан проверяет салон -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FA9C4"/><stop offset="1" stop-color="#C9D6E8"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyE)"/>
+      <g fill="#7C8A9C"><rect x="20" y="700" width="100" height="400"/><rect x="140" y="620" width="80" height="480"/><rect x="860" y="660" width="90" height="440"/><rect x="960" y="740" width="100" height="360"/></g>
+      <rect y="1100" width="1080" height="820" fill="#3E6C93"/>
+      <g id="planeE">
+        <rect x="160" y="1010" width="760" height="110" rx="55" fill="#F4F1EA"/><polygon points="840,1010 920,1010 960,900 910,900" fill="#3FC3FF"/>
+        <polygon points="420,1090 640,1090 560,1150 380,1150" fill="#C9D6E8"/>
+        <g fill="#2A3B57"><circle cx="260" cy="1050" r="10"/><circle cx="300" cy="1050" r="10"/><circle cx="340" cy="1050" r="10"/><circle cx="380" cy="1050" r="10"/><circle cx="660" cy="1050" r="10"/><circle cx="700" cy="1050" r="10"/><circle cx="740" cy="1050" r="10"/></g>
+      </g>
+      <rect y="1112" width="1080" height="60" fill="#3E6C93" opacity=".85"/>
+      <g id="people" fill="#FFB23A"></g>
+      <g id="ferry1"><rect x="0" y="1180" width="230" height="70" rx="10" fill="#E9EEF5"/><rect x="40" y="1130" width="120" height="50" rx="6" fill="#FFB23A"/></g>
+      <g id="ferry2"><rect x="0" y="1260" width="230" height="70" rx="10" fill="#E9EEF5"/><rect x="40" y="1210" width="120" height="50" rx="6" fill="#FFB23A"/></g>
+      <g id="splashE" fill="#DDEBFF"></g>
+    </svg>
+    <div class="tag" data-small id="eTag"><i></i>15:31 · РЕКА ГУДЗОН</div>
+    <div class="chip" id="eWing" style="left:300px;top:820px">люди на крыльях</div>
+    <div class="chip" id="eCap" style="left:220px;top:1400px;color:var(--fg);border-color:#2A3B57">капитан обходит салон × 2</div>
+  </section>
+
+  <!-- F. 155 — все живы -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#0A0F1A"/><g id="dots" fill="#2A3B57"></g></svg>
+    <div class="big" id="f155" style="top:600px;font-size:300px">155</div>
+    <div class="chip" id="fAlive" style="left:345px;top:930px;color:var(--green);border-color:var(--green);font-size:56px">все живы</div>
+  </section>
+
+  <!-- G. Финал: четыре истории, одно правило -->
+  <section class="scene" id="sG">
+    <div class="tag" data-small id="gTag" style="top:200px"><i></i>ВЫЖИТЬ ВОПРЕКИ · 4 ИСТОРИИ</div>
+    <div class="card" id="g1" style="left:150px;top:330px;width:370px;height:320px"><svg viewBox="0 0 130 130"><path d="M10,120 L10,70 Q65,0 120,70 L120,120 Z" fill="#4A4038"/><path d="M40,120 L40,85 Q65,55 90,85 L90,120 Z" fill="#050506"/></svg><b>пещера</b></div>
+    <div class="card" id="g2" style="left:560px;top:330px;width:370px;height:320px"><svg viewBox="0 0 130 130"><polygon points="0,120 50,30 80,70 130,120" fill="#5A3A2E"/><path d="M55,120 L55,95 Q65,82 75,95 L75,120Z" fill="#0A0605"/></svg><b>шахта</b></div>
+    <div class="card" id="g3" style="left:150px;top:690px;width:370px;height:320px"><svg viewBox="0 0 130 130"><circle cx="65" cy="65" r="44" fill="#2F7DD1"/><path d="M40,50 q20,-14 34,4 t30,10 q-10,24 -34,20 t-30,-34Z" fill="#5BE38B"/></svg><b>космос</b></div>
+    <div class="card" id="g4" style="left:560px;top:690px;width:370px;height:320px"><svg viewBox="0 0 130 130"><g transform="translate(65,65) rotate(-20)"><rect x="-55" y="-8" width="110" height="16" rx="8" fill="#F4F1EA"/><polygon points="-5,0 15,0 -15,-40 -25,-40" fill="#C9D6E8"/><polygon points="-5,0 15,0 -15,40 -25,40" fill="#C9D6E8"/></g></svg><b>небо</b></div>
+    <div id="rule" style="position:absolute;left:60px;right:60px;top:1100px;text-align:center;font:900 96px/1.05 var(--font-display);text-transform:uppercase">Кто не паникует —<br><span style="color:var(--green)">выживает</span></div>
+  </section>
+
+  <div id="cap"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(17);
+  xfade(tl, [['#sA',0],['#sB',4.85],['#sC',18.3],['#sD',31.2],['#sE',41.7],['#sF',55.6],['#sG',58.6]], D);
+  captions(M.data.words.s4, {
+    k1: ['три','минуты,','2009','155','40','дважды'],
+    k2: ['гудзон.','река,','воде.','паромы.','крылья.'],
+    k3: ['некуда?','гусей.','отказывают.','дотянет.','удару','удару!»','ледяная','тонущему'],
+    k4: ['целым.','живы.','выживает.'] }, { maxChars: 14 });
+
+  // A
+  M.show('#aTag', { at: 0.1, in: 'drop', dur: 0.5 });
+  M.show('#aT', { at: 1.1, in: 'pop', dur: 0.45 });
+  M.onFrame(t => { const s = Math.max(0, 180 - Math.max(0, t - 1.2) * 6); document.querySelector('#aT').textContent = `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    document.querySelector('#alt').textContent = Math.round(850 - Math.min(t, 5) * 40); });
+  M.ticks(1.3, { n: 12, gap: 0.3, rise: false });
+  tl.fromTo('#viewA', { y: 0, rotation: -3, transformOrigin: '540px 960px' }, { y: 120, rotation: 3, scale: 1.12, duration: 5, ease: 'none' }, 0);
+
+  // B
+  M.show('#bTag', { at: 5.0, in: 'drop', dur: 0.5 });
+  tl.fromTo('#planeB', { x: -300, y: 1350 }, { x: 540, y: 800, duration: 6, ease: 'power1.out' }, 4.85);
+  tl.to('#planeB', { x: 600, y: 760, duration: 9, ease: 'none' }, 10.85);
+  M.sfx('sweep', 5.2, { gain: -4 });
+  M.show('#b155', { at: 8.1, in: 'pop', dur: 0.45 });
+  M.hide('#b155', { at: 12.6, out: 'fade', dur: 0.4 });
+  const gs = document.querySelector('#geese'), G = [];
+  for (let i = 0; i < 16; i++) { const g = mk(gs, 'path', { d: 'M-22,0 Q-11,-12 0,0 Q11,-12 22,0 Q11,-4 0,4 Q-11,-4 -22,0Z' }); G.push([g, 60 * (i % 4) + R() * 30, 50 * Math.floor(i / 4) + R() * 30]); }
+  M.onFrame(t => { const k = Math.max(0, Math.min(1, (t - 13.2) / 3.1)); G.forEach(([g, dx, dy], i) => {
+    const flap = Math.sin(t * 14 + i) * .35 + 1; g.setAttribute('transform', `translate(${1250 - k * 760 + dx},${560 + k * 180 + dy}) scale(${1.3},${1.3 * flap})`);
+    g.setAttribute('opacity', t < 13.2 || t > 16.5 ? 0 : 1); }); });
+  M.sfx('whoosh', 15.5);
+  tl.fromTo('#flashB', { opacity: 0, attr: { r: 30 } }, { opacity: 1, attr: { r: 220 }, duration: .2, ease: 'expo.out' }, 16.3);
+  tl.to('#flashB', { opacity: 0, duration: .8 }, 16.5); M.hit(16.3, 'l');
+  tl.set('#flashB', { attr: { cx: 600, cy: 760 } }, 0);
+  tl.to('#e1, #e2', { attr: { fill: '#FF4B4B' }, duration: .15 }, 16.35);
+  for (let i = 0; i < 18; i++) { const c = mk('#smoke', 'circle', { cx: 590, cy: 780, r: 10, opacity: 0 }); const t0 = 16.4 + i * .1;
+    tl.fromTo(c, { attr: { cx: 590, cy: 780, r: 10 }, opacity: .8 }, { attr: { cx: 590 - 300 - R() * 80, cy: 820 + R() * 60, r: 40 + R() * 20 }, opacity: 0, duration: 1.6, ease: 'power1.out' }, t0); }
+  M.show('#bEng', { at: 16.9, in: 'pop', dur: 0.45 });
+
+  // C
+  const bl = document.querySelector('#blocks');
+  for (let x = 90; x < 1000; x += 70) for (let y = 790; y < 1500; y += 70) if (Math.abs(x - 600) > 70) mk(bl, 'rect', { x, y, width: 54, height: 54, rx: 4, fill: '#1A2440' });
+  tl.fromTo('#sC svg.art > g:last-child, #cName', { x: -80, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .6, ease: 'expo.out' }, 18.4);
+  M.show('#c40', { at: 20.6, in: 'pop', dur: 0.45 });
+  const bp = document.querySelector('#backPath'), BL = bp.getTotalLength(); gsap.set(bp, { strokeDasharray: '20 14', strokeDashoffset: 0 });
+  tl.fromTo(bp, { opacity: 0 }, { opacity: 1, duration: .4 }, 22.6);
+  const rp = document.querySelector('#realPath'), RL = rp.getTotalLength(); gsap.set(rp, { strokeDasharray: RL, strokeDashoffset: RL });
+  tl.to(rp, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.in' }, 25.3);
+  M.show('#cNo', { at: 26.45, in: 'pop', dur: 0.45 }); M.sfx('thud', 26.5);
+  tl.to('#blocks rect', { attr: { fill: '#3A4560' }, duration: .3, stagger: { each: .004, from: 'center' } }, 27.6);
+
+  // D
+  const cd = document.querySelector('#cityD');
+  for (let i = 0; i < 40; i++) { const left = R() < .5, x = left ? R() * 300 : 760 + R() * 300; mk(cd, 'rect', { x, y: R() * 1900, width: 50 + R() * 50, height: 50 + R() * 60, rx: 4 }); }
+  M.show('#dTag', { at: 31.5, in: 'drop', dur: 0.5 });
+  tl.fromTo('#planeD', { x: 540, y: -200 }, { x: 560, y: 1050, duration: 10.4, ease: 'power1.in' }, 31.2);
+  M.show('#dHud', { at: 35.35, in: 'pop', dur: 0.45 });
+  M.show('#dCold', { at: 36.3, in: 'pop', dur: 0.45 }); tl.to('#ice', { opacity: .9, duration: .6 }, 36.3);
+  M.show('#dWarn', { at: 40.2, in: 'pop', dur: 0.4 }); M.hit(40.25, 'm');
+  M.onFrame(t => { document.querySelector('#dWarn').style.filter = t > 40.6 && t < 41.8 && Math.sin(t * 16) < 0 ? 'brightness(1.6)' : 'none'; });
+
+  // E
+  tl.fromTo('#planeE', { y: -260, x: -200 }, { y: 0, x: 0, duration: .5, ease: 'power2.out' }, 41.7);
+  burst(tl, '#splashE', R, 540, 1110, 42.15, { tag: 'circle', n: 26, a0: -Math.PI, span: Math.PI, d: 200, sy: .7 }); M.hit(42.15, 'm');
+  M.show('#eTag', { at: 42.4, in: 'drop', dur: 0.5 });
+  M.onFrame(t => { const k = Math.sin(t * 1.3) * 4; document.querySelector('#planeE').setAttribute('transform', `translate(0,${t > 42.2 ? k : 0})`); });
+  const pp = document.querySelector('#people');
+  for (let i = 0; i < 14; i++) { const x = 400 + i * 16 + (i % 2) * 4, c = mk(pp, 'g', { opacity: 0 }); mk(c, 'circle', { cx: x, cy: 1072 - (i % 3) * 4, r: 7 }); mk(c, 'rect', { x: x - 6, y: 1078 - (i % 3) * 4, width: 12, height: 18, rx: 4 });
+    tl.to(c, { opacity: 1, duration: .25 }, 45.4 + i * .1); }
+  M.show('#eWing', { at: 46.8, in: 'pop', dur: 0.45 });
+  tl.fromTo('#ferry1', { x: -260 }, { x: 140, duration: 2.2, ease: 'power2.out' }, 47.6);
+  tl.fromTo('#ferry2', { x: 1100 }, { x: 760, duration: 2.2, ease: 'power2.out' }, 48.3);
+  M.sfx('sweep', 47.8, { gain: -6 });
+  M.show('#eCap', { at: 50.4, in: 'rise', dur: 0.5 });
+  tl.to('#planeE', { opacity: .75, duration: 4 }, 51.0);
+
+  // F
+  const dt = document.querySelector('#dots');
+  for (let i = 0; i < 155; i++) { const c = mk(dt, 'circle', { cx: 120 + (i % 15) * 60, cy: 1150 + Math.floor(i / 15) * 40, r: 12 }); tl.to(c, { attr: { fill: '#5BE38B' }, duration: .1 }, 57.6 + i * .006); }
+  M.show('#f155', { at: 55.9, in: 'pop', dur: 0.45 });
+  M.count('#f155', { from: 0, to: 155, at: 55.95, dur: .8 });
+  M.show('#fAlive', { at: 57.55, in: 'pop', dur: 0.45 }); M.hit(57.6, 'l');
+
+  // G
+  M.show('#gTag', { at: 58.8, in: 'drop', dur: 0.5 });
+  M.show('#g1', { at: 60.5, in: 'pop', dur: 0.45 }); M.show('#g2', { at: 61.5, in: 'pop', dur: 0.45 });
+  M.show('#g3', { at: 62.3, in: 'pop', dur: 0.45 }); M.show('#g4', { at: 63.15, in: 'pop', dur: 0.45 });
+  M.text('#rule', { at: 65.9, in: 'rise', by: 'lines' }); M.hit(67.3, 'l');
+
+  drift(tl, [['#sC svg.art', 18.1, 31.4], ['#sE svg.art', 41.5, 55.8], ['#sF svg.art', 55.4, 58.8]]);
+  M.grain(0.08);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="65.9" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. Иллюминатор, Земля — точка, кислород падает -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#1A2030"/>
+      <circle cx="540" cy="860" r="420" fill="#2A3346"/><circle cx="540" cy="860" r="380" fill="#04060D"/>
+      <g id="starsA" fill="#F4F1EA"></g>
+      <circle cx="540" cy="860" r="380" fill="none" stroke="#5C6A84" stroke-width="16"/>
+      <g fill="#5C6A84"><circle cx="540" cy="455" r="12"/><circle cx="540" cy="1265" r="12"/><circle cx="135" cy="860" r="12"/><circle cx="945" cy="860" r="12"/></g>
+      <circle id="earthDot" cx="610" cy="800" r="9" fill="#3FA3FF"/>
+      <circle id="earthRing" cx="610" cy="800" r="30" fill="none" stroke="#3FC3FF" stroke-width="3"/>
+    </svg>
+    <div class="tag" data-small id="aTag"><i></i>«АПОЛЛОН-13» · КОСМОС</div>
+    <div class="chip" id="aHome" style="left:660px;top:700px;color:var(--blue);border-color:var(--blue)">дом</div>
+    <div class="lbl" data-small style="left:130px;top:1360px">КИСЛОРОД</div>
+    <svg style="position:absolute;left:130px;top:1400px;width:820px;height:50px" viewBox="0 0 820 50"><rect width="820" height="50" rx="14" fill="#111A2B" stroke="#2A3B57" stroke-width="3"/><rect id="o2" x="6" y="6" width="808" height="38" rx="10" fill="#5BE38B"/></svg>
+  </section>
+
+  <!-- B. Полёт к Луне, взрыв, «Хьюстон…» -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#04060D"/>
+      <g id="starsB" fill="#F4F1EA"></g>
+      <circle cx="880" cy="420" r="120" fill="#C9C3B6"/><g fill="#A9A396"><circle cx="840" cy="390" r="22"/><circle cx="910" cy="460" r="14"/><circle cx="900" cy="370" r="10"/></g>
+      <circle cx="150" cy="1380" r="130" fill="#2F7DD1"/><path d="M80,1330 q50,-40 90,10 t70,30 q-30,60 -90,50 t-70,-90Z" fill="#5BE38B" opacity=".8"/>
+      <path id="traj" d="M200,1450 C380,1150 560,900 820,520" fill="none" stroke="#3FC3FF" stroke-width="4" stroke-dasharray="14 14" opacity=".5"/>
+      <g id="shipB"><g transform="rotate(35)">
+        <rect x="-26" y="-90" width="52" height="150" rx="8" fill="#E9EEF5"/><polygon points="-26,-90 26,-90 0,-140" fill="#D7E3F0"/>
+        <rect x="-26" y="10" width="52" height="16" fill="#2A3B57"/><polygon points="-14,60 14,60 22,90 -22,90" fill="#9FB3C8"/>
+      </g></g>
+      <circle id="flashB" data-cut="11.77" cx="0" cy="0" r="40" fill="#FFF3C4" opacity="0"/>
+      <g id="shardsB" fill="#FFB23A"></g>
+    </svg>
+    <div class="tag" data-small id="bTag"><i></i>АПРЕЛЬ 1970</div>
+    <div class="chip" id="b3" style="left:90px;top:760px">3 астронавта</div>
+    <div class="chip" id="bDay" style="left:90px;top:870px;color:var(--fg);border-color:#2A3B57">день 3</div>
+    <div class="tag red" data-small id="bO2" style="top:1180px"><i></i>ВЗРЫВ КИСЛОРОДНОГО БАКА</div>
+    <div class="quote" id="bQ" style="top:1300px">«Хьюстон, у нас проблема»</div>
+  </section>
+
+  <!-- C. Лунный модуль: на двоих, на два дня, лететь четыре -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#04060D"/>
+      <g id="starsC" fill="#F4F1EA"></g>
+      <g id="cm" opacity="1"><polygon points="140,520 340,420 340,620" fill="#9FB3C8"/><rect x="340" y="420" width="140" height="200" fill="#C9D6E8"/><g id="cmLights" fill="#FFC857"><circle cx="380" cy="470" r="8"/><circle cx="420" cy="470" r="8"/><circle cx="460" cy="470" r="8"/></g></g>
+      <g transform="translate(560,380)">
+        <polygon points="40,60 320,60 360,260 0,260" fill="#C9A23A"/><rect x="80" y="0" width="200" height="90" rx="10" fill="#D7E3F0"/>
+        <polygon points="0,260 -40,380 -10,380 40,260" fill="#9FB3C8"/><polygon points="360,260 400,380 370,380 320,260" fill="#9FB3C8"/>
+        <rect x="120" y="120" width="120" height="90" rx="12" fill="#0E1626"/>
+        <g fill="#F4F1EA"><circle cx="150" cy="170" r="16"/><circle cx="180" cy="160" r="16"/><circle cx="210" cy="170" r="16"/></g>
+        <g id="breathC" fill="#DDEBFF" opacity=".0"><circle cx="160" cy="140" r="8"/><circle cx="196" cy="132" r="8"/></g>
+      </g>
+    </svg>
+    <div class="tag" data-small id="cTag"><i></i>ЛУННЫЙ МОДУЛЬ · СПАСАТЕЛЬНАЯ ШЛЮПКА</div>
+    <div class="tag red" data-small id="cDie" style="top:700px;left:310px"><i></i>ГЛАВНЫЙ КОРАБЛЬ ГАСНЕТ</div>
+    <div class="card" id="c2p" style="left:140px;top:960px"><svg viewBox="0 0 130 130"><g fill="#3FC3FF"><circle cx="45" cy="45" r="18"/><rect x="25" y="68" width="40" height="44" rx="12"/><circle cx="88" cy="45" r="18"/><rect x="68" y="68" width="40" height="44" rx="12"/></g></svg><b>на двоих</b></div>
+    <div class="card" id="c2d" style="left:415px;top:960px"><svg viewBox="0 0 130 130"><text x="65" y="92" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="84" fill="#3FC3FF">2</text></svg><b>дня запаса</b></div>
+    <div class="card" id="c4d" style="left:690px;top:960px;border-color:var(--red)"><svg viewBox="0 0 130 130"><text x="65" y="92" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="84" fill="#FF4B4B">4</text></svg><b>дня до Земли</b></div>
+  </section>
+
+  <!-- D. CO₂, квадратный фильтр в круглый разъём, переходник из картона, пакетов, скотча -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0A0F1A"/>
+      <rect x="130" y="380" width="820" height="60" rx="16" fill="#111A2B" stroke="#2A3B57" stroke-width="3"/>
+      <rect id="co2" x="136" y="386" width="10" height="48" rx="10" fill="#FF4B4B"/>
+      <g id="sq"><rect x="200" y="620" width="260" height="260" rx="10" fill="#2A3B57" stroke="#9FB3C8" stroke-width="8"/><g stroke="#5C6A84" stroke-width="4"><line x1="230" y1="660" x2="430" y2="660"/><line x1="230" y1="700" x2="430" y2="700"/><line x1="230" y1="740" x2="430" y2="740"/><line x1="230" y1="780" x2="430" y2="780"/><line x1="230" y1="820" x2="430" y2="820"/></g></g>
+      <g id="ci"><circle cx="750" cy="750" r="130" fill="#0E1626" stroke="#9FB3C8" stroke-width="8"/><circle cx="750" cy="750" r="70" fill="#04060D"/></g>
+      <g id="neq" stroke="#FF4B4B" stroke-width="12" stroke-linecap="round"><line x1="560" y1="720" x2="620" y2="720"/><line x1="560" y1="780" x2="620" y2="780"/><line x1="610" y1="680" x2="570" y2="820"/></g>
+      <rect x="80" y="1020" width="920" height="420" rx="24" fill="#3A2B22"/>
+      <g id="it1"><rect x="150" y="1100" width="230" height="160" rx="6" fill="#C9A26A"/><line x1="150" y1="1180" x2="380" y2="1180" stroke="#A8844F" stroke-width="5"/></g>
+      <g id="it2"><path d="M450,1270 L470,1090 L620,1090 L640,1270 Z" fill="#DDEBFF" opacity=".85"/></g>
+      <g id="it3"><circle cx="820" cy="1180" r="90" fill="#9FB3C8"/><circle cx="820" cy="1180" r="40" fill="#3A2B22"/></g>
+      <g id="adapter" opacity="0"><rect x="380" y="1110" width="320" height="140" rx="30" fill="#C9A26A" stroke="#9FB3C8" stroke-width="10"/><rect x="380" y="1160" width="320" height="34" fill="#9FB3C8"/></g>
+    </svg>
+    <div class="lbl" data-small style="left:130px;top:340px">УГЛЕКИСЛЫЙ ГАЗ В МОДУЛЕ</div>
+    <div class="lbl" data-small style="left:225px;top:910px">ФИЛЬТР: КВАДРАТНЫЙ</div>
+    <div class="lbl" data-small style="left:640px;top:910px">РАЗЪЁМ: КРУГЛЫЙ</div>
+    <div class="tag" data-small id="dTag" style="top:200px"><i></i>ЦЕНТР УПРАВЛЕНИЯ · ХЬЮСТОН</div>
+    <div class="chip" id="dAd" style="left:310px;top:1470px;color:var(--green);border-color:var(--green)">переходник готов</div>
+  </section>
+
+  <!-- E. Холод, без сна, вход в атмосферу, связь пропала, тишина -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="fireG"><stop offset="0" stop-color="#FFF3C4"/><stop offset=".4" stop-color="#FFB23A"/><stop offset="1" stop-color="#FF4B4B" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#04060D"/>
+      <g id="starsE" fill="#F4F1EA"></g>
+      <path d="M-200,1950 Q540,1250 1280,1950 Z" fill="#2F7DD1"/><path d="M-200,1950 Q540,1250 1280,1950" fill="none" stroke="#7FD0FF" stroke-width="20" opacity=".5"/>
+      <g id="capE"><ellipse id="fireE" cx="0" cy="60" rx="120" ry="200" fill="url(#fireG)" opacity="0"/>
+        <polygon points="-60,40 60,40 30,-60 -30,-60" fill="#C9D6E8"/><rect x="-62" y="36" width="124" height="18" rx="6" fill="#5C4030"/></g>
+      <g id="therm"><rect x="160" y="420" width="40" height="300" rx="20" fill="#111A2B" stroke="#9FB3C8" stroke-width="5"/><circle cx="180" cy="760" r="44" fill="#3FC3FF"/><rect id="thermV" x="170" y="600" width="20" height="160" fill="#3FC3FF"/></g>
+      <g id="sig" fill="#5BE38B"><rect x="820" y="660" width="24" height="40"/><rect x="856" y="630" width="24" height="70"/><rect x="892" y="600" width="24" height="100"/><rect x="928" y="570" width="24" height="130"/></g>
+    </svg>
+    <div class="chip" id="e0" style="left:240px;top:540px;color:var(--blue);border-color:var(--blue)">около 0 °C</div>
+    <div class="chip" id="eSleep" style="left:240px;top:650px;color:var(--fg);border-color:#2A3B57">почти без сна</div>
+    <div class="tag" data-small id="eTag" style="top:180px"><i></i>ВХОД В АТМОСФЕРУ</div>
+    <div class="tag red" data-small id="eLost" style="top:760px;left:790px"><i></i>НЕТ СВЯЗИ</div>
+    <div class="big" id="eT" style="top:330px;font-size:170px;color:var(--fg);font-family:'JetBrains Mono'">00:00</div>
+    <div class="chip" id="e3" style="left:290px;top:530px;color:var(--orange)">обычно — 3 минуты</div>
+  </section>
+
+  <!-- F. Голос из эфира, парашюты, все трое живы -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A6FB0"/><stop offset="1" stop-color="#9CC6EA"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyF)"/>
+      <rect y="1500" width="1080" height="420" fill="#1F5C8C"/><path d="M0,1500 Q270,1480 540,1505 T1080,1495" fill="none" stroke="#DDEBFF" stroke-width="5"/>
+      <g id="chutes">
+        <g id="ch1"><path d="M330,600 a120,90 0 0 1 240,0 Z" fill="#F4F1EA"/><path d="M330,600 a120,90 0 0 1 80,-80 L450,600Z" fill="#FF4B4B"/></g>
+        <g id="ch2"><path d="M450,500 a120,90 0 0 1 240,0 Z" fill="#F4F1EA"/><path d="M570,500 a120,90 0 0 1 80,-60 L650,500Z" fill="#FF4B4B"/></g>
+        <g id="ch3"><path d="M570,600 a120,90 0 0 1 240,0 Z" fill="#F4F1EA"/><path d="M570,600 a120,90 0 0 1 80,-80 L690,600Z" fill="#FF4B4B"/></g>
+        <g stroke="#F4F1EA" stroke-width="3" id="lines"><line x1="335" y1="600" x2="540" y2="900"/><line x1="565" y1="600" x2="540" y2="900"/><line x1="455" y1="500" x2="540" y2="900"/><line x1="685" y1="500" x2="540" y2="900"/><line x1="575" y1="600" x2="540" y2="900"/><line x1="805" y1="600" x2="540" y2="900"/></g>
+        <polygon points="500,900 580,900 610,980 470,980" fill="#C9D6E8"/>
+      </g>
+      <g id="waves" fill="none" stroke="#3FC3FF" stroke-width="6"></g>
+    </svg>
+    <div class="tag" data-small id="fTag" style="top:200px"><i></i>17 АПРЕЛЯ 1970 · ТИХИЙ ОКЕАН</div>
+    <div class="chip" id="fAlive" style="left:260px;top:1150px;color:var(--green);border-color:var(--green);font-size:60px">все трое живы</div>
+  </section>
+
+  <!-- G. Тизер: самолёт над Нью-Йорком -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0B1020"/>
+      <g fill="#1A2440"><rect x="40" y="1100" width="120" height="500"/><rect x="180" y="980" width="90" height="620"/><rect x="290" y="1150" width="140" height="450"/><rect x="450" y="900" width="100" height="700"/><rect x="570" y="1050" width="130" height="550"/><rect x="720" y="960" width="90" height="640"/><rect x="830" y="1120" width="160" height="480"/></g>
+      <g fill="#FFC857" opacity=".7" id="win"></g>
+      <rect y="1600" width="1080" height="320" fill="#0E1626"/>
+      <g id="plane" transform="translate(200,600)"><g transform="rotate(8)">
+        <rect x="0" y="-22" width="360" height="44" rx="22" fill="#E9EEF5"/><polygon points="160,0 240,0 140,-120 110,-120" fill="#C9D6E8"/><polygon points="160,0 240,0 140,120 110,120" fill="#C9D6E8"/><polygon points="20,-10 60,-10 20,-80 0,-80" fill="#C9D6E8"/>
+        <rect id="eng1" x="150" y="40" width="60" height="26" rx="12" fill="#5C6A84"/><rect id="eng2" x="150" y="-66" width="60" height="26" rx="12" fill="#5C6A84"/></g></g>
+    </svg>
+    <div class="tag" data-small id="gTag"><i></i>ПОСЛЕДНЯЯ СЕРИЯ</div>
+    <div class="tag red" data-small id="gEng" style="top:400px"><i></i>ОБА ДВИГАТЕЛЯ ОТКАЗАЛИ</div>
+    <div class="chip" id="g3" style="left:330px;top:820px;font-size:60px">3 минуты</div>
+  </section>
+
+  <div id="cap"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(13);
+  xfade(tl, [['#sA',0],['#sB',5.3],['#sC',17.4],['#sD',27.4],['#sE',41.05],['#sF',54.3],['#sG',58.3]], D);
+  captions(M.data.words.s3, {
+    k1: ['1970','третий','два','двоих','четыре.','ноль','три','минуты.'],
+    k2: ['луну.','модуль.','земли','земле','воздух?','атмосферу.'],
+    k3: ['взрывается','кислородный','проблема.','умирает.','углекислый','газ.','пропадает,','отказывают'],
+    k4: ['живы.','голос.','спасение'] });
+  ['#starsA', '#starsB', '#starsC', '#starsE'].forEach(s => stars(s, R, 80));
+
+  // A
+  M.show('#aTag', { at: 0.1, in: 'drop', dur: 0.5 });
+  tl.fromTo('#sA svg.art', { scale: 1.25, transformOrigin: '56% 42%' }, { scale: 1, duration: 5.3, ease: 'power2.out' }, 0);
+  M.onFrame(t => { const k = (t * 1.2) % 1; const r = document.querySelector('#earthRing'); r.setAttribute('r', 14 + 40 * k); r.setAttribute('opacity', 1 - k); });
+  M.show('#aHome', { at: 1.85, in: 'pop', dur: 0.45 });
+  tl.fromTo('#o2', { attr: { width: 808 } }, { attr: { width: 90 }, duration: 1.4, ease: 'power2.in' }, 3.4);
+  tl.to('#o2', { attr: { fill: '#FF4B4B' }, duration: .4 }, 4.2);
+  M.sfx('downer', 3.5, { gain: -4 }); M.ticks(3.5, { n: 8, gap: 0.12, rise: false });
+
+  // B
+  M.show('#bTag', { at: 5.5, in: 'drop', dur: 0.5 });
+  const traj = document.querySelector('#traj'), TL = traj.getTotalLength(), sp = { p: 0 };
+  tl.to(sp, { p: .62, duration: 6.4, ease: 'none' }, 5.3);
+  let boom = { b: 0 }; tl.to(boom, { b: 1, duration: .01 }, 11.76);
+  M.onFrame(t => { const pt = traj.getPointAtLength(sp.p * TL); const k = boom.b ? Math.sin(t * 9) * 6 : 0;
+    document.querySelector('#shipB').setAttribute('transform', `translate(${pt.x + k},${pt.y}) rotate(${boom.b ? (t - 11.76) * 25 : 0})`);
+    const f = document.querySelector('#flashB'); f.setAttribute('cx', pt.x); f.setAttribute('cy', pt.y); });
+  M.show('#b3', { at: 8.45, in: 'slide', dur: 0.5 });
+  M.show('#bDay', { at: 10.85, in: 'slide', dur: 0.5 });
+  const p0 = traj.getPointAtLength(.6 * TL);
+  tl.fromTo('#flashB', { opacity: 0, attr: { r: 30 } }, { opacity: 1, attr: { r: 300 }, duration: .25, ease: 'expo.out' }, 11.76);
+  tl.to('#flashB', { opacity: 0, duration: 1, ease: 'power2.out' }, 12.0);
+  burst(tl, '#shardsB', R, p0.x, p0.y, 11.78, { n: 18 }); M.hit(11.76, 'l'); M.shake('#sB svg.art', { at: 11.78, amp: 12, dur: .5, sfx: false });
+  M.show('#bO2', { at: 12.4, in: 'pop', dur: 0.45 });
+  tl.set('#bQ', { autoAlpha: 0 }, 0); tl.to('#bQ', { autoAlpha: 1, duration: .25 }, 15.4); M.text('#bQ', { at: 15.5, in: 'type', cps: 26, cursor: false });
+
+  // C
+  M.show('#cTag', { at: 17.6, in: 'drop', dur: 0.5 });
+  tl.to('#cmLights circle', { opacity: .1, duration: .6, stagger: .25 }, 18.4); tl.to('#cm', { opacity: .45, duration: 1.2 }, 18.6);
+  M.show('#cDie', { at: 18.5, in: 'pop', dur: 0.45 }); M.sfx('downer', 18.6, { gain: -4 });
+  M.hide('#cDie', { at: 23.0, out: 'fade', dur: .4 });
+  M.show('#c2p', { at: 23.75, in: 'pop', dur: 0.45 });
+  M.show('#c2d', { at: 24.65, in: 'pop', dur: 0.45 });
+  M.show('#c4d', { at: 26.45, in: 'pop', dur: 0.45 }); M.hit(26.5, 'm');
+  M.onFrame(t => document.querySelector('#breathC').setAttribute('opacity', t > 17.4 && t < 27.6 ? (Math.sin(t * 2.4) + 1) * .3 : 0));
+
+  // D
+  M.show('#dTag', { at: 27.6, in: 'drop', dur: 0.5 });
+  tl.to('#co2', { attr: { width: 700 }, duration: 2.2, ease: 'power1.in' }, 28.0); M.sfx('riser', 28.2, { gain: -6 });
+  M.show('#sq', { at: 31.4, in: 'pop', dur: 0.45 });
+  M.show('#ci', { at: 32.9, in: 'pop', dur: 0.45 });
+  M.show('#neq', { at: 33.3, in: 'pop', dur: 0.45 });
+  M.show('#it1', { at: 38.5, in: 'drop', dur: 0.45 }); M.show('#it2', { at: 39.3, in: 'drop', dur: 0.45 }); M.show('#it3', { at: 40.15, in: 'drop', dur: 0.45 });
+  tl.to('#it1, #it2, #it3', { opacity: 0, duration: .25 }, 40.35);
+  tl.fromTo('#adapter', { opacity: 0, scale: .6, transformOrigin: '540px 1180px' }, { opacity: 1, scale: 1, duration: .35, ease: 'back.out(2)' }, 40.3);
+  M.show('#dAd', { at: 40.35, in: 'pop', dur: 0.3 });
+
+  // E
+  tl.fromTo('#thermV', { attr: { y: 440, height: 320 } }, { attr: { y: 700, height: 60 }, duration: 1, ease: 'expo.out' }, 41.0);
+  M.show('#e0', { at: 41.1, in: 'slide', dur: 0.5 }); M.sfx('downer', 41.2, { gain: -6 });
+  M.show('#eSleep', { at: 43.5, in: 'slide', dur: 0.5 });
+  M.hide('#e0, #eSleep, #therm', { at: 44.8, out: 'fade', dur: .4 });
+  M.show('#eTag', { at: 45.1, in: 'drop', dur: 0.5 });
+  tl.fromTo('#capE', { x: 540, y: 500 }, { x: 540, y: 1180, duration: 8.5, ease: 'power1.in' }, 45.0);
+  tl.to('#fireE', { opacity: 1, duration: .8 }, 45.4); M.sfx('sweep', 45.4);
+  tl.to('#sig rect', { opacity: .12, duration: .2, stagger: .18 }, 47.1);
+  M.show('#eLost', { at: 47.5, in: 'pop', dur: 0.45 });
+  M.show('#eT', { at: 49.5, in: 'pop', dur: 0.45 });
+  M.show('#e3', { at: 50.2, in: 'rise', dur: 0.5 });
+  M.onFrame(t => { const s = Math.max(0, Math.min(270, (t - 49.5) * 30 + 150)); const el = document.querySelector('#eT');
+    el.textContent = `0${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`; el.style.color = s > 180 ? '#FF4B4B' : '#F4F1EA'; });
+  M.ticks(49.6, { n: 16, gap: 0.28, rise: false, name: 'tick' });
+
+  // F
+  const wv = document.querySelector('#waves');
+  for (let i = 0; i < 3; i++) { const c = mk(wv, 'circle', { cx: 540, cy: 300, r: 10, opacity: 0 }); tl.fromTo(c, { attr: { r: 10 }, opacity: 1 }, { attr: { r: 260 }, opacity: 0, duration: 1.2, ease: 'expo.out' }, 54.6 + i * .3); }
+  M.sfx('ping', 54.6);
+  M.show('#fTag', { at: 54.5, in: 'drop', dur: 0.5 });
+  tl.fromTo('#chutes', { y: -900 }, { y: 0, duration: 1.2, ease: 'expo.out' }, 54.4);
+  tl.fromTo('#ch1, #ch2, #ch3', { scale: .2, transformOrigin: '50% 100%' }, { scale: 1, duration: .5, ease: 'back.out(1.8)', stagger: .15 }, 55.3);
+  tl.to('#chutes', { y: 160, duration: 3, ease: 'none' }, 55.6);
+  M.show('#fAlive', { at: 56.6, in: 'pop', dur: 0.45 }); M.hit(56.6, 'l');
+
+  // G
+  const win = document.querySelector('#win');
+  for (let i = 0; i < 70; i++) mk(win, 'rect', { x: 50 + R() * 940, y: 950 + R() * 620, width: 10, height: 14 });
+  M.show('#gTag', { at: 58.5, in: 'drop', dur: 0.5 });
+  tl.fromTo('#plane', { x: 120, y: 520 }, { x: 420, y: 700, duration: 7.4, ease: 'none' }, 58.3);
+  tl.to('#eng1, #eng2', { attr: { fill: '#FF4B4B' }, duration: .15 }, 60.4);
+  M.show('#gEng', { at: 60.4, in: 'pop', dur: 0.45 }); M.sfx('thud', 60.45);
+  M.show('#g3', { at: 63.95, in: 'pop', dur: 0.45 }); M.hit(64.0, 'm');
+
+  drift(tl, [['#sC svg.art', 17.2, 27.6], ['#sD svg.art', 27.2, 41], ['#sF svg.art', 54.1, 58.5], ['#sG svg.art', 58.1, 65.9]]);
+  M.grain(0.08);
+});
+</script>
+</body>
+</html>

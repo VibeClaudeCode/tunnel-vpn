@@ -40,3 +40,16 @@ function captions(words, keys, o = {}) {
     if (k !== cur) { cur = k; cap.innerHTML = k < 0 ? '' : html[k]; } });
   return G;
 }
+
+// Мелкие помощники для SVG-сцен
+const NS = 'http://www.w3.org/2000/svg';
+function mk(parent, tag, attrs) { const p = typeof parent === 'string' ? document.querySelector(parent) : parent;
+  const c = document.createElementNS(NS, tag); for (const k in attrs) c.setAttribute(k, attrs[k]); p.appendChild(c); return c; }
+function stars(sel, R, n = 90) { for (let i = 0; i < n; i++) mk(sel, 'circle', { cx: R() * 1080, cy: R() * 1920, r: .8 + R() * 2.2, opacity: .3 + R() * .7 }); }
+function burst(tl, sel, R, x, y, t, o = {}) {   // осколки/брызги из точки
+  for (let i = 0; i < (o.n || 14); i++) { const c = mk(sel, o.tag || 'rect', o.tag === 'circle' ? { r: 4 + R() * 8, cx: x, cy: y, opacity: 0 } : { width: 8 + R() * 16, height: 6 + R() * 10, x, y, opacity: 0 });
+    const a = (o.a0 ?? 0) + R() * (o.span ?? 6.28), d = (o.d || 200) + R() * (o.d || 200);
+    const k = o.tag === 'circle' ? ['cx', 'cy'] : ['x', 'y'];
+    tl.fromTo(c, { attr: { [k[0]]: x, [k[1]]: y }, opacity: 1 }, { attr: { [k[0]]: x + Math.cos(a) * d, [k[1]]: y + Math.sin(a) * d * (o.sy || 1) }, opacity: 0, duration: o.dur || 1.3, ease: 'expo.out' }, t + R() * 0.08); }
+}
+function drift(tl, list) { list.forEach(([s, a, b, k]) => { gsap.set(s, { transformOrigin: '50% 60%' }); tl.fromTo(s, { scale: 1 }, { scale: k || 1.07, duration: b - a, ease: 'none' }, a); }); }
