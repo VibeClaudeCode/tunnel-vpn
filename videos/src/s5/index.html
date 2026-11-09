@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --bg:#050507; --red:#E23B3B; }
+  .scene { background:#050507; }
+  #cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+  #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+  .tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+  .quote { background:rgba(12,10,10,.85); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:78px; line-height:1.1; color:#E8E0D0; }
+  #vign { position:absolute; inset:0; z-index:40; pointer-events:none;
+          background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+  #flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+  .blue { font:700 30px/1 "JetBrains Mono"; color:#9CC3E6; letter-spacing:.08em; position:absolute; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="56.6" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. План квартиры: две комнаты, пустота между ними -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920" id="planA">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40,0 L0,0 0,40" fill="none" stroke="#1E3550" stroke-width="1.5"/></pattern>
+        <pattern id="hatch" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="18" stroke="#9CC3E6" stroke-width="2" opacity=".35"/></pattern>
+      </defs>
+      <rect width="1080" height="1920" fill="#0B1726"/>
+      <rect width="1080" height="1920" fill="url(#grid)"/>
+      <g fill="none" stroke="#9CC3E6" stroke-width="10">
+        <rect x="140" y="560" width="360" height="520"/>
+        <rect x="580" y="560" width="360" height="520"/>
+        <rect x="140" y="1080" width="800" height="200"/>
+      </g>
+      <g stroke="#0B1726" stroke-width="14"><line x1="280" y1="1080" x2="360" y2="1080"/><line x1="720" y1="1080" x2="800" y2="1080"/></g>
+      <rect id="gap" x="505" y="565" width="70" height="510" fill="url(#hatch)"/>
+      <rect id="ghost" x="505" y="760" width="70" height="140" fill="none" stroke="#E23B3B" stroke-width="6" stroke-dasharray="14 10" opacity="0"/>
+      <g stroke="#9CC3E6" stroke-width="3"><line x1="140" y1="1350" x2="940" y2="1350"/><line x1="140" y1="1335" x2="140" y2="1365"/><line x1="940" y1="1335" x2="940" y2="1365"/></g>
+    </svg>
+    <div class="blue" style="left:215px;top:800px">КОМНАТА 1</div>
+    <div class="blue" style="left:655px;top:800px">КОМНАТА 2</div>
+    <div class="blue" style="left:450px;top:1165px">КОРИДОР</div>
+    <div class="blue" style="left:470px;top:1380px">8,40 М</div>
+    <div class="tag" data-small id="aTag" style="top:330px"><i></i>ПЛАН КВАРТИРЫ · 1974</div>
+  </section>
+
+  <!-- B. Подъезд, ключи, пустая квартира, слова хозяйки -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs>
+        <pattern id="paper" width="120" height="160" patternUnits="userSpaceOnUse">
+          <rect width="120" height="160" fill="#5A5243"/><path d="M60,20 q20,20 0,40 q-20,20 0,40 q20,20 0,40" fill="none" stroke="#6E6553" stroke-width="6"/>
+          <circle cx="15" cy="80" r="6" fill="#6E6553"/><circle cx="105" cy="80" r="6" fill="#6E6553"/></pattern>
+        <radialGradient id="bulb"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="1080" height="1920" fill="url(#paper)"/>
+      <rect width="1080" height="1920" fill="#000" opacity=".45"/>
+      <g opacity=".35" fill="#2B261E"><rect x="120" y="300" width="240" height="320"/><rect x="700" y="420" width="200" height="260"/></g>
+      <rect x="0" y="1420" width="1080" height="500" fill="#2A2420"/>
+      <g stroke="#1E1A16" stroke-width="4"><line x1="0" y1="1500" x2="1080" y2="1500"/><line x1="0" y1="1600" x2="1080" y2="1600"/><line x1="0" y1="1720" x2="1080" y2="1720"/></g>
+      <path d="M380,1420 L380,760 L700,760 L700,1420 Z" fill="#14110E"/>
+      <rect x="390" y="770" width="300" height="650" fill="#0A0807"/>
+      <circle cx="540" cy="300" r="380" fill="url(#bulb)" id="bulbG"/>
+      <line x1="540" y1="0" x2="540" y2="270" stroke="#222" stroke-width="4"/><circle cx="540" cy="290" r="22" fill="#FFE7A8" id="bulbC"/>
+      <g id="keys" transform="translate(760,980)">
+        <circle r="34" fill="none" stroke="#C9B37A" stroke-width="8"/>
+        <g fill="#C9B37A"><path d="M-6,30 h12 v120 h18 v14 h-18 v14 h12 v14 h-24 Z"/><path d="M14,26 l10,-4 l40,110 l14,-4 l5,13 l-14,5 l5,13 l-13,5 Z"/></g>
+      </g>
+    </svg>
+    <div class="tag" data-small id="bTag"><i></i>СТАРЫЙ ДОМ · АРЕНДА</div>
+    <div class="chip" id="bCheap" style="left:240px;top:420px;color:#C9C3B6;border-color:#5A544C;background:rgba(10,10,12,.8)">подозрительно дёшево</div>
+    <div class="quote" id="bQ" style="top:1060px;text-align:center">«Ночью в коридор<br>не выходите»</div>
+  </section>
+
+  <!-- C. Ночь, 3:00, стена коридора, стук изнутри -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="under" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".9"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="#0C0C10"/>
+      <g id="wallC"><rect x="0" y="0" width="1080" height="1500" fill="#1C1A1E"/>
+        <g opacity=".5" fill="none" stroke="#26232A" stroke-width="5"><path d="M60,0 v1500 M240,0 v1500 M420,0 v1500 M600,0 v1500 M780,0 v1500 M960,0 v1500"/></g>
+        <rect x="0" y="1460" width="1080" height="40" fill="#141216"/></g>
+      <rect x="0" y="1500" width="1080" height="420" fill="#09080A"/>
+      <rect id="slit" x="300" y="1494" width="480" height="8" fill="#3A3540" opacity=".6"/>
+      <g id="rings" fill="none" stroke="#E23B3B" stroke-width="5"></g>
+    </svg>
+    <div class="big" id="clock" style="top:300px;font-size:200px;font-family:'JetBrains Mono';color:#E23B3B;text-shadow:0 0 50px rgba(226,59,59,.6)">03:00</div>
+    <div class="tag" data-small id="cTag" style="top:200px"><i></i>НЕДЕЛЯ 2 · НОЧЬ</div>
+  </section>
+
+  <!-- D. Стена звучит пусто, обои сорваны, дверь в газетах -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><pattern id="paperD" width="120" height="160" patternUnits="userSpaceOnUse">
+          <rect width="120" height="160" fill="#5A5243"/><path d="M60,20 q20,20 0,40 q-20,20 0,40 q20,20 0,40" fill="none" stroke="#6E6553" stroke-width="6"/>
+          <circle cx="15" cy="80" r="6" fill="#6E6553"/><circle cx="105" cy="80" r="6" fill="#6E6553"/></pattern></defs>
+      <rect width="1080" height="1920" fill="#16130F"/>
+      <g id="door">
+        <rect x="290" y="420" width="500" height="1060" fill="#3A3128" stroke="#241E18" stroke-width="12"/>
+        <g id="papers"></g>
+      </g>
+      <g id="wall"><rect id="wp" x="0" y="0" width="1080" height="1500" fill="url(#paperD)"/><rect x="0" y="0" width="1080" height="1500" fill="#000" opacity=".35"/></g>
+      <path id="tearEdge" d="" fill="#C9BFA8"/>
+      <rect x="0" y="1500" width="1080" height="420" fill="#0E0C0A"/>
+      <g id="knockD" fill="none" stroke="#C9C3B6" stroke-width="4"></g>
+    </svg>
+    <div class="tag" data-small id="dTag" style="top:200px"><i></i>УТРО · КОРИДОР</div>
+    <div class="tag red" data-small id="dHollow" style="top:300px"><i></i>ЗВУЧИТ ПУСТО</div>
+    <div class="tag red" data-small id="dNo" style="top:300px"><i></i>БЕЗ РУЧКИ · ЗАКЛЕЕНА ИЗНУТРИ</div>
+  </section>
+
+  <!-- E. Комната метр на два, стул к стене, отверстие, за ним — кровать -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs>
+        <radialGradient id="torchE" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="mE"><rect width="1080" height="1920" fill="#000"/><circle id="spotE" cx="540" cy="900" r="420" fill="url(#torchE)"/></mask>
+        <clipPath id="eyeClip"><circle cx="540" cy="860" r="260"/></clipPath>
+      </defs>
+      <rect width="1080" height="1920" fill="#030303"/>
+      <g id="roomE" mask="url(#mE)">
+        <rect width="1080" height="1920" fill="#4A4136"/>
+        <polygon points="0,0 1080,0 860,360 220,360" fill="#3A3229"/>
+        <polygon points="0,1920 1080,1920 860,1420 220,1420" fill="#2A241E"/>
+        <polygon points="0,0 220,360 220,1420 0,1920" fill="#352E26"/><polygon points="1080,0 860,360 860,1420 1080,1920" fill="#352E26"/>
+        <rect x="220" y="360" width="640" height="1060" fill="#4A4136"/>
+        <circle id="hole" cx="540" cy="860" r="9" fill="#000"/>
+        <g id="chair" fill="#1E1913"><rect x="430" y="1080" width="220" height="30"/><rect x="430" y="900" width="26" height="210"/><rect x="624" y="900" width="26" height="210"/><rect x="440" y="1110" width="20" height="200"/><rect x="620" y="1110" width="20" height="200"/><rect x="430" y="900" width="220" height="24"/></g>
+      </g>
+      <g id="eyeView" clip-path="url(#eyeClip)" opacity="0">
+        <rect x="280" y="600" width="520" height="520" fill="#14181F"/>
+        <rect x="320" y="900" width="440" height="140" fill="#2E3A4C"/><rect x="320" y="860" width="140" height="60" rx="16" fill="#C9D0DA"/>
+        <path d="M460,880 Q600,850 760,890 L760,960 L460,960 Z" fill="#53627A"/>
+        <rect x="700" y="640" width="70" height="120" fill="#22303F"/>
+      </g>
+      <circle id="eyeRing" cx="540" cy="860" r="262" fill="none" stroke="#000" stroke-width="30" opacity="0"/>
+    </svg>
+    <div class="tag" data-small id="eTag" style="top:200px"><i></i>ЗА ДВЕРЬЮ</div>
+    <div class="chip" id="e12" style="left:390px;top:1470px;color:#C9C3B6;border-color:#5A544C;background:rgba(10,10,12,.8)">1 × 2 м</div>
+    <div class="tag red" data-small id="eBed" style="top:1180px"><i></i>ЕГО КРОВАТЬ</div>
+  </section>
+
+  <!-- F. Тарелка с паром, «ещё тёплая», финал: план с лишней комнатой, «сдаётся» -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="torchF"><stop offset="0" stop-color="#5A5040" stop-opacity=".9"/><stop offset="1" stop-color="#5A5040" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#030303"/>
+      <ellipse cx="540" cy="1150" rx="600" ry="420" fill="url(#torchF)"/>
+      <ellipse cx="540" cy="1180" rx="300" ry="80" fill="#0E0C0A" opacity=".7"/>
+      <ellipse cx="540" cy="1150" rx="270" ry="72" fill="#D9D2C2"/><ellipse cx="540" cy="1146" rx="200" ry="50" fill="#BFB6A2"/>
+      <ellipse cx="540" cy="1140" rx="150" ry="34" fill="#7A5236"/><g fill="#9A6A42"><circle cx="500" cy="1132" r="14"/><circle cx="570" cy="1138" r="12"/><circle cx="540" cy="1126" r="10"/></g>
+      <g id="steam" fill="none" stroke="#E8E0D0" stroke-width="10" stroke-linecap="round"></g>
+    </svg>
+    <div class="tag red" data-small id="fWarm" style="top:700px"><i></i>ЕЩЁ ТЁПЛАЯ</div>
+  </section>
+
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><pattern id="gridG" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40,0 L0,0 0,40" fill="none" stroke="#1E3550" stroke-width="1.5"/></pattern></defs><rect width="1080" height="1920" fill="#0B1726"/>
+      <rect width="1080" height="1920" fill="url(#gridG)"/>
+      <g fill="none" stroke="#9CC3E6" stroke-width="10"><rect x="140" y="560" width="360" height="520"/><rect x="580" y="560" width="360" height="520"/><rect x="140" y="1080" width="800" height="200"/></g>
+      <rect id="ghostG" x="505" y="565" width="70" height="510" fill="#E23B3B" opacity="0"/>
+    </svg>
+    <div class="stamp" id="gStamp" style="left:250px;top:760px;font-size:110px">СДАЁТСЯ</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(31), W = M.data.words.s5;
+  // время слова по тексту: wt('тук', 2) — начало второго «тук»
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('артём') - .3, C: wt('первую') - .3, D: wt('утром') - .3, E: wt('за', 1) - .3, F: wt('полу') - .55, G: wt('артём', 2) - .3 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sD',T.D],['#sE',T.E],['#sF',T.F],['#sG',T.G]], D, .45);
+  captions(W, { k1: [], k2: [], k3: ['комната','нет','плане?','ночью','не','выходите','три','стук','тук','стены','дверь','без','ручки','изнутри','глаз','кровать','тёплая','снова','сдают'], k4: [] });
+
+  // общий страх: мерцание света, медленное дыхание кадра, низкий гул
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    const fl = [[T.B + 5.0, .25], [T.C + .2, .5], [T.D - .1, .4], [T.E + 2.5, .3], [T.F - .05, .6], [T.G - .05, .6]];
+    for (const [a, d] of fl) if (t > a && t < a + d) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a) / d));
+    f.style.opacity = o; });
+  for (const s of [0, T.B, T.C, T.D, T.E, T.F, T.G]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+
+  // A — план
+  M.show('#aTag', { at: .15, in: 'fade', dur: .8 });
+  gsap.set('#planA', { transformOrigin: '50% 42%' });
+  tl.fromTo('#planA', { scale: 1 }, { scale: 2.4, duration: T.B + .4, ease: 'power2.in' }, 0);
+  tl.to('#ghost', { opacity: 1, duration: .2, repeat: 5, yoyo: true, ease: 'none' }, wt('нет') - .1);
+  tl.to('#ghost', { opacity: 1, duration: .3 }, wt('нет') + 1.1);
+  M.sfx('glitch', wt('нет'), { gain: -8 }); M.hit(wt('плане'), 's');
+
+  // B — подъезд
+  M.show('#bTag', { at: T.B + .3, in: 'fade', dur: .6 });
+  M.onFrame(t => { const a = Math.sin((t - T.B) * 2.2) * 9 * Math.exp(-Math.max(0, t - T.B) * .25); document.querySelector('#keys').setAttribute('transform', `translate(760,980) rotate(${a})`);
+    const on = !(t > T.B + 5 && t < T.B + 5.25); document.querySelector('#bulbG').setAttribute('opacity', on ? .9 + .1 * Math.sin(t * 13) : .15); });
+  M.sfx('scratch', T.B + .4, { gain: -8 });
+  M.show('#bCheap', { at: wt('подозрительно'), in: 'rise', dur: .6 });
+  M.hide('#bCheap', { at: wt('хозяйка') - .1, out: 'fade', dur: .5 });
+  M.show('#bQ', { at: wt('ночью') - .1, in: 'blur', dur: .9 }); M.sfx('swell', wt('ночью'), { gain: -6 });
+  tl.to('#sB svg.art', { scale: 1.1, transformOrigin: '50% 50%', duration: T.C - T.B, ease: 'none' }, T.B);
+
+  // C — 3:00, стук
+  M.show('#cTag', { at: T.C + .3, in: 'fade', dur: .6 });
+  M.show('#clock', { at: wt('три') - .05, in: 'blur', dur: .6 });
+  M.onFrame(t => document.querySelector('#clock').style.opacity = t > wt('три') + .6 ? .75 + .25 * Math.sin(t * 6) : '');
+  const knocks = [wt('стук'), wt('тук', 1), wt('тук', 2), wt('тук', 3)];
+  knocks.forEach((k, i) => { M.sfx('thud', k, { gain: i ? 0 : -4, rate: .8 }); M.shake('#wallC', { at: k, amp: i ? 6 : 3, dur: .25, sfx: false });
+    const c = mk('#rings', 'circle', { cx: 540, cy: 1000, r: 10, opacity: 0 }); tl.fromTo(c, { attr: { r: 10 }, opacity: .9 }, { attr: { r: 380 }, opacity: 0, duration: 1.1, ease: 'expo.out' }, k); });
+  tl.to('#slit', { attr: { fill: '#0A0A0C' }, duration: .6 }, knocks[1]);
+  tl.to('#sC svg.art', { scale: 1.12, transformOrigin: '50% 60%', duration: T.D - T.C, ease: 'power1.in' }, T.C);
+
+  // D — обои, дверь
+  M.show('#dTag', { at: T.D + .3, in: 'fade', dur: .6 });
+  [wt('простучал'), wt('простучал') + .35, wt('простучал') + .7].forEach(k => { M.sfx('tap', k); const c = mk('#knockD', 'circle', { cx: 540, cy: 900, r: 6, opacity: 0 }); tl.fromTo(c, { attr: { r: 6 }, opacity: .8 }, { attr: { r: 160 }, opacity: 0, duration: .8, ease: 'expo.out' }, k); });
+  M.show('#dHollow', { at: wt('пусто') - .1, in: 'pop', dur: .45 });
+  M.hide('#dHollow', { at: wt('сорвал') - .2, out: 'fade', dur: .3 });
+  const pp = document.querySelector('#papers');
+  for (let i = 0; i < 14; i++) { const g = mk(pp, 'g', { transform: `translate(${300 + (i % 3) * 160 + R() * 20},${440 + Math.floor(i / 3) * 210 + R() * 20}) rotate(${(R() - .5) * 14})` });
+    mk(g, 'rect', { width: 170, height: 220, fill: '#B9B19E' }); for (let l = 0; l < 7; l++) mk(g, 'rect', { x: 14, y: 20 + l * 26, width: 60 + R() * 80, height: 8, fill: '#6E6758' });
+    if (i % 4 === 0) mk(g, 'text', { x: 14, y: 210, 'font-family': 'JetBrains Mono', 'font-size': 22, fill: '#3A3530' }).textContent = '198' + Math.floor(R() * 9); }
+  const tear = { p: 0 }; tl.to(tear, { p: 1, duration: 1.4, ease: 'power3.out' }, wt('сорвал'));
+  M.onFrame(() => { const y = tear.p * 1560; document.querySelector('#wall').setAttribute('transform', `translate(0,${y})`);
+    let d = `M0,${y} `; for (let x = 0; x <= 1080; x += 60) d += `L${x},${y + (x / 60 % 2 ? 30 : -10)} `; d += `L1080,${y - 40} L0,${y - 40} Z`; document.querySelector('#tearEdge').setAttribute('d', tear.p > 0 && tear.p < 1 ? d : ''); });
+  M.sfx('scratch', wt('сорвал'), { gain: -2 }); M.sfx('swish', wt('сорвал') + .2);
+  M.hit(wt('дверь'), 'm');
+  M.show('#dNo', { at: wt('без', 1) - .05, in: 'pop', dur: .45 });
+  tl.to('#door', { scale: 1.08, transformOrigin: '50% 50%', duration: T.E - wt('дверь'), ease: 'none' }, wt('дверь'));
+
+  // E — комнатка
+  M.show('#eTag', { at: T.E + .3, in: 'fade', dur: .6 });
+  M.onFrame(t => { const c = document.querySelector('#spotE'); c.setAttribute('cx', 540 + Math.sin(t * .8) * 120); c.setAttribute('cy', 900 + Math.sin(t * .55) * 160); });
+  M.show('#e12', { at: wt('метр') - .05, in: 'pop', dur: .45 });
+  M.hide('#e12', { at: wt('стул') + .6, out: 'fade', dur: .4 });
+  tl.fromTo('#hole', { attr: { r: 0 } }, { attr: { r: 14 }, duration: .4 }, wt('дырочка'));
+  M.sfx('ping', wt('глаз'), { gain: -10, rate: .7 });
+  const zoom = wt('заглянул');
+  gsap.set('#roomE', { transformOrigin: '540px 860px' });
+  tl.to('#roomE', { scale: 26, duration: 1.6, ease: 'power3.in' }, zoom);
+  tl.to('#eyeView, #eyeRing', { opacity: 1, duration: .5 }, zoom + 1.2);
+  M.sfx('sweep', zoom, { gain: -4 });
+  M.show('#eBed', { at: wt('кровать') - .05, in: 'pop', dur: .45 }); M.hit(wt('кровать'), 'l');
+
+  // F — тарелка, пар
+  const st = document.querySelector('#steam'), S = [];
+  for (let i = 0; i < 3; i++) S.push([mk(st, 'path', {}), 470 + i * 70, i * 1.3]);
+  M.onFrame(t => S.forEach(([p, x, ph]) => { let d = ''; for (let k = 0; k <= 12; k++) { const y = 1080 - k * 40, xx = x + Math.sin(t * 1.5 + k * .55 + ph) * (10 + k * 3); d += (k ? 'L' : 'M') + xx + ',' + y; }
+    p.setAttribute('d', d); p.setAttribute('opacity', Math.max(0, .45 + .2 * Math.sin(t * 2 + ph))); }));
+  tl.fromTo('#sF svg.art', { scale: 1.25, transformOrigin: '50% 60%' }, { scale: 1, duration: T.G - T.F, ease: 'power1.out' }, T.F);
+  M.show('#fWarm', { at: wt('тёплая') - .1, in: 'blur', dur: .8 }); M.sfx('swell', wt('тёплая'), { gain: -4 });
+
+  // G — финал
+  tl.to('#ghostG', { opacity: .55, duration: 1.2, ease: 'power1.in' }, T.G + .3);
+  tl.fromTo('#gStamp', { scale: 2.2, rotation: -14, autoAlpha: 0 }, { scale: 1, rotation: -8, autoAlpha: 1, duration: .3, ease: 'power4.in' }, wt('снова') - .25);
+  M.sfx('thud', wt('снова') + .05); M.hit(wt('сдают'), 'l');
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
