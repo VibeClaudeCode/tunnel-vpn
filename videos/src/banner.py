@@ -17,7 +17,7 @@ t2 = near(M + B - o.tail)
 t1, t2 = round(t1 * 30) / 30, round(t2 * 30) / 30
 F = M + 2 * B
 print(f'основной {M:.2f} с, баннер {B:.2f} с, итог {F:.2f} с; пауза 1 на {t1:.2f} с, пауза 2 на {t2:.2f} с (итог {t2 + B:.2f} с, до конца {F - t2 - B:.2f} с)')
-Wd = int(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width','-of','csv=p=0',o.main])); bw = int(Wd * 0.92) // 2 * 2
+Wd = int(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width','-of','csv=p=0',o.main])); bw = Wd  # во всю ширину кадра, по центру
 fc = (
   f"[0:v]split=3[v0][v1][v2];[0:a]asplit=3[a0][a1][a2];"
   f"[v0]trim=0:{t1},setpts=PTS-STARTPTS[p0];[a0]atrim=0:{t1},asetpts=PTS-STARTPTS[q0];"
@@ -27,7 +27,7 @@ fc = (
 )
 for k, t in ((1, t1), (2, t2)):
     fc += (f"[{k+1}:v]loop=loop=-1:size=1:start=0,trim=0:{B},setpts=PTS-STARTPTS,fps=30,eq=brightness=-0.22:saturation=0.6,gblur=sigma=6[f{k}];"
-           f"[f{k}][b{k}]overlay=(W-w)/2:(H-h)/2-H*0.07:shortest=1,format=yuv420p,trim=0:{B},setpts=PTS-STARTPTS[F{k}];")
+           f"[f{k}][b{k}]overlay=(W-w)/2:(H-h)/2:shortest=1,format=yuv420p,trim=0:{B},setpts=PTS-STARTPTS[F{k}];")
 fc += "[q0]aformat=sample_rates=48000:channel_layouts=stereo[r0];[q1]aformat=sample_rates=48000:channel_layouts=stereo[r1];[q2]aformat=sample_rates=48000:channel_layouts=stereo[r2];"
 fc += "[ba1]apad=whole_dur=%.3f[c1];[ba2]apad=whole_dur=%.3f[c2];" % (B, B)
 fc += "[p0][r0][F1][c1][p1][r1][F2][c2][p2][r2]concat=n=5:v=1:a=1[v][a]"
