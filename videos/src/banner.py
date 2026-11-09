@@ -8,8 +8,14 @@ ap = argparse.ArgumentParser(); ap.add_argument('main'); ap.add_argument('words'
 ap.add_argument('--first', type=float, default=15.0); ap.add_argument('--tail', type=float, default=15.0); o = ap.parse_args()
 dur = lambda f: float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
 M, B = dur(o.main), dur(o.banner)
-W = json.load(open(o.words)); W = W.get('words', W) if isinstance(W, dict) else W
-gaps = [((a['e'] + b['s']) / 2, b['s'] - a['e']) for a, b in zip(W, W[1:]) if b['s'] - a['e'] >= 0.15]
+if o.words.endswith(('.mp3', '.wav')):   # паузы прямо по звуку голоса
+    import re
+    log = subprocess.run(['ffmpeg', '-i', o.words, '-af', 'silencedetect=noise=-38dB:d=0.2', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    st = [float(x) for x in re.findall(r'silence_start: ([\d.]+)', log)]; en = [float(x) for x in re.findall(r'silence_end: ([\d.]+)', log)]
+    gaps = [((a + b) / 2, b - a) for a, b in zip(st, en)]
+else:
+    W = json.load(open(o.words)); W = W.get('words', W) if isinstance(W, dict) else W
+    gaps = [((a['e'] + b['s']) / 2, b['s'] - a['e']) for a, b in zip(W, W[1:]) if b['s'] - a['e'] >= 0.15]
 def near(t): return min(gaps, key=lambda g: abs(g[0] - t))[0]
 t1 = near(o.first)                         # 1-й баннер: итоговое время = основному (до него ничего не вставлено)
 # 2-й баннер стартует, когда до конца итогового ролика остаётся tail секунд: F - tail = t2 + B, F = M + 2B → t2 = M + B - tail
