@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --bg:#050507; --red:#E23B3B; }
+  .scene { background:#050507; }
+  #cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+  #cap .k1, #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+  .tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+  .quote { background:rgba(12,10,10,.88); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:74px; line-height:1.12; color:#E8E0D0; }
+  #vign { position:absolute; inset:0; z-index:40; pointer-events:none; background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+  #flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+  .panel { position:absolute; left:290px; top:300px; width:500px; height:1160px; border-radius:30px; background:linear-gradient(#3A3D44,#24262B); border:6px solid #4A4D55; }
+  .btn { position:absolute; width:150px; height:150px; border-radius:50%; background:#1A1B1F; border:6px solid #6A6D75; display:flex; align-items:center; justify-content:center;
+         font:800 64px/1 "Montserrat"; color:#C9CCD3; }
+  .btn.on { border-color:#E23B3B; color:#E23B3B; box-shadow:0 0 40px rgba(226,59,59,.7), inset 0 0 20px rgba(226,59,59,.4); }
+  .ind { position:absolute; left:340px; top:260px; width:400px; height:240px; border-radius:20px; background:#0A0A0C; border:6px solid #2A2A30;
+         display:flex; align-items:center; justify-content:center; font:700 170px/1 "JetBrains Mono"; color:#E23B3B; text-shadow:0 0 40px rgba(226,59,59,.6); }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="48.6" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. Панель лифта: появляется кнопка 13 -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#0E0F12"/>
+      <g stroke="#17181C" stroke-width="3">
+        <line x1="0" y1="240" x2="1080" y2="240"/><line x1="0" y1="1560" x2="1080" y2="1560"/></g></svg>
+    <div id="panelA" class="panel">
+      <div class="btn" id="b13A" style="left:170px;top:60px;opacity:0">13</div>
+      <div class="btn" style="left:170px;top:250px">12</div>
+      <div class="btn" style="left:60px;top:440px">10</div><div class="btn" style="left:280px;top:440px">11</div>
+      <div class="btn" style="left:60px;top:630px">8</div><div class="btn" style="left:280px;top:630px">9</div>
+      <div class="btn" style="left:60px;top:820px">6</div><div class="btn" style="left:280px;top:820px">7</div>
+    </div>
+  </section>
+
+  <!-- B. Дом: 12 этажей, последний -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06080F"/><stop offset="1" stop-color="#141826"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyB)"/>
+      <rect x="300" y="300" width="480" height="1320" fill="#15171D"/>
+      <g id="winsB" fill="#0A0B0E"></g>
+      <rect id="topFloor" x="300" y="300" width="480" height="110" fill="#E23B3B" opacity="0"/>
+      <rect y="1620" width="1080" height="300" fill="#08090C"/>
+    </svg>
+    <div class="tag" data-small id="bTag" style="top:180px"><i></i>12 ЭТАЖЕЙ · ПОСЛЕДНИЙ — 12</div>
+  </section>
+
+  <!-- C. Ночь: кнопка 13 над 12, нажал -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#08090B"/></svg>
+    <div id="panelC" class="panel" style="transform-origin:50% 25%">
+      <div class="btn" id="b13C" style="left:170px;top:60px">13</div>
+      <div class="btn" style="left:170px;top:250px">12</div>
+      <div class="btn" style="left:60px;top:440px">10</div><div class="btn" style="left:280px;top:440px">11</div>
+      <div class="btn" style="left:60px;top:630px">8</div><div class="btn" style="left:280px;top:630px">9</div>
+      <div class="btn" style="left:60px;top:820px">6</div><div class="btn" style="left:280px;top:820px">7</div>
+    </div>
+    <svg id="finger" style="position:absolute;left:540px;top:1500px;width:300px;height:700px" viewBox="0 0 300 700"><path d="M100,0 q50,-10 60,40 l20,300 q60,40 90,160 l0,200 l-240,0 l-20,-200 q20,-90 70,-120 Z" fill="#C9A88A"/><path d="M100,0 q50,-10 60,40 l4,60 q-34,10 -64,0 Z" fill="#E0C4A8"/></svg>
+    <div class="tag" data-small id="cTag" style="top:180px"><i></i>02:40 · ЛИФТ</div>
+  </section>
+
+  <!-- D. Лифт едет дольше обычного -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#060608"/>
+      <g id="shaft" stroke="#1E1F25" stroke-width="10"></g>
+      <rect x="180" y="560" width="720" height="1000" fill="#121318" stroke="#2A2B32" stroke-width="10"/>
+      <line x1="540" y1="560" x2="540" y2="1560" stroke="#2A2B32" stroke-width="6"/></svg>
+    <div class="ind" id="ind">12</div>
+    <div class="tag red" data-small id="dLong" style="top:1620px"><i></i>ДОЛЬШЕ ОБЫЧНОГО</div>
+  </section>
+
+  <!-- E. Двери открываются: такой же коридор, глазок светится, в нём глаз -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="peep"><stop offset="0" stop-color="#FFE7A8"/><stop offset=".5" stop-color="#FFE7A8" stop-opacity=".5"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#16151A"/>
+      <polygon points="0,0 1080,0 860,420 220,420" fill="#1E1C22"/><polygon points="0,1920 1080,1920 860,1500 220,1500" fill="#0C0B0E"/>
+      <polygon points="0,0 220,420 220,1500 0,1920" fill="#121116"/><polygon points="1080,0 860,420 860,1500 1080,1920" fill="#121116"/>
+      <g id="doorE"><rect x="380" y="560" width="320" height="940" fill="#3A2E26" stroke="#241D18" stroke-width="10"/>
+        <text x="540" y="660" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="44" fill="#C9B37A">48</text>
+        <circle cx="540" cy="820" r="16" fill="#0A0807"/><circle id="peepG" cx="540" cy="820" r="90" fill="url(#peep)" opacity="0"/>
+        <circle id="peepC" cx="540" cy="820" r="14" fill="#FFE7A8" opacity="0"/>
+        <circle cx="660" cy="1050" r="14" fill="#9A8A70"/></g>
+      <g id="eyeE" opacity="0"><ellipse cx="540" cy="820" rx="300" ry="170" fill="#E8E0D0"/><circle cx="540" cy="820" r="120" fill="#4A6A5A"/><circle id="pupil" cx="540" cy="820" r="54" fill="#050505"/><circle cx="510" cy="790" r="18" fill="#fff" opacity=".8"/>
+        <ellipse id="lid" cx="540" cy="820" rx="310" ry="0" fill="#16151A"/></g>
+      <rect id="lL" x="0" y="0" width="540" height="1920" fill="#5A5D66"/><rect id="lR" x="540" y="0" width="540" height="1920" fill="#4E5158"/>
+      <line id="lM" x1="540" y1="0" x2="540" y2="1920" stroke="#2A2B32" stroke-width="6"/>
+    </svg>
+    <div class="tag" data-small id="eTag" style="top:180px"><i></i>ЭТАЖ 13 · КВ. 48</div>
+    <div class="tag red" data-small id="eHis" style="top:1180px"><i></i>ЕГО КВАРТИРА</div>
+  </section>
+
+  <!-- G. Утро: кнопки 13 нет -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#2A2F38"/></svg>
+    <div class="panel" id="panelG" style="background:linear-gradient(#5A5E68,#40434B)">
+      <div style="position:absolute;left:170px;top:60px;width:150px;height:150px;border-radius:50%;border:4px dashed #6A6D75"></div>
+      <div class="btn" style="left:170px;top:250px">12</div>
+      <div class="btn" style="left:60px;top:440px">10</div><div class="btn" style="left:280px;top:440px">11</div>
+      <div class="btn" style="left:60px;top:630px">8</div><div class="btn" style="left:280px;top:630px">9</div>
+      <div class="btn" style="left:60px;top:820px">6</div><div class="btn" style="left:280px;top:820px">7</div>
+    </div>
+    <div class="tag" data-small id="gTag" style="top:180px"><i></i>УТРО</div>
+  </section>
+
+  <!-- H. Слова соседки и фигура у двери -->
+  <section class="scene" id="sH">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0C0B0E"/>
+      <rect x="380" y="560" width="320" height="940" fill="#2A221C" stroke="#1A1512" stroke-width="10"/>
+      <text x="540" y="660" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="44" fill="#9A8A60">48</text>
+      <rect y="1500" width="1080" height="420" fill="#08070A"/>
+      <g id="figure" opacity="0" fill="#020203"><circle cx="540" cy="900" r="62"/><path d="M450,1500 L460,1020 Q540,960 620,1020 L630,1500 Z"/></g>
+    </svg>
+    <div class="quote" id="hQ" style="top:240px;text-align:center">«Ты чего ночью стоял<br>у своей двери?»</div>
+    <div class="tag red" data-small id="hT" style="top:1560px"><i></i>1 ЧАС · НЕ ДВИГАЛСЯ</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(51), W = M.data.words.s7;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('денис') - .3, C: wt('однажды') - .3, D: wt('ехал') - .3, E: wt('двери') - .3, G: wt('утром') - .3, H: wt('соседка') - .5 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sD',T.D],['#sE',T.E],['#sG',T.G],['#sH',T.H]], D, .45);
+  captions(W, { k1: [], k2: [], k3: ['кнопка…','кнопка','не','было?','13.','тринадцать','дольше','свет.','наружу.','двигался».','час.','последний.','его'], k4: [] });
+
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.B, T.C, T.E, T.G, T.H]) if (t > a - .05 && t < a + .45) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .5));
+    f.style.opacity = o; });
+  for (const s of [0, T.B, T.C, T.D, T.E, T.G, T.H]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+
+  // A
+  tl.fromTo('#panelA', { scale: 1.6, y: 300 }, { scale: 1.2, y: 140, duration: T.B, ease: 'power1.out' }, 0);
+  const k13 = wt('кнопка');
+  M.onFrame(t => { const b = document.querySelector('#b13A'); if (t < k13) { b.style.opacity = 0; return; }
+    const fl = t - k13 < .8 ? (Math.sin((t - k13) * 60) > 0 ? 1 : .2) : 1; b.style.opacity = fl; b.classList.toggle('on', t > k13 + .4); });
+  M.sfx('glitch', k13, { gain: -8 }); M.hit(wt('было'), 's');
+
+  // B
+  const wb = document.querySelector('#winsB');
+  for (let f = 0; f < 12; f++) for (let c = 0; c < 4; c++) mk(wb, 'rect', { x: 330 + c * 115, y: 330 + f * 105, width: 70, height: 60, fill: R() < .15 ? '#3A3020' : '#0A0B0E' });
+  M.show('#bTag', { at: wt('последний') - .2, in: 'fade', dur: .6 });
+  tl.to('#topFloor', { opacity: .35, duration: .4, repeat: 3, yoyo: true }, wt('12.'));
+
+  // C
+  M.show('#cTag', { at: T.C + .3, in: 'fade', dur: .5 });
+  tl.fromTo('#panelC', { scale: 1 }, { scale: 1.35, duration: T.D - T.C, ease: 'power1.inOut' }, T.C);
+  M.onFrame(t => { const b = document.querySelector('#b13C'); b.classList.toggle('on', t > wt('нажал')); b.style.opacity = t > wt('увидел') - .2 ? 1 : 0; });
+  tl.fromTo('#finger', { y: 400, autoAlpha: 0 }, { y: -980, autoAlpha: 1, duration: .9, ease: 'power3.out' }, wt('нажал') - .7);
+  tl.to('#finger', { y: 300, autoAlpha: 0, duration: .6, ease: 'power2.in' }, wt('нажал') + .4);
+  M.sfx('click', wt('нажал')); M.hit(wt('нажал') + .05, 'm');
+
+  // D
+  const sh = document.querySelector('#shaft'), SL = [];
+  for (let i = 0; i < 14; i++) SL.push(mk(sh, 'line', { x1: 0, x2: 1080 }));
+  M.onFrame(t => SL.forEach((l, i) => { const y = ((i * 150 + (t - T.D) * 420) % 2100) - 100; l.setAttribute('y1', y); l.setAttribute('y2', y); }));
+  M.onFrame(t => { const el = document.querySelector('#ind'); if (t < T.D + .8) el.textContent = '12'; else el.textContent = Math.floor(t * 7) % 3 === 0 ? '--' : '13'; });
+  M.sfx('riser', T.D + .3, { gain: -8, rate: .6 }); M.sfx('riser', T.D + 2.3, { gain: -8, rate: .5 });
+  M.show('#dLong', { at: wt('гораздо') - .1, in: 'fade', dur: .5 });
+  M.shake('#sD svg.art', { at: wt('гораздо'), amp: 4, dur: 1.2, sfx: false });
+
+  // E
+  tl.to('#lL', { x: -560, duration: 1.4, ease: 'power2.inOut' }, T.E + .2); tl.to('#lR', { x: 560, duration: 1.4, ease: 'power2.inOut' }, T.E + .2);
+  tl.to('#lM', { opacity: 0, duration: .2 }, T.E + .2); M.sfx('ding', T.E + .1, { gain: -8 }); M.sfx('sweep', T.E + .3, { gain: -8 });
+  M.show('#eTag', { at: T.E + 1, in: 'fade', dur: .5 });
+  M.show('#eHis', { at: wt('номер') - .1, in: 'pop', dur: .45 });
+  M.hide('#eHis', { at: wt('глазке') - .2, out: 'fade', dur: .3 });
+  tl.to('#peepG, #peepC', { opacity: 1, duration: .6 }, wt('горел'));
+  const eyeT = wt('смотрел') - .3;
+  gsap.set('#doorE', { transformOrigin: '540px 820px' });
+  tl.to('#doorE', { scale: 9, duration: 1.2, ease: 'power3.in' }, eyeT - .9);
+  tl.to('#eyeE', { opacity: 1, duration: .3 }, eyeT + .1);
+  M.onFrame(t => { const p = document.querySelector('#pupil'); p.setAttribute('cx', 540 + Math.sin(t * 1.7) * 30); const blink = t > eyeT + 1.6 && t < eyeT + 1.8; document.querySelector('#lid').setAttribute('ry', blink ? 175 : 0); });
+  M.hit(eyeT + .2, 'l');
+  // нажал «двенадцать» — двери закрываются
+  tl.to('#lL', { x: 0, duration: 1, ease: 'power2.inOut' }, wt('закрылись') - .4); tl.to('#lR', { x: 0, duration: 1, ease: 'power2.inOut' }, wt('закрылись') - .4);
+  tl.to('#lM', { opacity: 1, duration: .2 }, wt('закрылись') + .5); M.sfx('thud', wt('закрылись') + .55);
+
+  // G
+  M.show('#gTag', { at: T.G + .3, in: 'fade', dur: .5 });
+  tl.fromTo('#panelG', { scale: 1.1 }, { scale: 1.25, duration: T.H - T.G, ease: 'none' }, T.G);
+
+  // H
+  M.show('#hQ', { at: wt('ты') - .2, in: 'blur', dur: .8 });
+  tl.to('#figure', { opacity: 1, duration: 1.6, ease: 'power1.in' }, wt('целый') - .2);
+  M.show('#hT', { at: wt('двигался') - .3, in: 'blur', dur: .7 }); M.hit(wt('двигался'), 'l');
+  tl.to('#sH svg.art', { scale: 1.12, transformOrigin: '50% 60%', duration: D - T.H, ease: 'none' }, T.H);
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
