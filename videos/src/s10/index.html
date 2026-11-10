@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --bg:#050507; --red:#E23B3B; }
+  .scene { background:#050507; }
+  #cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+  #cap .k1, #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+  .tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+  .quote { background:rgba(12,10,10,.88); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:78px; line-height:1.1; color:#E23B3B; }
+  #vign { position:absolute; inset:0; z-index:40; pointer-events:none; background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+  #flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+  .chat { position:absolute; left:90px; right:90px; top:260px; bottom:420px; border-radius:40px; background:#0D1017; border:6px solid #1C202A; overflow:hidden; }
+  .chat .hd { padding:34px 40px; border-bottom:3px solid #1C202A; font:800 40px/1.2 "Montserrat"; color:#E8E6E0; }
+  .chat .hd small { display:block; font:700 26px/1.3 "JetBrains Mono"; color:#7A8090; letter-spacing:.06em; }
+  .bubble { position:absolute; width:620px; height:150px; border-radius:40px; background:#1E2433; display:flex; align-items:center; padding:0 34px; box-sizing:border-box; gap:26px; }
+  .bubble.me { background:#2A3F66; }
+  .bubble .pl { width:84px; height:84px; border-radius:50%; background:#E8E6E0; flex:none; position:relative; }
+  .bubble .pl::after { content:''; position:absolute; left:32px; top:24px; border-left:30px solid #1E2433; border-top:18px solid transparent; border-bottom:18px solid transparent; }
+  .bubble .tm { position:absolute; right:34px; bottom:14px; font:700 24px/1 "JetBrains Mono"; color:#9AA0AE; }
+  .bubble svg { width:420px; height:70px; }
+  .mono { position:absolute; font:700 34px/1 "JetBrains Mono"; color:#C9C3B6; white-space:nowrap; }
+  .news { position:absolute; left:0; right:0; top:1080px; height:170px; background:#B91E1E; display:flex; align-items:center; padding-left:60px; font:900 58px/1 "Montserrat"; color:#fff; white-space:nowrap; }
+  .news span { background:#fff; color:#B91E1E; padding:10px 20px; margin-right:26px; font-size:40px; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="62.6" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- A. Хук: чат, голосовое с завтрашней датой -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#040506"/></svg>
+    <div class="chat" id="chatA"><div class="hd">+7 9•• ••• •• ••<small>НЕИЗВЕСТНЫЙ НОМЕР</small></div>
+      <div class="bubble" id="bubA" style="left:40px;top:520px"><div class="pl"></div><svg viewBox="0 0 420 70" id="wA"></svg><div class="tm" id="tmA">завтра · 23:59</div></div></div>
+  </section>
+
+  <!-- B. Ночь, телефон дрогнул -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="pg"><stop offset="0" stop-color="#7FA0E0" stop-opacity=".5"/><stop offset="1" stop-color="#7FA0E0" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#05060A"/>
+      <path d="M0,1100 Q540,1000 1080,1100 L1080,1920 L0,1920 Z" fill="#11141C"/>
+      <rect x="140" y="980" width="420" height="200" rx="70" fill="#1C2130"/>
+      <circle id="pgB" cx="700" cy="1150" r="420" fill="url(#pg)" opacity="0"/>
+      <g id="phB"><rect x="600" y="1080" width="220" height="130" rx="22" fill="#0B0D12" stroke="#2A2F3A" stroke-width="5"/><rect id="scrB" x="612" y="1092" width="196" height="106" rx="14" fill="#0B0D12"/></g>
+    </svg>
+    <div class="tag" data-small id="bTag" style="top:300px"><i></i>00:47 · НОЧЬ</div>
+  </section>
+
+  <!-- C. Её голос: волна и слова -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#030304"/><g id="waveC" fill="#E23B3B"></g></svg>
+    <div class="tag red" data-small id="cHer" style="top:420px"><i></i>ЕЁ ГОЛОС</div>
+    <div class="quote" id="cQ" style="top:1180px;text-align:center">«Не садись в такси<br>в 8:40»</div>
+    <div class="stamp" id="cDate" style="left:150px;top:560px;font-size:64px">ОТПРАВЛЕНО: ЗАВТРА</div>
+  </section>
+
+  <!-- E. Утро: такси у подъезда, 08:40 -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4458"/><stop offset="1" stop-color="#7A8296"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyE)"/>
+      <rect x="0" y="300" width="1080" height="1050" fill="#2A2E38"/><g fill="#3A4050"><rect x="100" y="380" width="160" height="200"/><rect x="460" y="380" width="160" height="200"/><rect x="820" y="380" width="160" height="200"/><rect x="100" y="700" width="160" height="200"/><rect x="820" y="700" width="160" height="200"/></g>
+      <rect x="430" y="980" width="220" height="370" fill="#16181E"/>
+      <rect y="1350" width="1080" height="570" fill="#22252C"/><rect y="1540" width="1080" height="14" fill="#C9C3B6" opacity=".25"/>
+      <g id="taxi"><rect x="220" y="1360" width="620" height="170" rx="40" fill="#E8C33A"/><path d="M340,1360 L420,1260 L640,1260 L720,1360 Z" fill="#D7B22E"/>
+        <path d="M370,1355 L430,1280 L520,1280 L520,1355 Z" fill="#1A1E28"/><path d="M540,1355 L540,1280 L630,1280 L690,1355 Z" fill="#1A1E28"/>
+        <rect x="470" y="1222" width="120" height="40" rx="8" fill="#1A1E28"/><text x="530" y="1250" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="24" fill="#E8C33A">TAXI</text>
+        <circle cx="350" cy="1530" r="56" fill="#111"/><circle cx="710" cy="1530" r="56" fill="#111"/><rect x="560" y="1400" width="60" height="14" rx="7" fill="#8A7420"/></g>
+    </svg>
+    <div class="big" id="eT" style="top:220px;font-size:170px;font-family:'JetBrains Mono';color:#E23B3B;text-shadow:0 0 40px rgba(226,59,59,.5)">08:40</div>
+    <div class="tag" data-small id="eLet" style="top:880px"><i></i>ОТПУСТИЛА РУЧКУ</div>
+  </section>
+
+  <!-- F. Новости -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#08090C"/>
+      <rect x="60" y="300" width="960" height="760" fill="#11141B" stroke="#22262F" stroke-width="8"/>
+      <g stroke="#2A2F3A" stroke-width="16" fill="none"><path d="M100,500 L980,520"/><path d="M100,820 L980,800"/><path d="M300,320 L320,1040"/><path d="M760,320 L740,1040"/></g>
+      <path id="route" d="M180,980 L310,820 L750,810 L760,520 L960,510" fill="none" stroke="#E8C33A" stroke-width="12" stroke-dasharray="20 14"/>
+      <g id="crash" stroke="#E23B3B" stroke-width="18" stroke-linecap="round" opacity="0"><line x1="700" y1="760" x2="800" y2="860"/><line x1="800" y1="760" x2="700" y2="860"/></g></svg>
+    <div class="news" id="fNews"><span>СРОЧНО</span>ДТП НА МАРШРУТЕ</div>
+    <div class="mono" style="left:90px;top:1290px;color:#9AA0AE">09:41 · ТОТ САМЫЙ МАРШРУТ</div>
+  </section>
+
+  <!-- G. Вечер: голосового нет, номера нет -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#040506"/></svg>
+    <div class="chat"><div class="hd">Номер не существует<small>ИСТОРИЯ ЧАТА ПУСТА</small></div></div>
+    <div class="tag" data-small id="gT" style="top:200px"><i></i>21:30 · ВЕЧЕР</div>
+  </section>
+
+  <!-- H. Отправленные: голосовое от неё самой, 23:59 -->
+  <section class="scene" id="sH">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#040506"/></svg>
+    <div class="chat"><div class="hd">Отправленные<small>ОТ: Я</small></div>
+      <div class="bubble me" id="bubH" style="left:240px;top:520px"><div class="pl" style="background:#E8E6E0"></div><svg viewBox="0 0 420 70" id="wH"></svg><div class="tm" style="color:#E23B3B">23:59</div></div></div>
+    <div class="mono" id="hNow" style="left:90px;top:1540px;color:#9AA0AE">сейчас · 21:31</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(81), W = M.data.words.s10;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('катя') - .3, C: wt('нажала') - .3, E: wt('утром') - .3, F: wt('через') - .3, G: wt('вечером') - .3, H: wt('зато') - .3 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sE',T.E],['#sF',T.F],['#sG',T.G],['#sH',T.H]], D, .45);
+  captions(W, { k1: [], k2: [], k3: ['вашим','завтра?','себя.','задыхающуюся.','испуганную.','такси','завтрашняя.','отпустила.','без','аварию.','маршруте.','не','было.','самой.','пока.','записывала.'], k4: [] });
+
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.C, T.E, T.F, T.H]) if (t > a - .05 && t < a + .45) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .5));
+    f.style.opacity = o; });
+  for (const s of [0, T.B, T.C, T.E, T.F, T.G, T.H]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+  const bars = (sel, n, color) => { const g = document.querySelector(sel); for (let i = 0; i < n; i++) { const h = 10 + Math.abs(Math.sin(i * 1.7) * Math.sin(i * .6)) * 55; mk(g, 'rect', { x: i * 14, y: 35 - h / 2, width: 8, height: h, rx: 4, fill: color }); } };
+  bars('#wA', 30, '#9AA0AE'); bars('#wH', 30, '#E8E6E0');
+
+  // A
+  tl.fromTo('#chatA', { scale: 1.15, transformOrigin: '50% 45%' }, { scale: 1, duration: T.B, ease: 'power2.out' }, 0);
+  tl.fromTo('#bubA', { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .5, ease: 'expo.out' }, .3); M.sfx('blip', .35, { gain: -6 });
+  tl.to('#tmA', { color: '#E23B3B', duration: .3 }, wt('завтра') - .1); M.hit(wt('завтра'), 's');
+
+  // B
+  M.show('#bTag', { at: T.B + .3, in: 'fade', dur: .5 });
+  const buzzT = wt('дрогнул') - .1;
+  tl.to('#pgB', { opacity: 1, duration: .3 }, buzzT); tl.to('#scrB', { attr: { fill: '#8FB0E6' }, duration: .2 }, buzzT);
+  M.onFrame(t => { const on = t > buzzT && t < buzzT + 1.5 && (t * 3) % 1 < .6; document.querySelector('#phB').setAttribute('transform', on ? `translate(${Math.sin(t * 90) * 6},0)` : ''); });
+  for (let k = buzzT; k < buzzT + 1.5; k += .33) M.sfx('thud', k, { gain: -16, rate: 1.6 });
+
+  // C
+  const wc = document.querySelector('#waveC'), B = [];
+  for (let i = 0; i < 40; i++) B.push(mk(wc, 'rect', { x: 140 + i * 20, y: 860, width: 10, height: 4, rx: 4 }));
+  const v0 = wt('себя') - .2, v1 = wt('дата') - .3;
+  M.onFrame(t => B.forEach((b, i) => { const live = t > v0 && t < v1; const h = live ? 8 + Math.abs(Math.sin(t * 9 + i * .7) * Math.sin(t * 3.1 + i)) * 240 : 4; b.setAttribute('height', h); b.setAttribute('y', 860 - h / 2); }));
+  M.show('#cHer', { at: wt('себя') - .1, in: 'pop', dur: .45 });
+  M.show('#cQ', { at: wt('садись') - .4, in: 'blur', dur: .9 }); M.hit(wt('поверишь'), 'm');
+  M.hide('#cQ, #cHer', { at: wt('дата') - .3, out: 'fade', dur: .4 });
+  tl.fromTo('#cDate', { scale: 2.2, rotation: -14, autoAlpha: 0 }, { scale: 1, rotation: -6, autoAlpha: 1, duration: .3, ease: 'power4.in' }, wt('завтрашняя') - .25);
+  M.sfx('thud', wt('завтрашняя') + .05); M.hit(wt('завтрашняя') + .1, 'l');
+  M.hide('#cDate', { at: wt('дипфейк') - .2, out: 'fade', dur: .5 });
+  tl.to('#sC svg.art', { scale: 1.1, transformOrigin: '50% 45%', duration: T.E - T.C, ease: 'none' }, T.C);
+
+  // E
+  M.show('#eT', { at: wt('8:40', 2) - .2, in: 'blur', dur: .6 });
+  M.show('#eLet', { at: wt('отпустила') - .1, in: 'pop', dur: .45 });
+  tl.to('#taxi', { x: 1300, duration: 2.2, ease: 'power2.in' }, wt('уехала') - .3); M.sfx('sweep', wt('уехала'), { gain: -4 });
+
+  // F
+  M.show('#fNews', { at: T.F + .4, in: 'wipe', dur: .6 }); M.sfx('ding', T.F + .45, { gain: -6 });
+  const rt = document.querySelector('#route'); tl.fromTo(rt, { opacity: 0 }, { opacity: 1, duration: .6 }, wt('аварию') - .4);
+  tl.to('#crash', { opacity: 1, duration: .2, repeat: 3, yoyo: true }, wt('маршруте') - .1); tl.to('#crash', { opacity: 1, duration: .2 }, wt('маршруте') + .7);
+  M.hit(wt('маршруте'), 'l');
+
+  // G
+  M.show('#gT', { at: T.G + .3, in: 'fade', dur: .5 });
+
+  // H
+  tl.fromTo('#bubH', { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'expo.out' }, wt('голосовое', 3) - .2); M.sfx('blip', wt('голосовое', 3), { gain: -6 });
+  M.hit(wt('23:59'), 'm');
+  tl.fromTo('#sH .chat', { scale: 1 }, { scale: 1.12, transformOrigin: '60% 40%', duration: D - T.H - .4, ease: 'none' }, T.H);
+  M.show('#hNow', { at: wt('пока') - .6, in: 'blur', dur: .7 }); M.hit(wt('пока'), 'l');
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
