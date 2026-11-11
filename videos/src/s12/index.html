@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --bg:#050507; --red:#E23B3B; }
+  .scene { background:#050507; }
+  #cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+  #cap .k1, #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+  .tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+  .quote { background:rgba(12,10,10,.88); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:86px; line-height:1.1; color:#E23B3B; }
+  #vign { position:absolute; inset:0; z-index:40; pointer-events:none; background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+  #flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+  .sheet { position:absolute; left:140px; top:330px; width:800px; height:1100px; background:#E8E2D2; transform:rotate(-2deg); box-shadow:0 30px 60px rgba(0,0,0,.6); padding:70px 70px; box-sizing:border-box; }
+  .sheet h3 { margin:0 0 30px; font:800 40px/1 "Montserrat"; color:#2A2620; text-transform:uppercase; }
+  .sheet .row { font:700 38px/1 "JetBrains Mono"; color:#3A352C; padding:14px 0; border-bottom:2px solid #C9C0AA; display:flex; justify-content:space-between; }
+  .sheet .hand { font:400 84px/1 "Marck Script"; color:#C62828; margin-top:26px; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="56.4" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <g id="bus"><rect x="-460" y="-230" width="920" height="420" rx="40" fill="#C9C3B6"/><rect x="-460" y="120" width="920" height="70" fill="#8A847A"/>
+      <g fill="#F2E3A8" id="busWin"><rect x="-420" y="-180" width="150" height="150" rx="10"/><rect x="-250" y="-180" width="150" height="150" rx="10"/><rect x="-80" y="-180" width="150" height="150" rx="10"/><rect x="90" y="-180" width="150" height="150" rx="10"/></g>
+      <rect x="270" y="-180" width="150" height="300" rx="10" fill="#2A2620"/><line x1="345" y1="-180" x2="345" y2="120" stroke="#8A847A" stroke-width="6"/>
+      <circle cx="-300" cy="200" r="60" fill="#111"/><circle cx="300" cy="200" r="60" fill="#111"/>
+      <rect x="-300" y="-226" width="420" height="36" rx="6" fill="#111"/></g>
+    <g id="head"><circle r="34" fill="#3A3C46"/><rect x="-44" y="30" width="88" height="70" rx="30" fill="#3A3C46"/></g>
+  </defs></svg>
+
+  <!-- A. Хук: остановка, автобус, двери не открываются -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="lampA"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".45"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#06070A"/><circle cx="180" cy="520" r="420" fill="url(#lampA)"/>
+      <rect x="170" y="520" width="16" height="900" fill="#2A2C32"/><circle cx="178" cy="510" r="24" fill="#FFE7A8"/>
+      <rect y="1420" width="1080" height="500" fill="#0E0F13"/>
+      <g id="busA" transform="translate(1600,1200)"><use href="#bus"/></g>
+      <g transform="translate(860,820)"><rect x="-60" y="-60" width="120" height="120" rx="14" fill="#2F5BD1"/><text y="22" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="64" fill="#fff">А</text><rect x="-6" y="60" width="12" height="540" fill="#2A2C32"/></g>
+    </svg>
+    <div class="tag red" data-small id="aNo" style="top:300px"><i></i>ДВЕРИ НЕ ОТКРЫЛИСЬ</div>
+  </section>
+
+  <!-- B. Последний автобус 00:42 -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#06070A"/>
+      <g id="lights" fill="#FFE7A8" opacity=".5"></g>
+      <g transform="translate(540,1050) scale(1.05)"><use href="#bus"/></g>
+      <text x="420" y="828" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="30" fill="#FFB23A">00:42 · ПОСЛЕДНИЙ</text>
+      <rect y="1300" width="1080" height="620" fill="#0E0F13"/></svg>
+    <div class="tag" data-small id="bTag" style="top:300px"><i></i>ПОСЛЕ СМЕНЫ</div>
+  </section>
+
+  <!-- C. Салон: десять затылков, молча -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#14130F"/>
+      <rect x="0" y="0" width="1080" height="360" fill="#1E1C17"/><g fill="#F2E3A8" opacity=".55"><rect x="200" y="300" width="680" height="16" rx="8"/></g>
+      <polygon points="0,1920 1080,1920 700,900 380,900" fill="#0E0D0A"/>
+      <g id="rows"></g>
+    </svg>
+    <div class="tag" data-small id="cPh" style="top:200px"><i></i>ТЕЛЕФОНЫ: 0</div>
+  </section>
+
+  <!-- D. Окно: отражение — все смотрят на него -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#08090C"/>
+      <rect x="90" y="360" width="900" height="1000" rx="30" fill="#0B0E15" stroke="#2A2C32" stroke-width="18"/>
+      <g id="street" fill="#F2E3A8" opacity=".25"></g>
+      <g id="faces" opacity="0"></g>
+      <g id="backs" opacity="0"></g>
+    </svg>
+    <div class="tag red" data-small id="dLook" style="top:220px"><i></i>ВСЕ СМОТРЯТ НА НЕГО</div>
+  </section>
+
+  <!-- E. Кнопка, остановка проезжает -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#14130F"/>
+      <rect x="380" y="300" width="320" height="1100" rx="20" fill="#2A2620" stroke="#3A352C" stroke-width="10"/><line x1="540" y1="300" x2="540" y2="1400" stroke="#3A352C" stroke-width="10"/>
+      <rect x="400" y="320" width="120" height="500" fill="#0B0E15"/><rect x="560" y="320" width="120" height="500" fill="#0B0E15"/>
+      <g id="stopSign" transform="translate(1200,560)"><rect x="-36" y="-36" width="72" height="72" rx="8" fill="#2F5BD1"/><text y="18" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="44" fill="#fff">А</text></g>
+      <circle id="doorLamp" cx="540" cy="250" r="24" fill="#3A1010"/>
+      <g transform="translate(860,1050)"><rect x="-80" y="-120" width="160" height="240" rx="20" fill="#E9E4DA"/><circle id="btn" r="54" fill="#8A1C1C"/><text y="96" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="30" fill="#2A2620">STOP</text></g>
+    </svg>
+    <div class="tag red" data-small id="eNo" style="top:1460px"><i></i>ДВЕРИ НЕ ОТКРЫЛИСЬ</div>
+  </section>
+
+  <!-- F. Водитель: «Конечная. Для всех» -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#0A0A0C"/>
+      <rect x="0" y="300" width="1080" height="640" fill="#0B0E15"/><g fill="#F2E3A8" opacity=".25" id="road"></g>
+      <rect x="0" y="940" width="1080" height="980" fill="#14130F"/>
+      <g transform="translate(540,1220)"><circle cy="-170" r="110" fill="#050507"/><path d="M-240,260 Q-240,-40 0,-50 Q240,-40 240,260 Z" fill="#050507"/></g>
+      <g transform="translate(760,1000)"><rect x="-8" y="0" width="16" height="200" fill="#2A2C32"/><circle r="24" fill="#2A2C32"/></g></svg>
+    <div class="quote" id="fQ" style="top:330px;text-align:center">«Конечная.<br>Для всех»</div>
+  </section>
+
+  <!-- G. Депо утром: пустой, мотор тёплый -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#3A4050"/>
+      <rect y="300" width="1080" height="1100" fill="#2A2E38"/><g stroke="#3A4050" stroke-width="12"><line x1="0" y1="500" x2="1080" y2="500"/><line x1="200" y1="300" x2="200" y2="1400"/><line x1="880" y1="300" x2="880" y2="1400"/></g>
+      <g transform="translate(540,1180) scale(.9)"><use href="#bus"/></g>
+      <g id="heat" fill="none" stroke="#FFB23A" stroke-width="5" opacity=".6"></g>
+      <rect y="1400" width="1080" height="520" fill="#22252C"/></svg>
+    <div class="tag" data-small id="gTag" style="top:200px"><i></i>ДЕПО · 06:30</div>
+    <div class="tag red" data-small id="gWarm" style="top:1460px"><i></i>МОТОР ЕЩЁ ТЁПЛЫЙ</div>
+  </section>
+
+  <!-- H. Маршрутный лист: 11-й — Илья -->
+  <section class="scene" id="sH">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#0A0A0C"/></svg>
+    <div class="sheet" id="sheet"><h3>Маршрутный лист · 00:42</h3><div id="rowsH"></div><div class="hand" id="ilya">11. Илья</div></div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(97), W = M.data.words.s12;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('илья') - .3, C: wt('салоне') - .6, D: wt('сел') - .5, E: wt('вот') - .3, F: wt('водитель') - .3, G: wt('утром') - .3, H: wt('маршрутном') - .7 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sD',T.D],['#sE',T.E],['#sF',T.F],['#sG',T.G],['#sH',T.H]], D, .45);
+  captions(W, { k1: [], k2: [], k3: ['не','откроет','двери','остановке?','молча.','смотрели','на','него.','отражении','лиц.','открылись.','конечная.','всех».','пустым.','тёплым.','одиннадцать','илья.','руки.'], k4: [] });
+
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.C, T.D, T.E, T.F, T.H]) if (t > a - .05 && t < a + .45) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .5));
+    f.style.opacity = o; });
+  for (const s of [0, T.B, T.C, T.D, T.E, T.F, T.G, T.H]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+
+  // A — автобус подъезжает и проезжает мимо
+  tl.to('#busA', { x: 540, duration: 2.2, ease: 'power3.out' }, .1); M.sfx('sweep', .2, { gain: -6 });
+  tl.to('#busA', { x: -700, duration: 1.6, ease: 'power2.in' }, wt('остановке') - .2);
+  M.show('#aNo', { at: wt('откроет') - .1, in: 'pop', dur: .45 }); M.hit(wt('остановке'), 's');
+
+  // B — фонари текут мимо
+  const lg = document.querySelector('#lights'), LG = [];
+  for (let i = 0; i < 8; i++) LG.push(mk(lg, 'circle', { r: 10, cy: 420 + (i % 3) * 40 }));
+  M.onFrame(t => LG.forEach((c, i) => c.setAttribute('cx', 1180 - ((t * 420 + i * 160) % 1380))));
+  M.show('#bTag', { at: T.B + .3, in: 'fade', dur: .5 });
+  M.hit(wt('00:42') - .1, 's');
+
+  // C — затылки
+  const rows = document.querySelector('#rows');
+  const seat = (g, x, y, s) => mk(g, 'use', { href: '#head', transform: `translate(${x},${y}) scale(${s})` });
+  [[380,1050,1],[700,1050,1],[340,1250,1.25],[740,1250,1.25],[300,1500,1.6],[780,1500,1.6],[420,900,.8],[660,900,.8],[470,800,.65],[610,800,.65]].forEach(([x,y,s]) => seat(rows, x, y, s));
+  M.show('#cPh', { at: wt('никто') - .1, in: 'pop', dur: .45 });
+  tl.fromTo('#sC svg.art', { scale: 1 }, { scale: 1.08, transformOrigin: '50% 40%', duration: T.D - T.C, ease: 'none' }, T.C);
+
+  // D — отражение
+  const st = document.querySelector('#street'), SS = [];
+  for (let i = 0; i < 10; i++) SS.push(mk(st, 'rect', { y: 500 + R() * 700, width: 6, height: 40 + R() * 80 }));
+  M.onFrame(t => SS.forEach((r, i) => r.setAttribute('x', 980 - ((t * 500 + i * 97) % 900))));
+  const fc = document.querySelector('#faces'), bk = document.querySelector('#backs');
+  const pos = [[250,600],[450,600],[650,600],[850,600],[300,850],[540,850],[780,850],[350,1100],[600,1100],[830,1100]];
+  pos.forEach(([x, y]) => { const g = mk(fc, 'g', { transform: `translate(${x},${y})` }); mk(g, 'ellipse', { rx: 54, ry: 70, fill: '#C9C3B6', opacity: .5 });
+    mk(g, 'circle', { cx: -18, cy: -8, r: 9, fill: '#050507' }); mk(g, 'circle', { cx: 18, cy: -8, r: 9, fill: '#050507' });
+    mk(bk, 'use', { href: '#head', transform: `translate(${x},${y})` }); });
+  const lookA = wt('все', 2) - .2, turn = wt('обернулся') - .1, back = wt('повернулся') - .1;
+  M.onFrame(t => { const f = document.querySelector('#faces'), b = document.querySelector('#backs');
+    const showF = (t > lookA && t < turn) || (t > back + .6 && t < T.E); const showB = t > turn && t < back + .6;
+    f.setAttribute('opacity', showF ? .9 : 0); b.setAttribute('opacity', showB ? 1 : 0); });
+  M.show('#dLook', { at: lookA, in: 'blur', dur: .6 }); M.hit(lookA + .2, 'l');
+  M.hide('#dLook', { at: turn - .2, out: 'fade', dur: .3 });
+  M.hit(wt('лиц'), 'm');
+
+  // E — кнопка, остановка
+  tl.to('#stopSign', { x: -200, duration: 2.4, ease: 'none' }, T.E + .2);
+  tl.to('#btn', { attr: { fill: '#E23B3B' }, duration: .1 }, wt('нажал') - .05); M.sfx('click', wt('нажал'));
+  M.onFrame(t => document.querySelector('#doorLamp').setAttribute('fill', t > wt('двери', 2) && Math.sin(t * 10) > 0 ? '#E23B3B' : '#3A1010'));
+  M.show('#eNo', { at: wt('открылись') - .1, in: 'pop', dur: .45 }); M.hit(wt('открылись'), 'm');
+
+  // F — водитель
+  const rd = document.querySelector('#road'), RD = [];
+  for (let i = 0; i < 6; i++) RD.push(mk(rd, 'rect', { x: 520, width: 40, height: 60 }));
+  M.onFrame(t => RD.forEach((r, i) => { const k = ((t * .8 + i / 6) % 1); r.setAttribute('y', 600 + k * 340); r.setAttribute('width', 10 + k * 60); r.setAttribute('x', 540 - (5 + k * 30)); }));
+  M.show('#fQ', { at: wt('конечная') - .3, in: 'blur', dur: .9 }); M.hit(wt('всех'), 'l');
+  tl.fromTo('#sF svg.art', { scale: 1 }, { scale: 1.15, transformOrigin: '50% 55%', duration: T.G - T.F, ease: 'power1.in' }, T.F);
+
+  // G — депо
+  M.show('#gTag', { at: T.G + .3, in: 'fade', dur: .5 });
+  const ht = document.querySelector('#heat'), H = [];
+  for (let i = 0; i < 3; i++) H.push(mk(ht, 'path', {}));
+  M.onFrame(t => H.forEach((p, i) => { let d = ''; for (let k = 0; k <= 8; k++) { const y = 1000 - k * 30, x = 880 + i * 30 + Math.sin(t * 3 + k * .7 + i) * 10; d += (k ? 'L' : 'M') + x + ',' + y; } p.setAttribute('d', d); }));
+  M.show('#gWarm', { at: wt('тёплым') - .4, in: 'pop', dur: .45 });
+
+  // H — маршрутный лист
+  const rh = document.querySelector('#rowsH');
+  for (let i = 1; i <= 10; i++) { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<span>${String(i).padStart(2, '0')}. пассажир</span><span>есть</span>`; rh.appendChild(r); }
+  tl.fromTo('#sheet', { y: 200, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'expo.out' }, T.H + .1); M.sfx('swish', T.H + .1);
+  tl.set('#ilya', { autoAlpha: 0 }, 0); tl.fromTo('#ilya', { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: .8, ease: 'power2.out' }, wt('илья', 2) - .2); M.sfx('scratch', wt('илья', 2) - .1); M.hit(wt('илья', 2) + .2, 'l');
+  tl.to('#sheet', { scale: 1.12, transformOrigin: '50% 90%', duration: D - T.H - 1.2, ease: 'none' }, T.H + .8);
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
