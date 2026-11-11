@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  .lblB { position:absolute; font:800 40px/1 var(--font-display); text-transform:uppercase; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="72.4" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <clipPath id="sqClip"><rect x="-150" y="-150" width="300" height="300" rx="14"/></clipPath>
+    <clipPath id="ciClip"><rect x="-130" y="-170" width="260" height="340" rx="120"/></clipPath>
+    <g id="clouds"><rect x="-400" y="-400" width="800" height="800" fill="#7FB6E8"/><g fill="#F4F8FC"><ellipse cx="-60" cy="40" rx="120" ry="40"/><ellipse cx="40" cy="20" rx="90" ry="34"/><ellipse cx="90" cy="110" rx="140" ry="36"/><ellipse cx="-120" cy="-80" rx="80" ry="24"/></g></g>
+  </defs></svg>
+
+  <!-- A. Хук: круглое окно против квадратного -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#0A0F1A"/>
+      <g id="sqA" transform="translate(300,900)"><rect x="-170" y="-170" width="340" height="340" rx="20" fill="#C9D6E8"/><g clip-path="url(#sqClip)"><use href="#clouds"/></g>
+        <path id="crackA" d="M150,-150 L100,-110 L120,-70 L60,-40 L80,10" fill="none" stroke="#FF4B4B" stroke-width="8" stroke-linecap="round"/></g>
+      <g id="ciA" transform="translate(780,900)"><rect x="-150" y="-190" width="300" height="380" rx="140" fill="#C9D6E8"/><g clip-path="url(#ciClip)"><use href="#clouds"/></g></g>
+    </svg>
+    <div class="big" id="aQ" style="top:330px;font-size:200px;color:var(--fg)">?</div>
+    <div class="tag red" data-small id="aTwo" style="top:1220px"><i></i>2 ЛАЙНЕРА · РАЗВАЛИЛИСЬ В НЕБЕ</div>
+  </section>
+
+  <!-- B. 1952, «Комета» -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6F8FB5"/><stop offset="1" stop-color="#C9D6E8"/></linearGradient></defs>
+      <rect width="1080" height="1920" fill="url(#skyB)"/>
+      <rect y="1250" width="1080" height="670" fill="#7C8A9C"/><rect y="1330" width="1080" height="24" fill="#E8E6E0" opacity=".6"/>
+      <g transform="translate(540,1080)"><g id="comet">
+        <rect x="-460" y="-60" width="900" height="120" rx="60" fill="#F4F1EA"/><path d="M440,-60 Q520,0 440,60 Z" fill="#E9EEF5"/>
+        <polygon points="-420,-60 -360,-60 -440,-200 -480,-200" fill="#D7E3F0"/>
+        <polygon points="-60,40 120,40 -40,200 -140,200" fill="#C9D6E8"/>
+        <rect x="-460" y="-10" width="900" height="14" fill="#2F5BD1"/>
+        <g id="winB" fill="#2A3B57"></g>
+      </g></g>
+    </svg>
+    <div class="tag" data-small id="bTag"><i></i>1952 · ПЕРВЫЙ РЕАКТИВНЫЙ ЛАЙНЕР</div>
+    <div class="chip" id="bFast" style="left:110px;top:420px">быстрее всех</div>
+    <div class="chip" id="bHigh" style="left:110px;top:530px;color:var(--blue);border-color:var(--blue)">выше всех</div>
+    <div class="chip" id="bSq" style="left:200px;top:1400px;color:var(--fg);border-color:#2A3B57">окна почти квадратные</div>
+  </section>
+
+  <!-- C. 1954: две катастрофы над Средиземным морем -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#16385A"/>
+      <path d="M0,300 L1080,300 L1080,560 Q900,620 800,560 Q700,520 640,600 Q560,700 420,620 Q300,560 200,640 Q100,700 0,640 Z" fill="#3A4A3A"/>
+      <path d="M0,1500 Q200,1420 420,1480 Q600,1540 760,1460 Q920,1400 1080,1460 L1080,1920 L0,1920 Z" fill="#5A4E3A"/>
+      <path d="M560,600 Q600,760 640,820 Q600,840 580,800 Q540,720 520,620 Z" fill="#3A4A3A"/>
+      <g id="m1" opacity="0"><circle cx="560" cy="1000" r="70" fill="#FF4B4B" opacity=".25"/><circle cx="560" cy="1000" r="24" fill="#FF4B4B"/></g>
+      <g id="m2" opacity="0"><circle cx="700" cy="860" r="70" fill="#FF4B4B" opacity=".25"/><circle cx="700" cy="860" r="24" fill="#FF4B4B"/></g>
+    </svg>
+    <div class="tag" data-small id="cTag" style="top:180px"><i></i>СРЕДИЗЕМНОЕ МОРЕ</div>
+    <div class="chip" id="c1" style="left:600px;top:1060px;color:var(--red);border-color:var(--red)">январь 1954</div>
+    <div class="chip" id="c2" style="left:560px;top:700px;color:var(--red);border-color:var(--red)">апрель 1954</div>
+    <div class="stamp" id="cStamp" style="left:110px;top:1180px;font-size:70px">ПОЛЁТЫ ЗАПРЕЩЕНЫ</div>
+  </section>
+
+  <!-- D. Бассейн: давление, циклы, трещина -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#0A0F1A"/>
+      <rect x="80" y="620" width="920" height="760" rx="20" fill="#14304F" stroke="#2A3B57" stroke-width="10"/>
+      <rect x="80" y="700" width="920" height="680" fill="#2F7DD1" opacity=".55"/>
+      <g id="fus"><rect x="160" y="930" width="760" height="180" rx="90" fill="#E9EEF5"/>
+        <g fill="#2A3B57"><rect x="260" y="980" width="44" height="44" rx="6"/><rect x="340" y="980" width="44" height="44" rx="6"/><rect x="420" y="980" width="44" height="44" rx="6"/><rect x="500" y="980" width="44" height="44" rx="6"/><rect x="580" y="980" width="44" height="44" rx="6"/><rect x="660" y="980" width="44" height="44" rx="6"/></g>
+        <rect x="520" y="928" width="60" height="22" fill="#2A3B57"/>
+        <path id="crackD" d="M580,930 L620,900 L610,870 L660,840" fill="none" stroke="#FF4B4B" stroke-width="10" stroke-linecap="round" opacity="0"/></g>
+      <g transform="translate(870,450)"><circle r="120" fill="#111A2B" stroke="#9FB3C8" stroke-width="8"/><path d="M-90,40 A100,100 0 0 1 90,40" fill="none" stroke="#2A3B57" stroke-width="12"/><line id="needle" x1="0" y1="0" x2="0" y2="-90" stroke="#FF4B4B" stroke-width="8" stroke-linecap="round"/><circle r="12" fill="#9FB3C8"/></g>
+    </svg>
+    <div class="tag" data-small id="dTag" style="top:180px"><i></i>ИСПЫТАНИЕ В БАССЕЙНЕ</div>
+    <div class="lbl" data-small style="left:90px;top:330px">ЦИКЛЫ «ВЗЛЁТ — ПОСАДКА»</div>
+    <div class="big" id="cyc" style="top:370px;font-size:170px;text-align:left;left:80px;right:auto">0</div>
+    <div class="lblB" id="phase" style="left:90px;top:1420px;color:var(--blue)">взлёт</div>
+  </section>
+
+  <!-- E. Острый угол против скруглённого -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><radialGradient id="hot"><stop offset="0" stop-color="#FF4B4B"/><stop offset="1" stop-color="#FF4B4B" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#0A0F1A"/>
+      <g id="eSq" transform="translate(290,900)">
+        <g id="sqLines" fill="none" stroke="#FFB23A" stroke-width="4" opacity=".8"></g>
+        <rect x="-140" y="-140" width="280" height="280" fill="#0A0F1A" stroke="#C9D6E8" stroke-width="10"/>
+        <circle id="hotDot" cx="140" cy="-140" r="70" fill="url(#hot)" opacity="0"/>
+      </g>
+      <g id="eCi" transform="translate(790,900)">
+        <g id="ciLines" fill="none" stroke="#5BE38B" stroke-width="4" opacity=".8"></g>
+        <rect x="-130" y="-160" width="260" height="320" rx="120" fill="#0A0F1A" stroke="#C9D6E8" stroke-width="10"/>
+      </g>
+    </svg>
+    <div class="lblB" style="left:150px;top:1140px;color:var(--red)">острый угол</div>
+    <div class="lblB" style="left:620px;top:1140px;color:var(--green)">скруглённый</div>
+    <div class="tag red" data-small id="eHot" style="top:560px;left:120px;transform:none"><i></i>НАПРЯЖЕНИЕ В ОДНОЙ ТОЧКЕ</div>
+    <div class="tag" data-small id="eEven" style="top:560px;left:600px;transform:none;color:var(--green);border-color:var(--green)"><i></i>РАВНОМЕРНО</div>
+  </section>
+
+  <!-- F. Финал: современный иллюминатор -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><clipPath id="winF"><rect x="320" y="560" width="440" height="620" rx="200"/></clipPath></defs>
+      <rect width="1080" height="1920" fill="#D7DEE6"/>
+      <rect x="280" y="520" width="520" height="700" rx="230" fill="#B9C3CF"/>
+      <g clip-path="url(#winF)"><rect x="320" y="560" width="440" height="620" fill="#7FB6E8"/><g id="cloudsF" fill="#F4F8FC"><ellipse cx="400" cy="900" rx="160" ry="44"/><ellipse cx="640" cy="800" rx="120" ry="36"/><ellipse cx="560" cy="1040" rx="200" ry="50"/><ellipse cx="900" cy="700" rx="140" ry="40"/></g>
+        <g id="ghost" opacity="0" fill="#FFFFFF"><rect x="360" y="840" width="360" height="40" rx="20"/><polygon points="500,860 560,860 500,940 470,940"/><polygon points="370,840 395,840 360,800 345,800"/></g></g>
+    </svg>
+    <div class="tag" data-small id="fTag" style="top:330px;color:#2A3B57;border-color:#2A3B57;background:rgba(255,255,255,.6)"><i></i>КАЖДЫЙ ЛАЙНЕР С 1950-х</div>
+    <div class="chip" id="fMem" style="left:250px;top:1300px">память о «Комете»</div>
+  </section>
+
+  <div id="cap"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(91), W = M.data.words.s11;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('1952') - .4, C: wt('январь') - .3, D: wt('инженеры') - .3, E: wt('трещина') - .3, F: wt('тех') - .5 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sD',T.D],['#sE',T.E],['#sF',T.F]], D, .3);
+  captions(W, {
+    k1: ['1952','1954.','3000','два','три'],
+    k2: ['круглые?','комету','кометы','бассейн','давлением','скруглённому','равномерно.','иллюминатор'],
+    k3: ['квадратных…','развалились','разваливается','лопается.','трещина','угла','острым','остром','устаёт.'],
+    k4: ['восторге.'] });
+
+  // A
+  M.show('#aQ', { at: .1, in: 'pop', dur: .5 });
+  tl.fromTo('#sqA', { scale: .6 }, { scale: 1, duration: .6, ease: 'back.out(1.7)' }, .2);
+  tl.fromTo('#ciA', { scale: .6 }, { scale: 1, duration: .6, ease: 'back.out(1.7)' }, .35);
+  M.sfx('pop', .2); M.sfx('pop', .35);
+  const ca = document.querySelector('#crackA'), CL = ca.getTotalLength(); gsap.set(ca, { strokeDasharray: CL, strokeDashoffset: CL });
+  tl.to(ca, { strokeDashoffset: 0, duration: .4, ease: 'power2.in' }, wt('квадратных') - .1); M.sfx('glitch', wt('квадратных'), { gain: -6 });
+  M.shake('#sqA', { at: wt('развалились'), amp: 10, dur: .4, sfx: false });
+  M.show('#aTwo', { at: wt('развалились') - .1, in: 'pop', dur: .45 }); M.hit(wt('небе'), 'l');
+
+  // B
+  const wb = document.querySelector('#winB');
+  for (let i = 0; i < 14; i++) mk(wb, 'rect', { x: -380 + i * 56, y: -42, width: 34, height: 30, rx: 3 });
+  M.show('#bTag', { at: T.B + .2, in: 'drop', dur: .5 });
+  tl.fromTo('#comet', { x: -700 }, { x: 0, duration: 1.6, ease: 'expo.out' }, T.B + .1); M.sfx('sweep', T.B + .2);
+  M.show('#bFast', { at: wt('быстрее') - .05, in: 'slide', dur: .45 });
+  M.show('#bHigh', { at: wt('выше') - .05, in: 'slide', dur: .45 });
+  gsap.set('#sB svg.art', { transformOrigin: '40% 55%' });
+  tl.to('#sB svg.art', { scale: 2.4, duration: 1.4, ease: 'power3.inOut' }, wt('окна', 2) - .4);
+  M.show('#bSq', { at: wt('квадратные') - .1, in: 'pop', dur: .45 });
+
+  // C
+  M.show('#cTag', { at: T.C + .2, in: 'drop', dur: .5 });
+  tl.to('#m1', { opacity: 1, duration: .3 }, wt('разваливается') - .1); M.show('#c1', { at: wt('разваливается'), in: 'pop', dur: .45 }); M.hit(wt('разваливается'), 'm');
+  tl.to('#m2', { opacity: 1, duration: .3 }, wt('вторая') - .1); M.show('#c2', { at: wt('вторая'), in: 'pop', dur: .45 }); M.hit(wt('вторая'), 'm');
+  tl.fromTo('#cStamp', { scale: 2.2, rotation: -14, autoAlpha: 0 }, { scale: 1, rotation: -6, autoAlpha: 1, duration: .3, ease: 'power4.in' }, wt('сажают') - .2); M.sfx('thud', wt('сажают') + .1);
+  drift(tl, [['#sC svg.art', T.C, T.D, 1.06]]);
+
+  // D
+  M.show('#dTag', { at: T.D + .2, in: 'drop', dur: .5 });
+  const c0 = wt('взлёт') - .2, c1 = wt('лопается');
+  M.onFrame(t => { const k = Math.max(0, Math.min(1, (t - c0) / (c1 - c0))); const kk = k * k * (3 - 2 * k);
+    document.querySelector('#cyc').textContent = Math.round(kk * 3057).toLocaleString('ru-RU');
+    const sp = 1.5 + kk * 14; const ph = Math.sin((t - c0) * sp);
+    document.querySelector('#needle').setAttribute('transform', `rotate(${t > c0 && t < c1 + .3 ? ph * 60 : -60})`);
+    document.querySelector('#phase').textContent = ph > 0 ? 'взлёт' : 'посадка';
+    document.querySelector('#fus').setAttribute('transform', t > c0 && t < c1 ? `translate(540,1020) scale(${1 + ph * .012}) translate(-540,-1020)` : ''); });
+  M.ticks(c0, { n: 16, gap: .14, rise: true });
+  tl.to('#crackD', { opacity: 1, duration: .15 }, c1); M.shake('#fus', { at: c1, amp: 10, dur: .4, sfx: false }); M.hit(c1, 'l');
+
+  // E
+  const sl = document.querySelector('#sqLines'), cl = document.querySelector('#ciLines');
+  for (let i = 0; i < 7; i++) { const y = -240 + i * 40; mk(sl, 'path', { d: `M-260,${y} Q140,${y} 140,-140` });
+    mk(cl, 'path', { d: `M-250,${-240 + i * 80} C-120,${-240 + i * 80} 120,${-240 + i * 80} 250,${-240 + i * 80}` }); }
+  ['#sqLines path', '#ciLines path'].forEach((s, j) => document.querySelectorAll(s).forEach((p, i) => { const L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
+    tl.to(p, { strokeDashoffset: 0, duration: .9, ease: 'power2.out' }, (j ? wt('скруглённому') : wt('остром')) + i * .06); }));
+  tl.to('#hotDot', { opacity: 1, duration: .4 }, wt('точку') - .1);
+  M.onFrame(t => { if (t > wt('точку')) document.querySelector('#hotDot').setAttribute('r', 60 + 18 * Math.sin(t * 8)); });
+  M.show('#eHot', { at: wt('точку') - .1, in: 'pop', dur: .45 }); M.hit(wt('устаёт'), 'm');
+  M.show('#eEven', { at: wt('равномерно') - .2, in: 'pop', dur: .45 });
+
+  // F
+  M.show('#fTag', { at: T.F + .3, in: 'drop', dur: .5 });
+  tl.fromTo('#cloudsF', { x: 0 }, { x: -260, duration: D - T.F - .4, ease: 'none' }, T.F);
+  tl.to('#ghost', { opacity: .35, duration: .8 }, wt('комете') - .6);
+  M.show('#fMem', { at: wt('память') - .1, in: 'rise', dur: .5 }); M.hit(wt('комете'), 'l');
+  drift(tl, [['#sF svg.art', T.F, D - .3, 1.08]]);
+  M.grain(0.06);
+});
+</script>
+</body>
+</html>
