@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root { --bg:#050507; --red:#E23B3B; }
+  .scene { background:#050507; }
+  #cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+  #cap .k1, #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+  .tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+  .tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+  .quote { background:rgba(12,10,10,.88); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:74px; line-height:1.12; color:#E8E0D0; }
+  #vign { position:absolute; inset:0; z-index:40; pointer-events:none; background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+  #flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+  .mono { position:absolute; font:700 32px/1 "JetBrains Mono"; color:#C9C3B6; white-space:nowrap; }
+  .seal { position:absolute; left:300px; top:880px; width:480px; padding:26px 30px; background:#D9D0BA; transform:rotate(-6deg); box-shadow:0 10px 30px rgba(0,0,0,.6);
+          font:700 34px/1.3 "JetBrains Mono"; color:#3A3228; text-align:center; }
+  .seal b { display:block; font:900 44px/1.1 "Montserrat"; color:#8A1C1C; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="58.8" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <!-- разрез двух квартир (сцены A, C, F) -->
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <g id="flats">
+      <rect x="0" y="420" width="520" height="980" fill="#2A2420"/>
+      <rect x="560" y="420" width="520" height="980" fill="#0C0C0E"/>
+      <rect x="520" y="380" width="40" height="1060" fill="#4A4038"/>
+      <rect x="0" y="1400" width="1080" height="40" fill="#1A1714"/><rect x="0" y="380" width="1080" height="40" fill="#1A1714"/>
+      <g fill="#3A322C"><rect x="60" y="1220" width="300" height="80" rx="14"/><rect x="60" y="1170" width="90" height="60" rx="20"/></g>
+      <circle cx="260" cy="560" r="24" fill="#FFE7A8"/>
+      <g fill="#1A1A1E" opacity=".9"><rect x="640" y="1180" width="260" height="40"/><rect x="660" y="1220" width="20" height="180"/><rect x="860" y="1220" width="20" height="180"/></g>
+    </g>
+    <g id="chair"><rect x="-80" y="-60" width="160" height="150" rx="20" fill="#2A2A30"/><rect x="-80" y="-160" width="40" height="130" rx="14" fill="#2A2A30"/><rect x="-70" y="90" width="16" height="50" fill="#1A1A1E"/><rect x="54" y="90" width="16" height="50" fill="#1A1A1E"/></g>
+  </defs></svg>
+
+  <!-- A. Хук: разрез, справа пусто год -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><defs><radialGradient id="lampA"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".35"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#050507"/><use href="#flats"/><circle cx="260" cy="560" r="360" fill="url(#lampA)"/>
+      <g id="dustA" fill="#C9C3B6" opacity=".35"></g></svg>
+    <div class="mono" style="left:60px;top:1460px">КВ. 47 · САША</div>
+    <div class="mono" style="left:600px;top:1460px;color:#E23B3B" id="aEmpty">КВ. 48 · ПУСТО 1 ГОД</div>
+  </section>
+
+  <!-- B. Въехал в сентябре -->
+  <section class="scene" id="sB">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#14110E"/>
+      <g fill="#8A6A4A"><rect x="140" y="1100" width="260" height="220"/><rect x="420" y="1160" width="200" height="160"/><rect x="200" y="920" width="200" height="180"/></g>
+      <g stroke="#6A5038" stroke-width="6"><line x1="140" y1="1180" x2="400" y2="1180"/><line x1="420" y1="1220" x2="620" y2="1220"/><line x1="200" y1="990" x2="400" y2="990"/></g>
+      <rect x="680" y="1180" width="340" height="140" rx="20" fill="#2A2420"/><rect x="700" y="1140" width="110" height="60" rx="20" fill="#3A322C"/>
+      <rect y="1320" width="1080" height="600" fill="#0E0C0A"/></svg>
+    <div class="tag" data-small id="bTag" style="top:330px"><i></i>СЕНТЯБРЬ · НОВАЯ КВАРТИРА</div>
+  </section>
+
+  <!-- C. Ночь, скрип за стеной, 03:00 -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#050507"/>
+      <g id="flatsC"><use href="#flats"/></g>
+      <g id="chairC" transform="translate(820,1260)"><use href="#chair"/></g>
+      <g id="scr" fill="none" stroke="#E23B3B" stroke-width="5"></g></svg>
+    <div class="big" id="cClock" style="top:200px;font-size:160px;font-family:'JetBrains Mono';color:#E23B3B;text-shadow:0 0 40px rgba(226,59,59,.5)">03:00</div>
+    <div class="tag red" data-small id="cEvery" style="top:420px"><i></i>КАЖДУЮ НОЧЬ</div>
+  </section>
+
+  <!-- D. Опечатанная дверь -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#1A1814"/>
+      <rect x="260" y="380" width="560" height="1160" fill="#3A2E24" stroke="#241D18" stroke-width="14"/>
+      <text x="540" y="500" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="48" fill="#9A8A60">48</text>
+      <circle cx="740" cy="980" r="18" fill="#7A6A50"/>
+      <rect x="0" y="1540" width="1080" height="380" fill="#100E0B"/>
+      <g id="dustD" fill="#C9C3B6" opacity=".3"></g></svg>
+    <div class="seal" id="dSeal"><b>ОПЕЧАТАНО</b>23.09 · прошлый год</div>
+  </section>
+
+  <!-- E. Консьержка -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920"><defs><radialGradient id="lampE"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".4"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient></defs>
+      <rect width="1080" height="1920" fill="#0C0B09"/><circle cx="540" cy="900" r="520" fill="url(#lampE)"/>
+      <rect x="140" y="1100" width="800" height="300" fill="#2A2420"/><rect x="140" y="700" width="800" height="400" fill="none" stroke="#3A322C" stroke-width="14"/>
+      <g transform="translate(540,960)"><circle cy="-60" r="70" fill="#1A1714"/><path d="M-130,140 Q-130,0 0,0 Q130,0 130,140 Z" fill="#1A1714"/></g></svg>
+    <div class="quote" id="eQ" style="top:300px;text-align:center">«Там жил старик. Один.<br>Нашли его только<br>через месяц»</div>
+  </section>
+
+  <!-- F. Ухо к стене: кресло тащат к его стене -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#050507"/>
+      <use href="#flats"/>
+      <g id="chairF" transform="translate(900,1260)"><use href="#chair"/></g>
+      <g id="dragF" fill="none" stroke="#5A544C" stroke-width="4"></g>
+      <g id="earRing" fill="none" stroke="#C9C3B6" stroke-width="4"></g></svg>
+    <div class="tag red" data-small id="fWall" style="top:280px"><i></i>К ЕГО СТЕНЕ</div>
+  </section>
+
+  <!-- G. Утро: трещина, холод -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <defs><pattern id="wpG" width="120" height="160" patternUnits="userSpaceOnUse"><rect width="120" height="160" fill="#8A7E66"/><path d="M60,20 q20,20 0,40 q-20,20 0,40 q20,20 0,40" fill="none" stroke="#9A8E74" stroke-width="6"/></pattern></defs>
+      <rect width="1080" height="1920" fill="url(#wpG)"/><rect width="1080" height="1920" fill="#000" opacity=".25"/>
+      <path id="crack" d="M540,300 L520,460 L570,560 L510,700 L560,860 L500,1020 L550,1180 L520,1380" fill="none" stroke="#1A1612" stroke-width="12" stroke-linecap="round"/>
+      <g id="cold" fill="none" stroke="#DDEBFF" stroke-width="6" stroke-linecap="round" opacity=".6"></g></svg>
+    <div class="tag" data-small id="gTag" style="top:180px;color:#2A2620;border-color:#2A2620;background:rgba(255,255,255,.4)"><i></i>УТРО · СТЕНА СО СТОРОНЫ САШИ</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="0" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(103), W = M.data.words.s13;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { B: wt('саша') - .3, C: wt('первую') - .3, D: wt('через') - .3, E: wt('консьержка') - .3, F: wt('той') - .3, G: wt('утром') - .3 };
+  xfade(tl, [['#sA',0],['#sB',T.B],['#sC',T.C],['#sD',T.D],['#sE',T.E],['#sF',T.F],['#sG',T.G]], D, .45);
+  captions(W, { k1: [], k2: [], k3: ['никого','нет','год?','скрип.','скрип','мебель.','три','опечатана.','прошлого','года.','старик.','один.','месяц».','тащили','его','ближе.','трещина.','холодом…','табаком.'], k4: [] });
+
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.C, T.D, T.F, T.G]) if (t > a - .05 && t < a + .45) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .5));
+    f.style.opacity = o; });
+  for (const s of [0, T.B, T.C, T.D, T.E, T.F, T.G]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+  const motes = (sel, n, x0, x1) => { const g = document.querySelector(sel), P = []; for (let i = 0; i < n; i++) P.push([mk(g, 'circle', { r: 2 + R() * 3 }), x0 + R() * (x1 - x0), R() * 1000, 6 + R() * 12]);
+    M.onFrame(t => P.forEach(([c, x, y, v]) => { c.setAttribute('cx', x + Math.sin(t * .5 + y) * 14); c.setAttribute('cy', 440 + (y + t * v) % 960); })); };
+  motes('#dustA', 30, 580, 1060); motes('#dustD', 40, 280, 800);
+
+  // скрип мебели: звук + рывок
+  const scrape = (t, el, dx) => { M.sfx('scratch', t, { gain: -2, rate: .55 }); M.sfx('thud', t + .25, { gain: -8, rate: .7 }); if (el) tl.to(el, { x: `+=${dx}`, duration: .5, ease: 'power2.inOut' }, t); };
+
+  // A
+  tl.fromTo('#sA svg.art', { scale: 1.35, transformOrigin: '75% 60%' }, { scale: 1, duration: T.B, ease: 'power2.out' }, 0);
+  tl.to('#aEmpty', { opacity: .3, duration: .15, repeat: 5, yoyo: true }, wt('никого') - .1);
+  M.hit(wt('год'), 's');
+
+  // B
+  M.show('#bTag', { at: T.B + .3, in: 'fade', dur: .5 });
+  tl.fromTo('#sB svg.art', { scale: 1 }, { scale: 1.08, transformOrigin: '50% 60%', duration: T.C - T.B, ease: 'none' }, T.B);
+
+  // C
+  scrape(wt('скрип'), '#chairC', -60); scrape(wt('мебель'), '#chairC', 40); scrape(wt('медленно'), '#chairC', -50);
+  M.shake('#flatsC', { at: wt('скрип') + .1, amp: 4, dur: .4, sfx: false });
+  const sc = document.querySelector('#scr');
+  [wt('скрип'), wt('мебель'), wt('медленно')].forEach(k => { const c = mk(sc, 'circle', { cx: 820, cy: 1260, r: 10, opacity: 0 }); tl.fromTo(c, { attr: { r: 10 }, opacity: .9 }, { attr: { r: 300 }, opacity: 0, duration: 1.2, ease: 'expo.out' }, k); });
+  M.show('#cClock', { at: wt('три') - .1, in: 'blur', dur: .6 });
+  M.show('#cEvery', { at: wt('каждую', 2) - .05, in: 'pop', dur: .45 }); M.hit(wt('каждую', 2), 'm');
+
+  // D
+  tl.fromTo('#sD svg.art', { scale: 1 }, { scale: 1.12, transformOrigin: '50% 50%', duration: T.E - T.D, ease: 'none' }, T.D);
+  tl.fromTo('#dSeal', { scale: 1.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .4, ease: 'power3.out' }, wt('опечатана') - .2); M.sfx('thud', wt('опечатана'));
+  M.hit(wt('прошлого'), 'l');
+
+  // E
+  M.show('#eQ', { at: wt('там') - .4, in: 'blur', dur: .9 }); M.hit(wt('месяц'), 'm');
+
+  // F — ухо к стене, кресло тащат к стене
+  const er = document.querySelector('#earRing');
+  for (let i = 0; i < 3; i++) { const c = mk(er, 'circle', { cx: 500, cy: 900, r: 6, opacity: 0 }); tl.fromTo(c, { attr: { r: 6 }, opacity: .8 }, { attr: { r: 160 }, opacity: 0, duration: 1.2, ease: 'expo.out' }, wt('ухо') + i * .4); }
+  const pulls = [wt('тащили'), wt('стене', 2), wt('ближе'), wt('ещё', 1)];
+  pulls.forEach((k, i) => scrape(k, '#chairF', -70));
+  tl.to('#chairF', { x: -60, duration: .8, ease: 'power3.in' }, wt('ближе', 2)); M.hit(wt('ближе', 2) + .6, 'l');
+  M.show('#fWall', { at: wt('стене', 2) - .1, in: 'pop', dur: .45 });
+  tl.fromTo('#sF svg.art', { scale: 1 }, { scale: 1.6, transformOrigin: '52% 66%', duration: T.G - T.F, ease: 'power2.in' }, T.F);
+
+  // G — трещина и холод
+  M.show('#gTag', { at: T.G + .3, in: 'fade', dur: .5 });
+  const cr = document.querySelector('#crack'), CL = cr.getTotalLength(); gsap.set(cr, { strokeDasharray: CL, strokeDashoffset: CL });
+  tl.to(cr, { strokeDashoffset: 0, duration: .9, ease: 'power2.in' }, wt('трещина') - .3); M.sfx('scratch', wt('трещина') - .2); M.hit(wt('трещина') + .5, 'm');
+  const cd = document.querySelector('#cold'), C = [];
+  for (let i = 0; i < 4; i++) C.push(mk(cd, 'path', {}));
+  const c0 = wt('холодом') - .3;
+  M.onFrame(t => C.forEach((p, i) => { if (t < c0) { p.setAttribute('d', ''); return; } const k = Math.min(1, (t - c0) / 1.5); let d = '';
+    for (let j = 0; j <= 10; j++) { const y = 500 + i * 220 + Math.sin(t * 2 + j * .6 + i) * 14, x = 560 + j * 32 * k; d += (j ? 'L' : 'M') + x + ',' + y; } p.setAttribute('d', d); }));
+  M.sfx('swell', c0, { gain: -4 }); M.hit(wt('табаком'), 'l');
+  tl.fromTo('#sG svg.art', { scale: 1 }, { scale: 1.1, transformOrigin: '50% 45%', duration: D - T.G - .4, ease: 'none' }, T.G);
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
