@@ -1,0 +1,7 @@
+kira/.cache/
+kira/out/stills/
+kira/out/*.jpg
+ref/ref_frames/
+kira/out/*strip*.jpg
+kira/out/.*.wav
+kira/out/.progress
