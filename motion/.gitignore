@@ -5,3 +5,9 @@ ref/ref_frames/
 kira/out/*strip*.jpg
 kira/out/.*.wav
 kira/out/.progress
+skin/.cache/
+skin/out/stills/
+skin/out/*.jpg
+skin/out/.*.wav
+skin/out/.progress
+skin/out/*_frames/
