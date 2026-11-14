@@ -23,3 +23,15 @@ geo/out/*.jpg
 geo/out/*_frames/
 geo/out/.*.wav
 geo/out/.progress
+drop/.cache/
+drop/out/stills/
+drop/out/*.jpg
+drop/out/*_frames/
+drop/out/.*.wav
+drop/out/.progress
+roof/.cache/
+roof/out/stills/
+roof/out/*.jpg
+roof/out/*_frames/
+roof/out/.*.wav
+roof/out/.progress
