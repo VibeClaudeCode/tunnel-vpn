@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="horror.css">
+<style>
+  #cap { font-size:80px; }
+  .nav { position:absolute; left:250px; top:1040px; width:580px; height:360px; border-radius:24px; background:#0B0F18; border:8px solid #22262E; overflow:hidden; }
+  .nav .msg { position:absolute; left:0; right:0; bottom:0; padding:26px 30px; background:#111A2B; font:800 38px/1.2 "Montserrat"; color:#F4F1EA; text-align:center; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="47.2" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <g id="backseat"><!-- заднее сиденье под фонарём, вмятина -->
+      <rect width="1080" height="1920" fill="#050507"/>
+      <rect x="120" y="760" width="840" height="300" rx="40" fill="#2A2420"/><rect x="120" y="1040" width="840" height="260" rx="30" fill="#3A322C"/>
+      <ellipse cx="560" cy="1140" rx="170" ry="60" fill="#1E1A16"/><ellipse cx="560" cy="900" rx="120" ry="110" fill="#221E1A"/>
+    </g>
+    <radialGradient id="beam"><stop offset="0" stop-color="#FFF6D8" stop-opacity=".55"/><stop offset="1" stop-color="#FFF6D8" stop-opacity="0"/></radialGradient>
+  </defs></svg>
+
+  <!-- 0. Вспышка финала -->
+  <section class="scene" id="sZ">
+    <svg class="art" viewBox="0 0 1080 1920"><use href="#backseat"/><circle cx="560" cy="1020" r="460" fill="url(#beam)"/><rect width="1080" height="1920" fill="#E23B3B" opacity=".2"/></svg>
+  </section>
+
+  <!-- A. Ночная трасса, навигатор -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920">
+      <rect width="1080" height="1920" fill="#04050A"/>
+      <polygon points="540,620 560,620 1080,1100 0,1100" fill="#14161C"/>
+      <g id="lines" fill="#C9C3B6"></g>
+      <g fill="#0A0B10"><path d="M0,1000 L0,1920 L1080,1920 L1080,1000 Q540,920 0,1000 Z"/></g>
+      <g id="mirror"><rect x="360" y="120" width="360" height="130" rx="30" fill="#0B0D12" stroke="#2A2D36" stroke-width="10"/><rect id="mirrorGlow" x="374" y="134" width="332" height="102" rx="22" fill="#FFF6D8" opacity="0"/></g>
+    </svg>
+    <div class="nav" id="nav">
+      <svg viewBox="0 0 580 360" style="width:100%;height:100%"><rect width="580" height="360" fill="#0E1626"/><path id="route" d="M290,360 L290,200 Q300,120 380,80 L580,20" fill="none" stroke="#3FC3FF" stroke-width="16"/><polygon points="290,250 270,290 310,290" fill="#F4F1EA"/></svg>
+      <div class="msg" id="navMsg">Через 200 м поверните направо</div>
+    </div>
+    <div class="tag" data-small id="aTag" style="top:330px"><i></i>01:04 · ТРАССА · 40 КМ ТИШИНЫ</div>
+  </section>
+
+  <!-- D. Пост ДПС, 20 км -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#04050A"/>
+      <polygon points="540,620 560,620 1080,1300 0,1300" fill="#14161C"/>
+      <rect id="pR" width="1080" height="1920" fill="#E23B3B" opacity="0"/><rect id="pB" width="1080" height="1920" fill="#2F5BD1" opacity="0"/>
+      <g id="post" transform="translate(540,700) scale(.3)"><rect x="-200" y="-200" width="400" height="200" fill="#C9C3B6"/><text y="-70" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="90" fill="#2F5BD1">ДПС</text></g></svg>
+    <div class="big" id="dKm" style="top:330px;font-size:170px;font-family:'JetBrains Mono';color:#C9C3B6">20 км</div>
+    <div class="tag red" data-small id="dNo" style="top:560px"><i></i>НЕ ОСТАНАВЛИВАЛАСЬ · НЕ СМОТРЕЛА</div>
+  </section>
+
+  <!-- E. Фонарь в салон, «А пассажир ваш где?» -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920"><use href="#backseat"/>
+      <circle id="beamE" cx="560" cy="1020" r="460" fill="url(#beam)" opacity="0"/>
+      <g id="heat" fill="none" stroke="#FFB23A" stroke-width="5" opacity="0"></g></svg>
+    <div class="quote" id="eQ" style="top:280px;text-align:center;color:#E8E0D0">«А пассажир ваш где?»</div>
+    <div class="tag red" data-small id="eWarm" style="top:1420px"><i></i>ЕЩЁ ТЁПЛАЯ</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="1" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(121), W = M.data.words.s15;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { A: .95, D: wt('аня', 1) - .3, E: wt('выскочила') - .3 };
+  xfade(tl, [['#sZ',0],['#sA',T.A],['#sD',T.D],['#sE',T.E]], D, .2);
+  captions(W, { k1: [], k2: [], k3: ['не','смотрите','зеркало».','исчез.','останавливайтесь».','мигнули','фары.','пустой.','пассажир','где?»','вмятина.','тёплая.'], k4: [] });
+
+  // хук: резкий гудок/удар в первый кадр
+  M.sfx('boom', .02); M.sfx('hit', .05, { gain: -2 }); M.sfx('glitch', .9, { gain: -4 });
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.A, T.D, T.E]) if (t > a - .05 && t < a + .4) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .45));
+    f.style.opacity = o; });
+  for (const s of [T.A, T.D, T.E]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+
+  // A — дорога
+  const ln = document.querySelector('#lines'), L = [];
+  for (let i = 0; i < 7; i++) L.push(mk(ln, 'polygon', {}));
+  M.onFrame(t => L.forEach((p, i) => { const k = ((t * .9 + i / 7) % 1), y = 620 + k * k * 480, w = 4 + k * 40, h = 10 + k * 80;
+    p.setAttribute('points', `${550 - w / 2},${y} ${550 + w / 2},${y} ${550 + w},${y + h} ${550 - w},${y + h}`); }));
+  const msg = document.querySelector('#navMsg');
+  const say1 = wt('не', 1) - .3, say2 = wt('надпись') - .2;
+  M.onFrame(t => { msg.textContent = t < say1 ? 'Через 200 м поверните направо' : t < say2 ? '«Не смотрите в зеркало»' : '«Едьте прямо. Не останавливайтесь»';
+    msg.style.color = t < say1 ? '#F4F1EA' : '#E23B3B'; });
+  M.sfx('ding', say1 - .1, { gain: -4 }); M.hit(wt('зеркало'), 'l');
+  M.show('#aTag', { at: wt('ехала') - .2, in: 'fade', dur: .5 });
+  tl.to('#route', { opacity: 0, duration: .3, repeat: 3, yoyo: true }, wt('исчез') - .3); tl.to('#route', { opacity: 0, duration: .2 }, wt('исчез') + .9);
+  M.sfx('glitch', wt('исчез'), { gain: -6 });
+  M.sfx('ding', say2, { gain: -4 }); M.hit(wt('останавливайтесь'), 'm');
+  const fl = wt('мигнули') - .1;
+  tl.to('#mirrorGlow', { opacity: .9, duration: .08, repeat: 3, yoyo: true }, fl); M.sfx('swipe', fl, { gain: -4 });
+  M.hit(wt('пустой'), 'm');
+  tl.to('#sA svg.art, #nav', { scale: 1.1, transformOrigin: '50% 50%', duration: T.D - T.A, ease: 'none' }, T.A);
+
+  // D — 20 км до поста
+  M.onFrame(t => { const k = Math.max(0, Math.min(1, (t - T.D - .2) / Math.max(1, T.E - T.D - .6))); document.querySelector('#dKm').textContent = Math.round(20 - 20 * k) + ' км';
+    document.querySelector('#post').setAttribute('transform', `translate(540,${700 + k * 200}) scale(${.3 + k * 1.2})`);
+    const b = (t * 2.2) % 1, on = k > .6; document.querySelector('#pR').setAttribute('opacity', on && b < .5 ? .16 : 0); document.querySelector('#pB').setAttribute('opacity', on && b >= .5 ? .16 : 0); });
+  M.show('#dNo', { at: wt('посмотрела') - .3, in: 'pop', dur: .45 });
+  M.ticks(T.D + .2, { n: 14, gap: .2, rise: true });
+
+  // E — фонарь, пассажир, вмятина
+  tl.to('#beamE', { opacity: 1, duration: .5 }, wt('посветил') - .2); M.sfx('click', wt('посветил'));
+  M.onFrame(t => { const b = document.querySelector('#beamE'); b.setAttribute('cx', 560 + Math.sin(t * 1.3) * 60); });
+  M.show('#eQ', { at: wt('пассажир') - .4, in: 'blur', dur: .8 }); M.hit(wt('где'), 'l');
+  M.hide('#eQ', { at: wt('заднем') - .3, out: 'fade', dur: .4 });
+  tl.fromTo('#sE svg.art', { scale: 1 }, { scale: 1.3, transformOrigin: '52% 58%', duration: D - wt('заднем') - .3, ease: 'power1.in' }, wt('заднем'));
+  const ht = document.querySelector('#heat'), H = [];
+  for (let i = 0; i < 3; i++) H.push(mk(ht, 'path', {}));
+  M.onFrame(t => H.forEach((p, i) => { let d = ''; for (let k = 0; k <= 8; k++) { const y = 1100 - k * 34, x = 500 + i * 60 + Math.sin(t * 3 + k * .7 + i) * 12; d += (k ? 'L' : 'M') + x + ',' + y; } p.setAttribute('d', d); }));
+  tl.to('#heat', { opacity: .7, duration: .6 }, wt('тёплая') - .4);
+  M.show('#eWarm', { at: wt('тёплая') - .2, in: 'blur', dur: .6 }); M.hit(wt('тёплая'), 'l');
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>

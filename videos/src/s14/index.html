@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="horror.css">
+<style>
+  .panel { position:absolute; left:190px; top:300px; width:700px; height:1080px; border-radius:40px; background:#1A1C22; border:10px solid #2A2D36; }
+  .scr { position:absolute; left:60px; top:60px; width:580px; height:640px; border-radius:20px; overflow:hidden; background:#0B0D10; }
+  .btnO { position:absolute; left:200px; top:800px; width:300px; height:120px; border-radius:60px; background:#2A3B2A; display:flex; align-items:center; justify-content:center; font:800 40px/1 "Montserrat"; color:#5BE38B; }
+  .cctv { position:absolute; left:60px; right:60px; top:320px; height:1080px; border:8px solid #2A2D36; overflow:hidden; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="46.6" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <g id="me"><!-- Максим на экране домофона: куртка, шапка, бледное лицо -->
+      <path d="M-200,640 Q-200,340 0,320 Q200,340 200,640 Z" fill="#2A3B57"/>
+      <rect x="-14" y="330" width="28" height="300" fill="#1A2436"/>
+      <ellipse cx="0" cy="220" rx="96" ry="118" fill="#B9B2A6"/>
+      <path d="M-104,190 Q-100,80 0,74 Q100,80 104,190 L104,150 Q0,100 -104,150 Z" fill="#8A1C1C"/>
+      <rect x="-104" y="150" width="208" height="40" fill="#6A1414"/>
+      <circle cx="-34" cy="228" r="11" fill="#050507"/><circle cx="34" cy="228" r="11" fill="#050507"/>
+      <rect x="-30" y="290" width="60" height="6" rx="3" fill="#4A4038"/>
+    </g>
+    <g id="steps"><!-- лестница со следами -->
+      <rect width="1080" height="1920" fill="#14130F"/>
+      <g fill="#2A2620" stroke="#1A1814" stroke-width="6">
+        <rect x="140" y="1500" width="800" height="140"/><rect x="200" y="1360" width="680" height="140"/><rect x="250" y="1230" width="580" height="130"/><rect x="295" y="1110" width="490" height="120"/><rect x="335" y="1000" width="410" height="110"/><rect x="370" y="900" width="340" height="100"/></g>
+      <rect x="400" y="560" width="280" height="340" fill="#2A221C" stroke="#1A1512" stroke-width="10"/>
+      <g id="prints" fill="#3E5A72" opacity=".9"></g>
+    </g>
+  </defs></svg>
+
+  <!-- 0. Вспышка финала в первую секунду -->
+  <section class="scene" id="sZ">
+    <svg class="art" viewBox="0 0 1080 1920"><use href="#steps"/><rect width="1080" height="1920" fill="#E23B3B" opacity=".22"/></svg>
+  </section>
+
+  <!-- A. Домофон: на экране он сам -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#08090C"/></svg>
+    <div class="panel" id="panelA">
+      <div class="scr" id="scrA"><svg viewBox="0 0 580 640" style="width:100%;height:100%"><rect width="580" height="640" fill="#1A2016"/><g id="meA" transform="translate(290,0)"><use href="#me"/>
+        <g id="arm" transform="translate(150,520)"><path d="M0,0 L60,-160" stroke="#2A3B57" stroke-width="56" stroke-linecap="round"/><g transform="translate(60,-170)"><rect x="-10" y="-70" width="16" height="70" rx="8" fill="#B9B2A6"/><rect x="10" y="-76" width="16" height="76" rx="8" fill="#B9B2A6"/><circle r="26" fill="#B9B2A6"/></g></g></g>
+        </svg>
+        <div class="mono" style="left:20px;top:20px;font-size:26px;color:#5BE38B">REC 02:17</div></div>
+      <div class="btnO" id="btnO">ОТКРЫТЬ</div>
+    </div>
+    <div class="tag red" data-small id="aRing" style="top:200px"><i></i>ЗВОНОК <span id="ringN">1</span></div>
+  </section>
+
+  <!-- E. Провод выдернут, ночь у двери -->
+  <section class="scene" id="sE">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#060607"/>
+      <rect x="330" y="420" width="420" height="1080" fill="#16130F" stroke="#241D18" stroke-width="14"/><circle cx="680" cy="980" r="16" fill="#3A322C"/>
+      <g transform="translate(300,1380)" fill="#0A0A0C"><circle cy="-260" r="70"/><path d="M-120,120 Q-140,-160 0,-190 Q140,-160 120,120 Z"/></g>
+      <line id="knife" x1="380" y1="1300" x2="470" y2="1210" stroke="#C9D0DA" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+      <rect y="1500" width="1080" height="420" fill="#0A0A0C"/></svg>
+    <div class="big" id="eClock" style="top:230px;font-size:150px;font-family:'JetBrains Mono';color:#C9C3B6">02:17</div>
+  </section>
+
+  <!-- F. Камера подъезда: никого -->
+  <section class="scene" id="sF">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#08090A"/></svg>
+    <div class="cctv"><svg viewBox="0 0 960 1080" style="width:100%;height:100%;filter:grayscale(1) contrast(1.1)">
+      <rect width="960" height="1080" fill="#3A3C40"/><rect x="300" y="200" width="360" height="760" fill="#2A2C30" stroke="#1E2024" stroke-width="12"/><rect y="960" width="960" height="120" fill="#26282C"/>
+      <g id="scan" fill="#fff" opacity=".05"></g></svg>
+      <div class="mono" style="left:24px;top:24px;color:#fff">CAM 02 · 02:17:<span id="sec">00</span></div></div>
+    <div class="stamp" id="fNone" style="left:250px;top:760px;font-size:96px">НИКОГО</div>
+  </section>
+
+  <!-- G. Следы до его двери -->
+  <section class="scene" id="sG">
+    <svg class="art" viewBox="0 0 1080 1920"><use href="#steps"/></svg>
+    <div class="tag" data-small id="gSize" style="top:330px"><i></i>РАЗМЕР 43 · ЕГО</div>
+    <div class="tag red" data-small id="gBack" style="top:430px"><i></i>ОБРАТНО — НИ ОДНОГО</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="1" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const R = M.rand(111), W = M.data.words.s14;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { A: .95, E: wt('выдернул') - .3, F: wt('утром') - .3, G: wt('ступеньках') - .5 };
+  xfade(tl, [['#sZ',0],['#sA',T.A],['#sE',T.E],['#sF',T.F],['#sG',T.G]], D, .2);
+  captions(W, { k1: [], k2: [], k3: ['он','сам.','не','моргая.','помахал.','только','никого.','никто','звонил.','мокрые','следы.','обратно.','ни','одного'], k4: [] });
+
+  // хук: громкий удар + звонок домофона в первый кадр
+  M.sfx('boom', 0.02, { gain: 0 }); M.sfx('ringtone_loop', 0.05, { gain: -2 }); M.sfx('glitch', .9, { gain: -4 });
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.A, T.E, T.F, T.G]) if (t > a - .05 && t < a + .4) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .45));
+    f.style.opacity = o; });
+  for (const s of [T.A, T.E, T.F, T.G]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+  const pr = document.querySelector('#prints'), PR = [];
+  [[470,1570],[600,1440],[480,1300],[590,1180],[490,1060],[580,950],[500,860],[570,780]].forEach(([x, y], i) => PR.push(mk(pr, 'ellipse', { cx: x, cy: y, rx: 26, ry: 44, transform: `rotate(${i % 2 ? 12 : -12} ${x} ${y})` })));
+
+  // A — домофон
+  const rings = [wt('домофон'), wt('повторился'), wt('ещё')];
+  M.onFrame(t => { let n = 1; rings.forEach((r, i) => { if (t > r) n = i + 1; }); document.querySelector('#ringN').textContent = n;
+    const buzz = rings.some(r => t > r - .1 && t < r + .8) && (t * 12) % 1 < .5; document.querySelector('#panelA').style.translate = buzz ? `${Math.sin(t * 90) * 6}px 0` : '0 0'; });
+  rings.slice(1).forEach(r => M.sfx('ringtone_loop', r, { gain: -8 }));
+  M.show('#aRing', { at: T.A + .2, in: 'pop', dur: .4 });
+  tl.fromTo('#scrA', { scale: 1.6, transformOrigin: '50% 35%' }, { scale: 1, duration: 1.4, ease: 'power3.out' }, T.A);
+  tl.to('#panelA', { scale: 1.25, transformOrigin: '50% 30%', duration: 4, ease: 'power1.inOut' }, wt('куртка') - .3);
+  M.hit(wt('сам'), 'l');
+  tl.to('#btnO', { opacity: .35, duration: .3 }, wt('открыл') - .2);
+  gsap.set('#arm', { opacity: 0 });
+  tl.to('#arm', { opacity: 1, duration: .2 }, wt('поднял') - .2);
+  M.onFrame(t => { const a0 = wt('помахал') - .3; const k = t > a0 && t < wt('выдернул') ? Math.sin((t - a0) * 6) * 18 : 0; document.querySelector('#arm').setAttribute('transform', `translate(150,520) rotate(${k})`); });
+  M.hit(wt('максим', 3), 'l');
+
+  // E — провод, ночь у двери
+  M.sfx('glitch', wt('выдернул'), { gain: -2 }); M.sfx('thud', wt('выдернул') + .1);
+  M.onFrame(t => { const s0 = wt('просидел'), k = Math.max(0, Math.min(1, (t - s0) / Math.max(1, T.F - s0 - .3)));
+    const m = Math.round(137 + k * (390 - 137)); document.querySelector('#eClock').textContent = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+    document.querySelector('#knife').setAttribute('opacity', .4 + .4 * Math.abs(Math.sin(t * 2))); });
+  M.ticks(wt('просидел'), { n: 12, gap: .15, rise: false });
+
+  // F — камера подъезда
+  const sc = document.querySelector('#scan'), SC = [];
+  for (let i = 0; i < 30; i++) SC.push(mk(sc, 'rect', { x: 0, width: 960, height: 3 }));
+  M.onFrame(t => { SC.forEach((r, i) => r.setAttribute('y', (i * 37 + t * 120) % 1080)); document.querySelector('#sec').textContent = String(Math.floor(Math.max(0, t - T.F) * 3) % 60).padStart(2, '0'); });
+  tl.fromTo('#fNone', { scale: 2.2, rotation: -14, autoAlpha: 0 }, { scale: 1, rotation: -6, autoAlpha: 1, duration: .3, ease: 'power4.in' }, wt('никого') - .2);
+  M.sfx('thud', wt('никого') + .1); M.hit(wt('звонил'), 'm');
+
+  // G — следы
+  PR.forEach((p, i) => { tl.set(p, { opacity: 0 }, T.G - .1); tl.to(p, { opacity: .9, duration: .25 }, wt('мокрые') - .2 + i * .18); });
+  M.show('#gSize', { at: wt('размера') - .2, in: 'pop', dur: .45 });
+  M.show('#gBack', { at: wt('обратно') - .3, in: 'blur', dur: .6 }); M.hit(wt('обратно'), 'l');
+  tl.fromTo('#sG svg.art', { scale: 1 }, { scale: 1.15, transformOrigin: '50% 45%', duration: D - T.G - .4, ease: 'none' }, T.G);
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
