@@ -17,3 +17,9 @@ kira2/out/*.jpg
 kira2/out/*_frames/
 kira2/out/.*.wav
 kira2/out/.progress
+geo/.cache/
+geo/out/stills/
+geo/out/*.jpg
+geo/out/*_frames/
+geo/out/.*.wav
+geo/out/.progress
