@@ -11,3 +11,9 @@ skin/out/*.jpg
 skin/out/.*.wav
 skin/out/.progress
 skin/out/*_frames/
+kira2/.cache/
+kira2/out/stills/
+kira2/out/*.jpg
+kira2/out/*_frames/
+kira2/out/.*.wav
+kira2/out/.progress
