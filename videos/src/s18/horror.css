@@ -1,0 +1,11 @@
+:root { --bg:#050507; --red:#E23B3B; }
+.scene { background:#050507; }
+#cap { text-shadow:0 4px 0 rgba(0,0,0,.7), 0 0 40px rgba(0,0,0,.9); }
+#cap .k1, #cap .k3 { color:#E23B3B; text-shadow:0 0 24px rgba(226,59,59,.55), 0 4px 0 rgba(0,0,0,.7); }
+.tag { color:#C9C3B6; border-color:#5A544C; box-shadow:none; background:rgba(10,10,12,.7); }
+.tag.red { color:var(--red); border-color:var(--red); box-shadow:0 0 24px rgba(226,59,59,.3); }
+.quote { background:rgba(12,10,10,.88); border-color:#3A3430; font-family:"Marck Script"; font-weight:400; font-size:80px; line-height:1.1; color:#E23B3B; }
+#vign { position:absolute; inset:0; z-index:40; pointer-events:none; background:radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.92) 100%); }
+#flick { position:absolute; inset:0; z-index:41; background:#000; opacity:0; pointer-events:none; }
+#hookFlash { position:absolute; inset:0; z-index:45; pointer-events:none; }
+.mono { position:absolute; font:700 32px/1 "JetBrains Mono"; color:#C9C3B6; white-space:nowrap; }

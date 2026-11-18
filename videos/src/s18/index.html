@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="horror.css">
+<style>
+  .alarm { position:absolute; left:120px; right:120px; top:560px; text-align:center; }
+  .alarm .tm { font:300 230px/1 "JetBrains Mono"; color:#E8E6E0; letter-spacing:-.04em; }
+  .alarm .lb { margin-top:20px; font:800 56px/1 "Montserrat"; color:#E23B3B; min-height:60px; }
+  .btns { position:absolute; left:160px; right:160px; top:1180px; display:flex; justify-content:space-between; }
+  .btns div { width:300px; height:110px; border-radius:55px; display:flex; align-items:center; justify-content:center; font:800 38px/1 "Montserrat"; }
+</style>
+</head>
+<body>
+<div id="stage" data-width="1080" data-height="1920" data-fps="30" data-duration="43.8" data-safe="none" data-sfx="02">
+  <div class="bg" data-bg></div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <g id="oldroom"><rect width="1080" height="1920" fill="#060608"/><rect y="1300" width="1080" height="620" fill="#0C0B0A"/>
+      <rect x="360" y="1080" width="360" height="240" fill="#1E1A16"/><rect x="380" y="1320" width="20" height="200" fill="#1E1A16"/><rect x="680" y="1320" width="20" height="200" fill="#1E1A16"/>
+      <rect x="470" y="1040" width="140" height="44" rx="10" fill="#0B0D12"/><rect id="oldScr" x="478" y="1046" width="124" height="32" rx="6" fill="#8FB0E6"/></g>
+    <radialGradient id="glow"><stop offset="0" stop-color="#8FB0E6" stop-opacity=".5"/><stop offset="1" stop-color="#8FB0E6" stop-opacity="0"/></radialGradient>
+  </defs></svg>
+
+  <!-- 0. Вспышка: старый телефон светится в пустой комнате -->
+  <section class="scene" id="sZ">
+    <svg class="art" viewBox="0 0 1080 1920"><use href="#oldroom"/><circle cx="540" cy="1060" r="420" fill="url(#glow)"/><rect width="1080" height="1920" fill="#E23B3B" opacity=".18"/></svg>
+  </section>
+
+  <!-- A. Будильник 3:33 -->
+  <section class="scene" id="sA">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#06070B"/><circle id="aGlow" cx="540" cy="760" r="620" fill="url(#glow)"/></svg>
+    <div class="alarm" id="alarm"><div class="tm">03:33</div><div class="lb" id="lb"></div></div>
+    <div class="btns" id="btns"><div style="background:#2A2D36;color:#C9C3B6">Отложить</div><div id="off" style="background:#E23B3B;color:#fff">Выключить</div></div>
+    <div class="tag" data-small id="aNo" style="top:330px"><i></i>ОНА ЕГО НЕ СТАВИЛА</div>
+    <div class="tag red" data-small id="aDel" style="top:1360px"><i></i>УДАЛЁН · ПЕРЕЗАГРУЗКА</div>
+  </section>
+
+  <!-- C. Темнота, второй будильник из соседней комнаты -->
+  <section class="scene" id="sC">
+    <svg class="art" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#040405"/>
+      <rect x="760" y="500" width="260" height="1000" fill="#0C0C0F" stroke="#1A1A1E" stroke-width="12"/>
+      <rect id="slit" x="770" y="1490" width="240" height="8" fill="#8FB0E6" opacity="0"/>
+      <g id="ringC" fill="none" stroke="#8FB0E6" stroke-width="5"></g>
+      <rect x="0" y="1500" width="1080" height="420" fill="#08080A"/></svg>
+    <div class="tag" data-small id="cEmpty" style="top:300px"><i></i>СОСЕДНЯЯ КОМНАТА · ПУСТАЯ</div>
+  </section>
+
+  <!-- D. Старый телефон -->
+  <section class="scene" id="sD">
+    <svg class="art" viewBox="0 0 1080 1920"><use href="#oldroom"/><circle id="dGlow" cx="540" cy="1060" r="420" fill="url(#glow)" opacity="0"/></svg>
+    <div class="tag" data-small id="dSold" style="top:330px"><i></i>ПРОДАН ГОД НАЗАД</div>
+    <div class="big" id="dWord" style="top:620px;font-size:150px;color:#E23B3B;font-family:'Marck Script';font-weight:400;text-shadow:0 0 40px rgba(226,59,59,.5)">«Наконец»</div>
+  </section>
+
+  <div id="cap"></div>
+  <div id="vign"></div>
+  <div id="flick"></div>
+</div>
+<audio src="media/voice.mp3" data-at="1" data-voice></audio>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="lib/SplitText.min.js"></script>
+<script src="lib/DrawSVGPlugin.min.js"></script>
+<script src="lib/MotionPathPlugin.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="motion.js"></script>
+<script src="data.js"></script>
+<script src="caps.js"></script>
+<script>
+M.start(({ tl, D }) => {
+  const W = M.data.words.s18;
+  const nrm = s => s.toLowerCase().replace(/[^а-яё0-9]/g, '');
+  const wt = (s, n = 1, end) => { let k = 0; for (const w of W) if ((nrm(s).length <= 3 ? nrm(w.w) === nrm(s) : nrm(w.w).startsWith(nrm(s))) && ++k === n) return end ? w.e : w.s; console.warn('нет слова', s); return 0; };
+  const T = { A: .95, C: wt('третью') - .3, D: wt('открыла') - .3 };
+  xfade(tl, [['#sZ',0],['#sA',T.A],['#sC',T.C],['#sD',T.D]], D, .2);
+  captions(W, { k1: ['3:33.','3:33'], k2: [], k3: ['не','ставила.','проснись».','второй','никто','живёт.','старый','год','назад.','наконец».'], k4: [] });
+  M.sfx('boom', .02); M.sfx('ringtone_loop', .05, { gain: -2 }); M.sfx('glitch', .9, { gain: -4 });
+  M.onFrame(t => { const f = document.querySelector('#flick'); let o = 0;
+    for (const a of [T.A, T.C, T.D]) if (t > a - .05 && t < a + .4) o = Math.max(o, (Math.sin((t - a) * 90) > 0 ? .85 : .15) * (1 - (t - a + .05) / .45));
+    f.style.opacity = o; });
+  for (const s of [T.A, T.C, T.D]) M.sfx('swell', s + .1, { gain: -10, rate: .6 });
+
+  // A — будильник, звонит в 1-ю и 2-ю ночь
+  const ring1 = [T.A, wt('первую') - .2], ring2 = [wt('следующую') - .1, T.C];
+  M.onFrame(t => { const on = (t > ring1[0] && t < ring1[1]) || (t > ring2[0] && t < ring2[1]);
+    document.querySelector('#alarm').style.translate = on && (t * 6) % 1 < .5 ? `${Math.sin(t * 80) * 8}px 0` : '0 0';
+    document.querySelector('#aGlow').setAttribute('opacity', on ? .7 + .3 * Math.sin(t * 8) : .2);
+    document.querySelector('#lb').textContent = t > wt('подпись') - .1 ? '«Проснись»' : ''; });
+  M.sfx('ringtone_loop', ring2[0], { gain: -6 });
+  M.show('#aNo', { at: wt('ставила') - .3, in: 'pop', dur: .45 }); M.hit(wt('ставила'), 'm');
+  M.hide('#aNo', { at: wt('первую') - .2, out: 'fade', dur: .3 });
+  tl.to('#off', { scale: .9, duration: .1, yoyo: true, repeat: 1 }, wt('удалила') - .1); M.sfx('click', wt('удалила'));
+  M.show('#aDel', { at: wt('удалила'), in: 'pop', dur: .45 }); M.hide('#aDel', { at: wt('следующую') - .3, out: 'fade', dur: .3 });
+  tl.to('#alarm, #btns', { opacity: .15, duration: .3 }, wt('перезагрузила') + .3); tl.to('#alarm, #btns', { opacity: 1, duration: .1 }, ring2[0]);
+  M.hit(wt('проснись'), 'l');
+
+  // C — второй будильник
+  const r2 = wt('услышала') - .1;
+  tl.to('#slit', { opacity: .9, duration: .3 }, r2);
+  const rc = document.querySelector('#ringC');
+  for (let i = 0; i < 6; i++) { const c = mk(rc, 'circle', { cx: 890, cy: 1490, r: 10, opacity: 0 }); tl.fromTo(c, { attr: { r: 10 }, opacity: .7 }, { attr: { r: 380 }, opacity: 0, duration: 1.4, ease: 'expo.out' }, r2 + i * .6); }
+  M.sfx('ringtone_loop', r2, { gain: -16, rate: .9 });
+  M.show('#cEmpty', { at: wt('давно') - .3, in: 'blur', dur: .6 }); M.hit(wt('живёт'), 'm');
+  tl.to('#sC svg.art', { scale: 1.4, transformOrigin: '82% 72%', duration: T.D - T.C, ease: 'power1.in' }, T.C);
+
+  // D — старый телефон
+  tl.to('#dGlow', { opacity: 1, duration: .6 }, wt('светился') - .2);
+  M.onFrame(t => document.querySelector('#oldScr').setAttribute('fill', t > T.D && (t * 2) % 1 < .5 ? '#E8F0FF' : '#8FB0E6'));
+  M.show('#dSold', { at: wt('продала') - .2, in: 'pop', dur: .45 });
+  tl.to('#sD svg.art', { scale: 2.4, transformOrigin: '50% 55%', duration: 2.5, ease: 'power2.inOut' }, wt('экране') - .5);
+  M.show('#dWord', { at: wt('наконец') - .3, in: 'blur', dur: .9 }); M.hit(wt('наконец'), 'l');
+  M.grain(0.16);
+});
+</script>
+</body>
+</html>
