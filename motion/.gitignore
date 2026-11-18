@@ -35,3 +35,15 @@ roof/out/*.jpg
 roof/out/*_frames/
 roof/out/.*.wav
 roof/out/.progress
+hack/.cache/
+hack/out/stills/
+hack/out/*.jpg
+hack/out/*_frames/
+hack/out/.*.wav
+hack/out/.progress
+gift/.cache/
+gift/out/stills/
+gift/out/*.jpg
+gift/out/*_frames/
+gift/out/.*.wav
+gift/out/.progress
